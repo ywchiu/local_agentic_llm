@@ -21,28 +21,32 @@ xychart-beta horizontal
 
 ### Leaderboard
 
-| Rank | Model | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | Total | Time | Tokens | Tok/Pt |
-|------|-------|----|----|----|----|----|----|----|----|----|----|-------|------|--------|--------|
-| 1 | **qwen/qwen3-coder-flash** |  3 |  3 |  3 |  3 |  3 |  3 |  3 |  3 |  3 |  3 | **30/30** | 20m51s | 780K | 26.0K |
-| 2 | moonshotai/kimi-k2.5 |  3 |  3 |  3 |  3 |  3 |  3 |  2 |  3 |  3 |  1 | **27/30** | 15m26s | 258K | 9.6K |
-| 3 | anthropic/claude-haiku-4.5 |  1 |  3 |  3 |  3 |  3 |  3 |  3 |  3 |  3 |  2 | **27/30** | 22m34s | 1955K | 72.4K |
-| 4 | z-ai/glm-5 |  2 |  3 |  3 |  3 |  3 |  3 |  2 |  3 |  3 |  1 | **26/30** | 27m03s | 354K | 13.6K |
-| 5 | qwen/qwen3-coder-30b |  2 |  2 |  3 |  3 |  3 |  3 |  3 |  3 |  3 |  1 | **26/30** | 24m51s | 1420K | 54.6K |
-| 6 | google/gemini-3-flash |  1 |  3 |  3 |  3 |  3 |  3 |  0 |  3 |  3 |  3 | **25/30** | 4m42s | 107K | 4.3K |
-| 7 | qwen/qwen3.5-27b |  1 |  3 |  3 |  3 |  3 |  3 |  2 |  3 |  3 |  1 | **25/30** | 11m01s | 262K | 10.5K |
-| 8 | minimax/minimax-m2.1 |  2 |  3 |  3 |  3 |  3 |  3 |  0 |  3 |  3 |  1 | **24/30** | 23m44s | 368K | 15.3K |
-| 9 | qwen/qwen3-coder |  1 |  3 |  3 |  3 |  3 |  3 |  1 |  3 |  3 |  1 | **24/30** | 10m19s | 469K | 19.5K |
-| 10 | z-ai/glm-4.7 |  1 |  3 |  3 |  3 |  3 |  3 |  0 |  3 |  3 |  1 | **23/30** | 14m46s | 570K | 24.8K |
-| 11 | qwen/qwen3.5-122b |  1 |  3 |  3 |  3 |  3 |  3 |  0 |  3 |  3 |  1 | **23/30** | 15m25s | 579K | 25.2K |
-| 12 | openai/gpt-oss-120b |  2 |  3 |  3 |  3 |  3 |  0 |  0 |  3 |  3 |  2 | **22/30** | 4m33s | 153K | 7.0K |
-| 12 | qwen/qwen3.5-35b |  3 |  3 |  3 |  1 |  3 |  0 |  2 |  3 |  3 |  1 | **22/30** | 15m58s | 355K | 16.1K |
-| 14 | qwen/qwen3-coder-next |  1 |  3 |  3 |  3 |  3 |  0 |  0 |  3 |  3 |  1 | **20/30** | 16m23s | 467K | 23.4K |
-| 14 | qwen/qwen3.5-397b |  1 |  3 |  3 |  3 |  3 |  0 |  0 |  3 |  3 |  1 | **20/30** | 19m20s | 546K | 27.3K |
-| 16 | minimax/minimax-m2.5 |  1 |  0 |  3 |  3 |  1 |  3 |  1 |  3 |  3 |  1 | **19/30** | 45m05s | 300K | 15.8K |
-| 17 | openai/gpt-oss-20b |  0 |  3 |  3 |  1 |  0 |  0 |  0 |  3 |  3 |  1 | **14/30** | 19m47s | 142K | 10.1K |
-| 17 | moonshotai/kimi-k2 |  1 |  3 |  0 |  1 |  3 |  3 |  3 |  0 |  0 |  0 | **14/30** | 42m04s | 808K | 57.7K |
+| Rank | Model | Open | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | Total | Time | Tokens | Tok/Pt |
+|------|-------|:----:|----|----|----|----|----|----|----|----|----|----|-------|------|--------|--------|
+| 1 | **qwen/qwen3-coder-flash** | | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **30/30** | 20m51s | 780K | 26.0K |
+| 2 | moonshotai/kimi-k2.5 | | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **27/30** | 15m26s | 258K | 9.6K |
+| 3 | anthropic/claude-haiku-4.5 | | 1 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 2 | **27/30** | 22m34s | 1955K | 72.4K |
+| 4 | z-ai/glm-5 | | 2 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **26/30** | 27m03s | 354K | 13.6K |
+| 5 | qwen/qwen3-coder-30b | OSS | 2 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 1 | **26/30** | 24m51s | 1420K | 54.6K |
+| 6 | google/gemini-3-flash | | 1 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 3 | **25/30** | 4m42s | 107K | 4.3K |
+| 7 | qwen/qwen3.5-27b | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **25/30** | 11m01s | 262K | 10.5K |
+| 8 | minimax/minimax-m2.1 | | 2 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 1 | **24/30** | 23m44s | 368K | 15.3K |
+| 9 | qwen/qwen3-coder (480B) | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 1 | 3 | 3 | 1 | **24/30** | 10m19s | 469K | 19.5K |
+| 10 | z-ai/glm-4.7 | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 1 | **23/30** | 14m46s | 570K | 24.8K |
+| 11 | qwen/qwen3.5-122b | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 1 | **23/30** | 15m25s | 579K | 25.2K |
+| 12 | openai/gpt-oss-120b | OSS | 2 | 3 | 3 | 3 | 3 | 0 | 0 | 3 | 3 | 2 | **22/30** | 4m33s | 153K | 7.0K |
+| 12 | qwen/qwen3.5-35b | OSS | 3 | 3 | 3 | 1 | 3 | 0 | 2 | 3 | 3 | 1 | **22/30** | 15m58s | 355K | 16.1K |
+| 14 | qwen/qwen3-coder-next | OSS | 1 | 3 | 3 | 3 | 3 | 0 | 0 | 3 | 3 | 1 | **20/30** | 16m23s | 467K | 23.4K |
+| 14 | qwen/qwen3.5-397b | OSS | 1 | 3 | 3 | 3 | 3 | 0 | 0 | 3 | 3 | 1 | **20/30** | 19m20s | 546K | 27.3K |
+| 16 | minimax/minimax-m2.5 | | 1 | 0 | 3 | 3 | 1 | 3 | 1 | 3 | 3 | 1 | **19/30** | 45m05s | 300K | 15.8K |
+| 17 | openai/gpt-oss-20b | OSS | 0 | 3 | 3 | 1 | 0 | 0 | 0 | 3 | 3 | 1 | **14/30** | 19m47s | 142K | 10.1K |
+| 17 | moonshotai/kimi-k2 | | 1 | 3 | 0 | 1 | 3 | 3 | 3 | 0 | 0 | 0 | **14/30** | 42m04s | 808K | 57.7K |
 
-> **Note:** All models tested via free-tier OpenRouter endpoints. Cost data not available (OpenRouter did not return cost headers for these models). Tok/Pt = tokens per point scored (lower = more efficient).
+> **Open** = OSS means open-weight models with downloadable weights on HuggingFace. Blank = proprietary/API-only.
+>
+> **Note on scope:** This benchmark focuses on lightweight and mid-tier models suitable for agentic coding. Frontier models like Claude Opus/Sonnet 4, GPT-4.5, and Gemini 2.5 Pro are excluded — they are expected to perform well but at significantly higher cost, making them less relevant for the cost-sensitive agentic coding use cases this benchmark targets.
+>
+> Tok/Pt = tokens per point scored (lower = more efficient).
 
 ### Per-Test Heatmap
 
