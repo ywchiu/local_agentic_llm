@@ -6,13 +6,40 @@ An automated benchmark suite for evaluating LLM **agentic coding ability** via O
 
 ## Results Overview (Experiment 2 — agent_harness, March 2026)
 
+### Combined Score (Group 1 + Group 2, out of 60)
+
 ```mermaid
 xychart-beta horizontal
-    title "Score by Model (out of 30)"
-    x-axis ["Q3-CF", "Kimi2.5", "Haiku", "GLM-5", "Q3-30B", "Gem3F", "Q3.5-27B", "M-M2.1", "Q3-C", "GLM4.7", "Q3.5-122B", "GPT-120B", "Q3.5-35B", "Q3-CN", "Q3.5-397B", "M-M2.5", "Kimi2", "GPT-20B"]
-    y-axis "Score" 0 --> 30
-    bar [30, 27, 27, 26, 26, 25, 25, 24, 24, 23, 23, 22, 22, 20, 20, 19, 14, 14]
+    title "Combined Score: Coding + OpenClaw Skills (out of 60)"
+    x-axis ["Q3-CF", "Kimi2.5", "Q3-30B", "Q3-CN", "Q3-C", "Haiku", "Q3.5-27B", "GLM4.7", "GPT-120B", "M-M2.5", "M-M2.1", "Q3.5-35B", "Q3.5-397B", "GLM-5", "Q3.5-122B", "Kimi2", "Gem3F", "GPT-20B"]
+    y-axis "Score" 0 --> 60
+    bar [53, 50, 48, 43, 45, 46, 42, 42, 42, 37, 40, 40, 37, 34, 33, 26, 38, 21]
 ```
+
+### Group 1 vs Group 2 Comparison
+
+| Rank | Model | G1 (Coding) | G2 (OpenClaw) | Combined | Delta |
+|------|-------|:-----------:|:-------------:|:--------:|:-----:|
+| 1 | **qwen/qwen3-coder-flash** | 30 | 23 | **53** | -7 |
+| 2 | moonshotai/kimi-k2.5 | 27 | 23 | **50** | -4 |
+| 3 | qwen/qwen3-coder-30b | 26 | 22 | **48** | -4 |
+| 4 | anthropic/claude-haiku-4.5 | 27 | 19 | **46** | -8 |
+| 5 | qwen/qwen3-coder | 24 | 21 | **45** | -3 |
+| 6 | qwen/qwen3-coder-next | 20 | 23 | **43** | +3 |
+| 7 | z-ai/glm-4.7 | 23 | 19 | **42** | -4 |
+| 7 | openai/gpt-oss-120b | 22 | 20 | **42** | -2 |
+| 7 | qwen/qwen3.5-27b | 25 | 17 | **42** | -8 |
+| 10 | minimax/minimax-m2.1 | 24 | 16 | **40** | -8 |
+| 10 | qwen/qwen3.5-35b | 22 | 18 | **40** | -4 |
+| 12 | google/gemini-3-flash | 25 | 13 | **38** | -12 |
+| 13 | minimax/minimax-m2.5 | 19 | 18 | **37** | -1 |
+| 13 | qwen/qwen3.5-397b | 20 | 17 | **37** | -3 |
+| 15 | z-ai/glm-5 | 26 | 8 | **34** | -18 |
+| 16 | qwen/qwen3.5-122b | 23 | 10 | **33** | -13 |
+| 17 | moonshotai/kimi-k2 | 14 | 12 | **26** | -2 |
+| 18 | openai/gpt-oss-20b | 14 | 7 | **21** | -7 |
+
+> **Delta** = G2 - G1 score difference. Negative = model scores lower on OpenClaw skills than pure coding. **qwen3-coder-next is the only model that scored higher on OpenClaw (+3).**
 
 ## Group 1: Python Fundamentals
 
@@ -157,6 +184,19 @@ Only 3 models scored 3/3: qwen3-coder-flash, qwen3-coder-30b, and claude-haiku-4
 ### 6. Web servers no longer universally broken
 
 In Experiment 1, tests 06 and 09 scored **0 across all models**. After fixing validate.sh port conflicts (macOS AirPlay on port 5000) and adding HTML fallback for Kanban, most models now pass these tests. The failures were environmental, not model-related.
+
+### 7. OpenClaw skills expose a different capability axis
+
+Group 2 (OpenClaw skills) reshuffles the rankings dramatically:
+- **GLM-5**: 26/30 on coding → **8/30** on OpenClaw (doesn't produce SKILL.md format at all)
+- **Gemini 3 Flash**: 25/30 → **13/30** (struggles with agent framework conventions)
+- **qwen3-coder-next**: 20/30 → **23/30** (the only model that *improved* — better at learning new formats)
+
+Models that are great at writing code are not necessarily great at building agent skills. The SKILL.md format + YAML frontmatter conventions are a genuine discriminator.
+
+### 8. Test 08 (Webhook Receiver) is the hardest OpenClaw test
+
+**Zero models** scored 3/3 on test 08. Only a few got the server to actually start. Building a working HTTP server *inside* an OpenClaw skill directory structure is the most challenging task across both groups.
 
 ## Test Groups
 
