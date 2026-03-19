@@ -1,0 +1,7 @@
+{
+  "devices": [
+    {"id": "light_living", "name": "living room light", "type": "light", "state": "off"},
+    {"id": "light_bedroom", "name": "bedroom light", "type": "light", "state": "off"},
+    {"id": "thermo_bedroom", "name": "bedroom temperature", "type": "thermostat", "state": "20"}
+  ]
+}

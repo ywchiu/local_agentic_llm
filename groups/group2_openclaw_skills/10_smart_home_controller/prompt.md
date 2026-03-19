@@ -1,0 +1,1 @@
+Build an OpenClaw skill that controls smart home devices. It should read device config from a JSON file, support commands like 'turn on living room light' and 'set bedroom temperature to 22', and maintain device state in a separate state file. Include a Python script that processes commands. OpenClaw skills use a SKILL.md file with YAML frontmatter.

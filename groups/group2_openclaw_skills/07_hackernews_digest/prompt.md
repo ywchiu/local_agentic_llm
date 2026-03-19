@@ -1,0 +1,1 @@
+Build an OpenClaw skill that generates a daily digest — it should fetch top HackerNews stories, format them into a readable report, and save as an HTML file. Include a Python script that does the fetching and formatting. OpenClaw skills use a SKILL.md file with YAML frontmatter.

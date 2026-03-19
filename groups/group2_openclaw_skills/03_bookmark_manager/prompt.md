@@ -1,0 +1,1 @@
+Build an OpenClaw skill that manages bookmarks — add a URL with a tag, list all bookmarks, search by tag. Store bookmarks in a JSON file. Include a companion script. OpenClaw skills use a SKILL.md file with YAML frontmatter.

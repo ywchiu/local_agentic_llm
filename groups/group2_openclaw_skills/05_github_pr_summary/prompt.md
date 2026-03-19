@@ -1,0 +1,1 @@
+Build an OpenClaw skill that lists open PRs for a GitHub repo and shows a summary with title, author, and how old the PR is. It should require the gh CLI and also need a GITHUB_TOKEN env var. OpenClaw skills use a SKILL.md file with YAML frontmatter.

@@ -1,0 +1,1 @@
+Build an OpenClaw skill that looks up the current weather for a city using a weather API. It should require an API key as an environment variable and use curl to fetch data. OpenClaw skills use a SKILL.md file with YAML frontmatter.

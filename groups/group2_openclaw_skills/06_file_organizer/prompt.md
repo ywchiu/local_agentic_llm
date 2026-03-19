@@ -1,0 +1,1 @@
+Build an OpenClaw skill that organizes files in a directory by sorting them into subdirectories based on file extension (e.g., .pdf goes to pdf/, .jpg goes to images/). Include a companion shell script that does the actual organizing. The SKILL.md should reference the script by filename. OpenClaw skills use a SKILL.md file with YAML frontmatter.

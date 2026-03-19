@@ -1,0 +1,1 @@
+Build an OpenClaw skill that tracks pomodoro work sessions. It should let you start a timer, check remaining time, and log completed sessions to a file. OpenClaw skills use a SKILL.md file with YAML frontmatter.

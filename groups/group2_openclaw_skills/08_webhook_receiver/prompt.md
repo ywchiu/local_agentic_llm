@@ -1,0 +1,1 @@
+Build an OpenClaw skill that starts a simple webhook receiver — a lightweight Python HTTP server that listens on a configurable port, accepts POST requests, and logs each payload as a line in a JSON lines file. OpenClaw skills use a SKILL.md file with YAML frontmatter.

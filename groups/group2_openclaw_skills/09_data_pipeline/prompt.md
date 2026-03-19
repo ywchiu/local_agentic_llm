@@ -1,0 +1,1 @@
+Build an OpenClaw skill that runs a data pipeline: step 1 reads posts from a JSON file, step 2 filters posts where userId=1, step 3 generates a markdown summary report with post titles. Include a Python script. OpenClaw skills use a SKILL.md file with YAML frontmatter.

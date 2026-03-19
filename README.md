@@ -163,7 +163,7 @@ In Experiment 1, tests 06 and 09 scored **0 across all models**. After fixing va
 | Group | Language | Tests | Status |
 |-------|----------|-------|--------|
 | [Group 1: Python Fundamentals](groups/group1_python_fundamentals/) | Python | 10 | Done |
-| Group 2: *Coming soon* | — | — | Planned |
+| [Group 2: OpenClaw Skills](groups/group2_openclaw_skills/) | Python/Bash | 10 | Done |
 
 ### Group 1 Tests
 
@@ -179,6 +179,21 @@ In Experiment 1, tests 06 and 09 scored **0 across all models**. After fixing va
 | 08 | API data dashboard | Script | Hard | Must install pip packages, fetch live API, generate HTML |
 | 09 | Kanban task board | Web | Hard | Build web app with drag-and-drop + persistence |
 | 10 | Real-time chat | Web | Hard | Build websocket-based chat with multiple users |
+
+### Group 2 Tests
+
+| # | Test | Type | Difficulty | What It Tests |
+|---|------|------|------------|---------------|
+| 01 | Pomodoro Timer | Skill | Easy | Basic SKILL.md structure with YAML frontmatter |
+| 02 | Fix Broken Skill | Debug | Easy | Repair malformed SKILL.md and buggy script |
+| 03 | Bookmark Manager | Skill | Easy | Skill with companion script and JSON persistence |
+| 04 | Weather Lookup | Skill | Medium | Declare env var and binary requirements in frontmatter |
+| 05 | GitHub PR Summary | Skill | Medium | Declare multiple dependencies (gh + GITHUB_TOKEN) |
+| 06 | File Organizer | Skill | Medium | Companion script that actually executes and organizes files |
+| 07 | HackerNews Digest | Skill | Hard | Fetch API data, generate HTML report |
+| 08 | Webhook Receiver | Skill | Hard | Build HTTP server that logs POST payloads |
+| 09 | Data Pipeline | Skill | Hard | Multi-step pipeline: read, filter, report |
+| 10 | Smart Home Controller | Skill | Hard | Config-driven state management with command parsing |
 
 ## Architecture
 

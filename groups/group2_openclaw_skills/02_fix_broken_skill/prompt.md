@@ -1,0 +1,1 @@
+There's a broken OpenClaw skill in this directory. The SKILL.md has formatting issues and the companion script has a bug. Fix it so it works correctly. OpenClaw skills use a SKILL.md file with YAML frontmatter.
