@@ -1,0 +1,4 @@
+openrouter/z-ai/glm-5
+openrouter/qwen/qwen3.5-397b-a17b
+openrouter/minimax/minimax-m2.5
+openrouter/moonshotai/kimi-k2

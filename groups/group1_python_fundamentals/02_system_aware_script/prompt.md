@@ -1,0 +1,1 @@
+write a python script called sysinfo_script.py that detects the current system (mac/linux/windows), python version, and available disk space, then generates a report.txt file with all that info formatted nicely. also include the number of CPU cores and total RAM. make sure it actually works on this machine.

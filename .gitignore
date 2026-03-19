@@ -1,0 +1,25 @@
+# Secrets
+.env
+.env.*
+
+# Benchmark output (contains local paths, session IDs)
+results/
+
+# Workspace artifacts (ephemeral, wiped each run)
+**/workspace/*
+!**/workspace/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Tool caches
+.ruff_cache/
+.pytest_cache/
+
+# Databases
+*.db
+
+# OS
+.DS_Store
