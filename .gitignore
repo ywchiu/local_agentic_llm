@@ -2,8 +2,10 @@
 .env
 .env.*
 
-# Benchmark output (contains local paths, session IDs)
-results/
+# Raw benchmark logs (contain local paths, session IDs)
+results/raw/
+results/**/*_opencode.log
+results/**/*_result.txt
 
 # Workspace artifacts (ephemeral, wiped each run)
 **/workspace/*
