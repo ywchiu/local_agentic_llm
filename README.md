@@ -1,33 +1,17 @@
-# Agentic Vibe-Coding Benchmark
+# Agentic Coding Benchmark
 
 [中文版 (Traditional Chinese)](README_zh.md)
 
-An automated benchmark suite for evaluating LLM **vibe-coding ability** through [OpenCode](https://opencode.ai/). Give a model a vague prompt, see if it builds something that actually works.
+An automated benchmark suite for evaluating LLM **agentic coding ability** via OpenRouter tool-use API. Give a model a vague prompt and 4 tools (write_file, read_file, run_command, list_files), see if it builds something that actually works.
 
-## Results Overview
+## Results Overview (Experiment 2 — agent_harness, March 2026)
 
 ```mermaid
 xychart-beta horizontal
     title "Score by Model (out of 30)"
-    x-axis ["GLM-4.7", "GLM-5", "M-M2.5", "M-M2.1", "Kimi K2.5", "Q3-30B", "Haiku 4.5", "Gemini 3F", "Q3-Flash", "GPT-20B", "Q3-Coder", "GPT-120B"]
+    x-axis ["Q3-CF", "Kimi2.5", "Haiku", "GLM-5", "Q3-30B", "Gem3F", "Q3.5-27B", "M-M2.1", "Q3-C", "GLM4.7", "Q3.5-122B", "GPT-120B", "Q3-CN", "Q3.5-397B", "M-M2.5", "Kimi2", "GPT-20B", "Q3.5-35B", "Gemma"]
     y-axis "Score" 0 --> 30
-    bar [19, 18, 18, 18, 17, 17, 16, 15, 13, 13, 10, 4]
-```
-
-```mermaid
-xychart-beta horizontal
-    title "Cost per Run (USD)"
-    x-axis ["GLM-4.7", "GLM-5", "M-M2.5", "M-M2.1", "Kimi K2.5", "Q3-30B", "Haiku 4.5", "Gemini 3F", "Q3-Flash", "GPT-20B", "Q3-Coder", "GPT-120B"]
-    y-axis "Cost ($)" 0 --> 0.5
-    bar [0.18, 0.39, 0.17, 0.06, 0.26, 0.15, 0.35, 0.14, 0.23, 0.05, 0.24, 0.03]
-```
-
-```mermaid
-xychart-beta horizontal
-    title "Token Efficiency (Tokens per Point, lower = better, in thousands)"
-    x-axis ["GLM-4.7", "Gemini 3F", "M-M2.1", "GLM-5", "Haiku 4.5", "Q3-30B", "Q3-Flash", "GPT-20B", "Q3-Coder"]
-    y-axis "K Tokens/Point" 0 --> 750
-    bar [19, 19, 31, 34, 64, 124, 170, 64, 700]
+    bar [30, 27, 27, 26, 26, 25, 25, 24, 24, 23, 23, 22, 20, 20, 19, 14, 14, 8, 1]
 ```
 
 ## Group 1: Python Fundamentals
@@ -37,106 +21,105 @@ xychart-beta horizontal
 
 ### Leaderboard
 
-| Rank | Model | Score | Cost | Time | Tokens | Cost/Pt |
-|------|-------|-------|------|------|--------|---------|
-| 🥇 | z-ai/glm-4.7 | **19/30** | $0.18 | 12m | 357K | $0.009 |
-| 🥈 | z-ai/glm-5 | 18/30 | $0.39 | 17m | 610K | $0.022 |
-| 🥈 | minimax/minimax-m2.5 | 18/30 | $0.17 | 25m | 1.46M | $0.009 |
-| 🥈 | minimax/minimax-m2.1 | 18/30 | $0.06 | 11m | 555K | $0.003 |
-| 5 | moonshotai/kimi-k2.5 | 17/30 | $0.26 | 11m | 868K | $0.015 |
-| 5 | qwen/qwen3-coder-30b | 17/30 | $0.15 | 32m | 2.1M | $0.009 |
-| 7 | anthropic/claude-haiku-4.5 | 16/30 | $0.35 | 13m | 1.03M | $0.022 |
-| 8 | google/gemini-3-flash | 15/30 | $0.14 | 5m | 287K | $0.009 |
-| 9 | qwen/qwen3-coder-flash | 13/30 | $0.23 | 14m | 2.2M | $0.018 |
-| 9 | openai/gpt-oss-20b | 13/30 | $0.05 | 13m | 838K | $0.004 |
-| 11 | qwen/qwen3-coder | 10/30 | $0.24 | 32m | 7.0M | $0.024 |
-| 12 | openai/gpt-oss-120b | 4/30 | $0.03 | 2m | 388K | $0.008 |
+| Rank | Model | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | Total | Tokens |
+|------|-------|----|----|----|----|----|----|----|----|----|----|-------|--------|
+| 1 | **qwen/qwen3-coder-flash** |  3 |  3 |  3 |  3 |  3 |  3 |  3 |  3 |  3 |  3 | **30/30** | 814K |
+| 2 | moonshotai/kimi-k2.5 |  3 |  3 |  3 |  3 |  3 |  3 |  2 |  3 |  3 |  1 | **27/30** | 258K |
+| 3 | anthropic/claude-haiku-4.5 |  1 |  3 |  3 |  3 |  3 |  3 |  3 |  3 |  3 |  2 | **27/30** | 1955K |
+| 4 | z-ai/glm-5 |  2 |  3 |  3 |  3 |  3 |  3 |  2 |  3 |  3 |  1 | **26/30** | 338K |
+| 5 | qwen/qwen3-coder-30b |  2 |  2 |  3 |  3 |  3 |  3 |  3 |  3 |  3 |  1 | **26/30** | 1420K |
+| 6 | google/gemini-3-flash |  1 |  3 |  3 |  3 |  3 |  3 |  0 |  3 |  3 |  3 | **25/30** | 107K |
+| 7 | qwen/qwen3.5-27b |  1 |  3 |  3 |  3 |  3 |  3 |  2 |  3 |  3 |  1 | **25/30** | 262K |
+| 8 | minimax/minimax-m2.1 |  2 |  3 |  3 |  3 |  3 |  3 |  0 |  3 |  3 |  1 | **24/30** | 368K |
+| 9 | qwen/qwen3-coder |  1 |  3 |  3 |  3 |  3 |  3 |  1 |  3 |  3 |  1 | **24/30** | 469K |
+| 10 | z-ai/glm-4.7 |  1 |  3 |  3 |  3 |  3 |  3 |  0 |  3 |  3 |  1 | **23/30** | 570K |
+| 11 | qwen/qwen3.5-122b |  1 |  3 |  3 |  3 |  3 |  3 |  0 |  3 |  3 |  1 | **23/30** | 579K |
+| 12 | openai/gpt-oss-120b |  2 |  3 |  3 |  3 |  3 |  0 |  0 |  3 |  3 |  2 | **22/30** | 153K |
+| 13 | qwen/qwen3-coder-next |  1 |  3 |  3 |  3 |  3 |  0 |  0 |  3 |  3 |  1 | **20/30** | 467K |
+| 14 | qwen/qwen3.5-397b |  1 |  3 |  3 |  3 |  3 |  0 |  0 |  3 |  3 |  1 | **20/30** | 546K |
+| 15 | minimax/minimax-m2.5 |  1 |  0 |  3 |  3 |  1 |  3 |  1 |  3 |  3 |  1 | **19/30** | 300K |
+| 16 | openai/gpt-oss-20b |  0 |  3 |  3 |  1 |  0 |  0 |  0 |  3 |  3 |  1 | **14/30** | 142K |
+| 17 | moonshotai/kimi-k2 |  1 |  3 |  0 |  1 |  3 |  3 |  3 |  0 |  0 |  0 | **14/30** | 808K |
+| 18 | qwen/qwen3.5-35b |  0 |  0 |  3 |  1 |  0 |  0 |  0 |  0 |  3 |  1 | **8/30** | 200K |
+| 19 | google/gemma-3-27b |  0 |  0 |  0 |  1 |  0 |  0 |  0 |  0 |  0 |  0 | **1/30** | 0K |
 
 ### Per-Test Heatmap
 
-```mermaid
-block-beta
-    columns 13
-    block:header:13
-        h["🟩 = 3/3 Pass  🟨 = Partial  🟥 = 0/3 Fail"]
-    end
-```
+| Test | Diff. | Q3-CF | Kimi2.5 | Haiku | GLM-5 | Q3-30B | Gem3F | Q3.5-27B | M2.1 | Q3-C | GLM4.7 | Q3.5-122B | GPT-120 | Q3-CN | Q3.5-397B | M2.5 | GPT-20 | Kimi2 | Q3.5-35B | Gemma |
+|------|-------|:-----:|:-------:|:-----:|:-----:|:------:|:-----:|:--------:|:----:|:----:|:------:|:---------:|:-------:|:-----:|:---------:|:----:|:------:|:-----:|:--------:|:-----:|
+| 01 CSV→JSON | Easy | 🟩 | 🟩 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟥 | 🟨 | 🟥 | 🟥 |
+| 02 Sysinfo | Easy | 🟩 | 🟩 | 🟩 | 🟩 | 🟨 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟥 | 🟩 | 🟩 | 🟥 | 🟥 |
+| 03 Calculator | Easy | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟥 | 🟩 | 🟥 |
+| 04 Bugfix | Med | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟨 | 🟨 | 🟨 | 🟨 |
+| 05 TDD | Med | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟨 | 🟥 | 🟩 | 🟥 | 🟥 |
+| 06 Expense API | Med | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟥 | 🟥 | 🟥 | 🟩 | 🟥 | 🟩 | 🟥 | 🟥 |
+| 07 URL Short | Med | 🟩 | 🟨 | 🟩 | 🟨 | 🟩 | 🟥 | 🟨 | 🟥 | 🟨 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟨 | 🟥 | 🟩 | 🟥 | 🟥 |
+| 08 Dashboard | Hard | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟥 | 🟥 | 🟥 |
+| 09 Kanban | Hard | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟥 | 🟩 | 🟥 |
+| 10 Chat (WS) | Hard | 🟩 | 🟨 | 🟨 | 🟨 | 🟨 | 🟩 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟥 | 🟨 | 🟥 |
 
-| Test | Diff. | Tool | GLM-4.7 | GLM-5 | M2.5 | M2.1 | Kimi | Q3-30B | Haiku | Gemini | Q3-Fl | GPT-20 | Q3-C | GPT-120 |
-|------|-------|------|:-------:|:-----:|:----:|:----:|:----:|:------:|:-----:|:------:|:-----:|:------:|:----:|:-------:|
-| 01 CSV→JSON | Easy | Gen | 🟩 | 🟩 | 🟨 | 🟩 | 🟨 | 🟨 | 🟩 | 🟩 | 🟥 | 🟥 | 🟨 | 🟥 |
-| 02 Sysinfo | Easy | Bash | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 |
-| 03 Calculator | Easy | Web | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟥 | 🟥 | 🟥 | 🟩 | 🟥 | 🟥 |
-| 04 Bugfix | Med | Read | 🟩 | 🟩 | 🟩 | 🟨 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟨 | 🟨 | 🟨 |
-| 05 TDD | Med | Iter | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟨 | 🟩 | 🟩 | 🟩 | 🟩 | 🟨 | 🟥 |
-| 06 Expense API | Med | Srv | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 |
-| 07 URL Short | Med | Srv | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟨 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 |
-| 08 Dashboard | Hard | Deps | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟥 |
-| 09 Kanban | Hard | Srv | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 | 🟥 |
-| 10 Chat | Hard | WS | 🟨 | 🟥 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟥 | 🟨 | 🟥 | 🟨 | 🟥 |
-
-### Score vs Cost
-
-```mermaid
-quadrantChart
-    title Score vs Cost (top-right = best)
-    x-axis "Low Cost" --> "High Cost"
-    y-axis "Low Score" --> "High Score"
-    quadrant-1 "High score, pricey"
-    quadrant-2 "Sweet spot"
-    quadrant-3 "Cheap but weak"
-    quadrant-4 "Expensive & weak"
-    MiniMax-M2.1: [0.12, 0.60]
-    GPT-OSS-20B: [0.10, 0.43]
-    GPT-OSS-120B: [0.06, 0.13]
-    Gemini-3-Flash: [0.29, 0.50]
-    Qwen3-Coder-30B: [0.31, 0.57]
-    MiniMax-M2.5: [0.35, 0.60]
-    GLM-4.7: [0.37, 0.63]
-    Qwen3-Coder-Flash: [0.47, 0.43]
-    Qwen3-Coder: [0.49, 0.33]
-    Kimi-K2.5: [0.53, 0.57]
-    Claude-Haiku-4.5: [0.71, 0.53]
-    GLM-5: [0.80, 0.60]
-```
-
-### Test Categories
+### Category Pass Rates
 
 ```mermaid
 pie title Pass Rate by Category
-    "Scripts & CLI (01,02,08)" : 86
-    "Tool Usage (04,05)" : 79
-    "Simple Web (03)" : 50
-    "Web Servers (06,07,09,10)" : 4
+    "Web Frontend - 03,09 (89%)" : 89
+    "Data Processing - 08 (84%)" : 84
+    "Tool Usage - 04,05 (83%)" : 83
+    "Scripts & CLI - 01,02 (62%)" : 62
+    "REST API Servers - 06,07 (52%)" : 52
+    "Realtime/WebSocket - 10 (40%)" : 40
 ```
 
 ## Key Findings
 
-### 1. Open-source beats proprietary
+### 1. Qwen3-Coder-Flash achieves perfect 30/30
 
-GLM-4.7 ($0.18) and MiniMax M2.1 ($0.06) both outscored Claude Haiku 4.5 ($0.35) and Gemini 3 Flash ($0.14). For agentic vibe coding, open-source wins.
+The only model to ace every test, including realtime WebSocket chat. At 814K tokens total, it's not the most efficient but gets everything done.
 
-### 2. Web servers are universally broken
+### 2. Tool harness matters enormously
 
-Tests 06 and 09 scored **0 across all 12 models**. No model can reliably build a working web server through an agentic coding tool.
+Switching from opencode to a custom agent harness (standardized tool-use API) caused dramatic score improvements:
+- **GLM-5**: 18/30 → 26/30 (+44%)
+- **Claude Haiku 4.5**: 16/30 → 27/30 (+69%)
+- **Gemini 3 Flash**: 15/30 → 25/30 (+67%)
 
-### 3. Bigger ≠ better
+The previous experiment's "0-byte workspace" problem (opencode failing to write files for many models) was entirely a tool-layer bug, not a model capability issue.
 
-GPT-OSS-20B crushed 120B. MiniMax M2.1 matched M2.5 at 3x less cost. GLM-4.7 beat GLM-5. Qwen3-Coder-30B far outperformed full Qwen3-Coder.
+### 3. Bigger ≠ better in the Qwen 3.5 series
 
-### 4. Token efficiency matters most
+| Model | Active Params | Score |
+|-------|--------------|-------|
+| qwen3.5-27b | 27B (dense) | **25/30** |
+| qwen3.5-122b-a10b | 10B active | **23/30** |
+| qwen3.5-397b-a17b | 17B active | **20/30** |
+| qwen3.5-35b-a3b | 3B active | **8/30** |
 
-Qwen3-Coder burns 700K tokens per point (loops without converging). GLM-4.7 uses just 19K — a 37x difference.
+The dense 27B model outperforms both larger MoE variants. The 3B-active model is essentially non-functional for agentic coding.
+
+### 4. Token efficiency varies 20x
+
+| Model | Score | Tokens | Tokens/Point |
+|-------|-------|--------|-------------|
+| gemini-3-flash | 25/30 | 107K | **4.3K** |
+| kimi-k2.5 | 27/30 | 258K | **9.6K** |
+| claude-haiku-4.5 | 27/30 | 1955K | **72.4K** |
+
+Gemini 3 Flash uses 17x fewer tokens than Claude Haiku for similar scores.
+
+### 5. URL shortener (07) is the hardest discriminator
+
+Only 3 models scored 3/3: qwen3-coder-flash, qwen3-coder-30b, and claude-haiku-4.5. The redirect check requires the model to implement HTTP 3xx redirects correctly — a subtle web development skill.
+
+### 6. Web servers no longer universally broken
+
+In Experiment 1, tests 06 and 09 scored **0 across all models**. After fixing validate.sh port conflicts (macOS AirPlay on port 5000) and adding HTML fallback for Kanban, most models now pass these tests. The failures were environmental, not model-related.
 
 ## Test Groups
-
-The benchmark is organized into groups. Each group tests a different dimension of agentic coding ability.
 
 | Group | Language | Tests | Status |
 |-------|----------|-------|--------|
 | [Group 1: Python Fundamentals](groups/group1_python_fundamentals/) | Python | 10 | Done |
 | Group 2: *Coming soon* | — | — | Planned |
-| Group 3: *Coming soon* | — | — | Planned |
 
 ### Group 1 Tests
 
@@ -153,89 +136,60 @@ The benchmark is organized into groups. Each group tests a different dimension o
 | 09 | Kanban task board | Web | Hard | Build web app with drag-and-drop + persistence |
 | 10 | Real-time chat | Web | Hard | Build websocket-based chat with multiple users |
 
-## Usage
+## Architecture
 
-### Prerequisites
+### Agent Harness
 
-- [OpenCode](https://opencode.ai/) (`brew install opencode`)
-- [OpenRouter](https://openrouter.ai/) API key
-- Python 3.x
+The benchmark uses a custom **agent harness** (`agent_harness.py`) instead of vendor-specific agentic tools. This ensures every model gets the same standardized interface:
 
-### Setup
+```
+                    ┌─────────────────────┐
+                    │   agent_harness.py  │
+                    │                     │
+   prompt.md ──────►│  OpenRouter API     │
+                    │  (tool-use loop)    │
+                    │                     │
+                    │  4 tools:           │
+                    │  - write_file       │
+                    │  - read_file        │──────► workspace/
+                    │  - run_command      │
+                    │  - list_files       │
+                    │                     │
+                    │  JSON metrics ──────│──────► stdout
+                    │  Tool log ──────────│──────► stderr
+                    └─────────────────────┘
+```
+
+**Why not opencode/cursor/etc?** Vendor tools introduce bias — models that happen to be compatible with a specific tool's interface score higher, regardless of coding ability. Our harness gives every model identical tools via OpenRouter's normalized API.
+
+### Usage
 
 ```bash
+# Prerequisites: Python 3, requests library, OpenRouter API key
+
+# Setup
 git clone <this-repo>
 cd agentic_testing
 echo 'OPENROUTER_API_KEY="sk-or-..."' > .env
+pip install requests
+
+# Run benchmark
+./run_benchmark.sh                                    # all models from models.txt
+./run_benchmark.sh "openrouter/z-ai/glm-5"           # single model
+OPENCODE_TESTS=06_expense_tracker_api ./run_benchmark.sh  # specific tests
+OPENCODE_TIMEOUT=600 ./run_benchmark.sh               # custom timeout
+
+# Run harness directly
+python3 agent_harness.py \
+    --model "openrouter/qwen/qwen3-coder-flash" \
+    --prompt groups/group1_python_fundamentals/01_csv_to_json/prompt.md \
+    --workspace /tmp/test_workspace \
+    --timeout 300
 ```
-
-### Run benchmark
-
-```bash
-# Single model
-./run_benchmark.sh "openrouter/z-ai/glm-4.7"
-
-# All models from models.txt
-./run_benchmark.sh
-
-# Specific group only
-OPENCODE_GROUP=group1_python_fundamentals ./run_benchmark.sh
-
-# Custom timeout (10 min instead of 5)
-OPENCODE_TIMEOUT=600 ./run_benchmark.sh
-```
-
-### Manual testing
-
-```bash
-cd groups/group1_python_fundamentals/01_csv_to_json/workspace
-opencode run -m "openrouter/z-ai/glm-4.7" "$(cat ../prompt.md)"
-cd .. && ./validate.sh
-```
-
-## Project Structure
-
-```
-agentic_testing/
-├── .env                          # API key (not committed)
-├── models.txt                    # Models to test
-├── run_benchmark.sh              # Automated runner
-├── run_all_validations.sh        # Manual validator
-├── groups/
-│   ├── group1_python_fundamentals/
-│   │   ├── 01_csv_to_json/
-│   │   │   ├── prompt.md         # Vibe-coding prompt
-│   │   │   ├── validate.sh       # 3 automated checks
-│   │   │   ├── fixtures/         # Test data
-│   │   │   └── workspace/        # Model output
-│   │   ├── 02_system_aware_script/
-│   │   └── ...
-│   ├── group2_<future>/          # Future test groups
-│   └── ...
-└── results/
-    ├── group1_python_fundamentals/
-    │   ├── full-comparison-report.md
-    │   └── <model>_<timestamp>/
-    └── ...
-```
-
-## Adding Test Groups
-
-Create a new directory under `groups/`:
-
-```bash
-mkdir -p groups/group2_javascript_basics
-```
-
-Each test inside needs:
-- `prompt.md` — vague natural prompt
-- `validate.sh` — outputs exactly 3 lines: `TEST_ID|check_name|PASS` or `FAIL`
-- `fixtures/` — optional test data
-- `setup.sh` — optional pre-test setup
 
 ## Scoring
 
-Each test: 3 checks x 1 point = 3 points. Total per group: tests x 3.
+Each test: 3 checks x 1 point = 3 points. Total per group: 30 points.
 
 | Check | Verifies |
 |-------|----------|
@@ -243,14 +197,12 @@ Each test: 3 checks x 1 point = 3 points. Total per group: tests x 3.
 | Core functionality | Main feature works |
 | Edge cases | Handles non-trivial inputs |
 
-Tracking: cost (USD), time, input/output/total tokens via OpenCode session exports.
+## Experiments
 
-## Limitations
-
-- Web server tests may reflect OpenCode limitations, not just model capability
-- Single run per model; multiple runs needed for statistical significance
-- Token tracking depends on OpenCode session export availability
-- Currently Python-only (more languages planned)
+| Experiment | Date | Tool | Models | Key Finding |
+|-----------|------|------|--------|-------------|
+| 1 | 2026-03-18 | opencode | 12 | Many models produced 0-byte output due to tool incompatibility |
+| **2** | **2026-03-19** | **agent_harness** | **19** | **Fair comparison — qwen3-coder-flash achieves perfect 30/30** |
 
 ## License
 

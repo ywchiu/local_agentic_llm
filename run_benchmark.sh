@@ -14,6 +14,7 @@ GROUPS_DIR="$SCRIPT_DIR/groups"
 MODELS_FILE="$SCRIPT_DIR/models.txt"
 TIMEOUT="${OPENCODE_TIMEOUT:-300}"  # 5 minutes default, override with env var
 GROUP="${OPENCODE_GROUP:-}"  # specific group to run, or empty for all
+TEST_FILTER="${OPENCODE_TESTS:-}"  # comma-separated test names to run, or empty for all
 
 RESULTS_DIR="$SCRIPT_DIR/results"
 mkdir -p "$RESULTS_DIR"
@@ -28,6 +29,7 @@ usage() {
     echo "Environment variables:"
     echo "  OPENCODE_TIMEOUT=300   # seconds per test (default: 300)"
     echo "  OPENCODE_GROUP=group1_python_fundamentals  # run specific group"
+    echo "  OPENCODE_TESTS=06_expense_tracker_api,07_url_shortener  # run specific tests"
     exit 1
 }
 
@@ -46,13 +48,6 @@ workspace_size() {
     fi
 }
 
-# Timeout wrapper (macOS doesn't have coreutils timeout by default)
-run_with_timeout() {
-    local secs=$1
-    shift
-    perl -e "alarm $secs; exec @ARGV" "$@"
-}
-
 # Format seconds to human readable
 format_time() {
     local secs=$1
@@ -63,39 +58,6 @@ format_time() {
     else
         printf "%ds" "$secs"
     fi
-}
-
-# Get all session IDs as a newline-separated list
-get_session_ids() {
-    opencode session list 2>/dev/null | awk 'NR>1 && /^ses_/ {print $1}'
-}
-
-# Extract token/cost data from a session ID
-# Outputs: cost,input_tokens,output_tokens,reasoning_tokens,total_tokens
-extract_session_tokens() {
-    local session_id="$1"
-    local tmpfile=$(mktemp)
-    opencode export "$session_id" > "$tmpfile" 2>/dev/null || { echo "0,0,0,0,0"; rm -f "$tmpfile"; return; }
-    python3 -c "
-import json
-try:
-    with open('$tmpfile') as f:
-        d = json.load(f)
-    msgs = d.get('messages', [])
-    tc = ti = to = tr = tt = 0
-    for m in msgs:
-        info = m.get('info', {})
-        tc += info.get('cost', 0)
-        t = info.get('tokens', {})
-        ti += t.get('input', 0)
-        to += t.get('output', 0)
-        tr += t.get('reasoning', 0)
-        tt += t.get('total', 0)
-    print(f'{tc},{ti},{to},{tr},{tt}')
-except:
-    print('0,0,0,0,0')
-" 2>/dev/null
-    rm -f "$tmpfile"
 }
 
 # ── Collect models ───────────────────────────────────────────────────────────
@@ -138,7 +100,15 @@ fi
 for group_dir in "${GROUP_DIRS[@]}"; do
     [ -d "$group_dir" ] || continue
     for test_dir in "$group_dir"/*/; do
-        [ -f "$test_dir/validate.sh" ] && [ -f "$test_dir/prompt.md" ] && TESTS+=("$test_dir")
+        [ -f "$test_dir/validate.sh" ] && [ -f "$test_dir/prompt.md" ] || continue
+        # Apply test filter if set
+        if [ -n "$TEST_FILTER" ]; then
+            test_name=$(basename "$test_dir")
+            if ! echo ",$TEST_FILTER," | grep -q ",$test_name,"; then
+                continue
+            fi
+        fi
+        TESTS+=("$test_dir")
     done
 done
 
@@ -156,7 +126,7 @@ TMPRESULTS=$(mktemp -d)
 trap 'rm -rf "$TMPRESULTS"' EXIT
 
 echo "═══════════════════════════════════════════════════════════════"
-echo "  Agentic Vibe-Coding Benchmark"
+echo "  Agentic Coding Benchmark (agent_harness)"
 echo "  Date:     $(date)"
 echo "  Models:   ${#MODELS[@]}"
 echo "  Tests:    $NUM_TESTS"
@@ -192,7 +162,7 @@ for model in "${MODELS[@]}"; do
         workspace="$test_dir/workspace"
         prompt_file="$test_dir/prompt.md"
         validate_script="$test_dir/validate.sh"
-        opencode_log="$model_result_dir/${test_name}_opencode.log"
+        harness_log="$model_result_dir/${test_name}_harness.log"
 
         echo ""
         echo "  ┌─ $test_name"
@@ -207,22 +177,18 @@ for model in "${MODELS[@]}"; do
             bash "$setup_script" 2>/dev/null || true
         fi
 
-        # Read prompt
-        prompt=$(cat "$prompt_file")
-
-        # Snapshot session IDs before running
         abs_workspace="$(cd "$workspace" && pwd)"
-        sessions_before=$(get_session_ids)
 
-        # Run opencode with timeout
-        echo "  │  Running opencode..."
+        # Run agent harness
+        echo "  │  Running agent harness..."
         start_time=$(date +%s)
 
-        run_with_timeout "$TIMEOUT" opencode run \
-            -m "$model" \
-            --dir "$abs_workspace" \
-            "$prompt" \
-            > "$opencode_log" 2>&1 || true
+        harness_json=$(python3 "$SCRIPT_DIR/agent_harness.py" \
+            --model "$model" \
+            --prompt "$prompt_file" \
+            --workspace "$abs_workspace" \
+            --timeout "$TIMEOUT" \
+            2>"$harness_log") || true
 
         end_time=$(date +%s)
         elapsed=$((end_time - start_time))
@@ -236,22 +202,17 @@ for model in "${MODELS[@]}"; do
 
         # Measure output
         size=$(workspace_size "$workspace")
-        size_kb=$(echo "scale=1; $size / 1024" | bc 2>/dev/null || echo "0")
 
-        # Find the new session created by this run
-        sessions_after=$(get_session_ids)
-        new_session=$(comm -23 <(echo "$sessions_after" | sort) <(echo "$sessions_before" | sort) | head -1)
-
-        # Extract token/cost data from the new session
-        token_data="0,0,0,0,0"
-        if [ -n "$new_session" ]; then
-            token_data=$(extract_session_tokens "$new_session")
-        fi
-        test_cost=$(echo "$token_data" | cut -d, -f1)
-        test_input=$(echo "$token_data" | cut -d, -f2)
-        test_output=$(echo "$token_data" | cut -d, -f3)
-        test_reasoning=$(echo "$token_data" | cut -d, -f4)
-        test_total_tokens=$(echo "$token_data" | cut -d, -f5)
+        # Extract token/cost data from harness JSON output (single python call)
+        read test_cost test_input test_output test_reasoning test_total_tokens <<< \
+            $(echo "$harness_json" | python3 -c "
+import sys, json
+try:
+    d = json.load(sys.stdin)
+    print(d.get('cost',0), d.get('input_tokens',0), d.get('output_tokens',0), d.get('reasoning_tokens',0), d.get('total_tokens',0))
+except:
+    print('0 0 0 0 0')
+" 2>/dev/null || echo "0 0 0 0 0")
 
         # Run validation
         echo "  │  Validating..."

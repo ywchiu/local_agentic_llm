@@ -4,6 +4,9 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 WORKSPACE="$SCRIPT_DIR/workspace"
 TEST_ID="07_url_shortener"
 
+# Use a safe port that won't conflict with macOS AirPlay Receiver (port 5000)
+SAFE_PORT=18112
+
 SERVER_PID=""
 cleanup() {
     if [ -n "${SERVER_PID:-}" ]; then kill $SERVER_PID 2>/dev/null || true; fi
@@ -14,8 +17,14 @@ cleanup() {
 trap cleanup EXIT
 
 detect_port() {
-    for port in 5000 8000 8080 3000 8888; do
-        if curl -s -o /dev/null -w "%{http_code}" "http://localhost:$port" 2>/dev/null | grep -qE "^[2345]"; then
+    # Check the safe port first — accept any HTTP response (we started this server)
+    if curl -s -o /dev/null -w "%{http_code}" "http://localhost:$SAFE_PORT" 2>/dev/null | grep -qE "^[2345]"; then
+        echo $SAFE_PORT; return 0
+    fi
+    # Fall back to other common ports, but only accept 2xx/3xx to avoid
+    # false positives from macOS AirPlay Receiver (403 on port 5000)
+    for port in 8000 8080 3000 8888 5000; do
+        if curl -s -o /dev/null -w "%{http_code}" "http://localhost:$port" 2>/dev/null | grep -qE "^[23]"; then
             echo $port; return 0
         fi
     done
@@ -43,6 +52,31 @@ if [ ${#SCRIPTS[@]} -eq 0 ]; then
     echo "${TEST_ID}|redirect_works|FAIL"
     exit 0
 fi
+
+# Patch common port assignments in generated code to avoid conflicts (e.g. macOS AirPlay on 5000)
+for f in "$WORKSPACE"/*.py; do
+    [ -f "$f" ] || continue
+    sed -i '' \
+        -e "s/port=5000/port=$SAFE_PORT/g" \
+        -e "s/port=8000/port=$SAFE_PORT/g" \
+        -e "s/port=3000/port=$SAFE_PORT/g" \
+        -e "s/port=8080/port=$SAFE_PORT/g" \
+        -e "s/port=8888/port=$SAFE_PORT/g" \
+        -e "s/port=5001/port=$SAFE_PORT/g" \
+        -e "s/port=5500/port=$SAFE_PORT/g" \
+        -e "s/port = 5001/port = $SAFE_PORT/g" \
+        -e "s/port = 5500/port = $SAFE_PORT/g" \
+        -e "s/port = 5000/port = $SAFE_PORT/g" \
+        -e "s/port = 8000/port = $SAFE_PORT/g" \
+        -e "s/port = 3000/port = $SAFE_PORT/g" \
+        -e "s/port = 8080/port = $SAFE_PORT/g" \
+        -e "s/port = 8888/port = $SAFE_PORT/g" \
+        "$f" 2>/dev/null || true
+done
+
+# Also set env vars for frameworks that read them
+export PORT=$SAFE_PORT
+export FLASK_RUN_PORT=$SAFE_PORT
 
 # Try to start the server
 PORT=""
@@ -77,12 +111,14 @@ SHORT_CODE=""
 check2_pass=false
 RESPONSE=""
 
-# Try JSON POST to various endpoints
+# Try JSON POST to various endpoints (check HTTP status to avoid matching error pages)
 for ep in /shorten /api/shorten / /url /api/url /create /api/create; do
-    RESPONSE=$(curl -s -X POST "$BASE$ep" \
+    HTTP_RESP=$(curl -s -w "\n%{http_code}" -X POST "$BASE$ep" \
         -H "Content-Type: application/json" \
         -d "{\"url\": \"$LONG_URL\"}" 2>/dev/null)
-    if [ -n "$RESPONSE" ] && echo "$RESPONSE" | grep -qiE "(short|url|http|localhost)"; then
+    HTTP_CODE=$(echo "$HTTP_RESP" | tail -1)
+    RESPONSE=$(echo "$HTTP_RESP" | sed '$d')
+    if echo "$HTTP_CODE" | grep -qE "^[23]" && [ -n "$RESPONSE" ] && echo "$RESPONSE" | grep -qiE "(short|url|http|localhost)"; then
         check2_pass=true
         break
     fi
@@ -91,9 +127,11 @@ done
 # If JSON didn't work, try form data
 if ! $check2_pass; then
     for ep in /shorten / /url /create; do
-        RESPONSE=$(curl -s -X POST "$BASE$ep" \
+        HTTP_RESP=$(curl -s -w "\n%{http_code}" -X POST "$BASE$ep" \
             -d "url=$LONG_URL" 2>/dev/null)
-        if [ -n "$RESPONSE" ] && echo "$RESPONSE" | grep -qiE "(short|url|http|localhost)"; then
+        HTTP_CODE=$(echo "$HTTP_RESP" | tail -1)
+        RESPONSE=$(echo "$HTTP_RESP" | sed '$d')
+        if echo "$HTTP_CODE" | grep -qE "^[23]" && [ -n "$RESPONSE" ] && echo "$RESPONSE" | grep -qiE "(short|url|http|localhost)"; then
             check2_pass=true
             break
         fi

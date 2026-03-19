@@ -4,6 +4,9 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 WORKSPACE="$SCRIPT_DIR/workspace"
 TEST_ID="06_expense_tracker_api"
 
+# Use a safe port that won't conflict with macOS AirPlay Receiver (port 5000)
+SAFE_PORT=18111
+
 SERVER_PID=""
 cleanup() {
     if [ -n "${SERVER_PID:-}" ]; then kill $SERVER_PID 2>/dev/null || true; fi
@@ -15,8 +18,14 @@ cleanup() {
 trap cleanup EXIT
 
 detect_port() {
-    for port in 5000 8000 8080 3000 8888; do
-        if curl -s -o /dev/null -w "%{http_code}" "http://localhost:$port" 2>/dev/null | grep -qE "^[2345]"; then
+    # Check the safe port first — accept any HTTP response (we started this server)
+    if curl -s -o /dev/null -w "%{http_code}" "http://localhost:$SAFE_PORT" 2>/dev/null | grep -qE "^[2345]"; then
+        echo $SAFE_PORT; return 0
+    fi
+    # Fall back to other common ports, but only accept 2xx/3xx to avoid
+    # false positives from macOS AirPlay Receiver (403 on port 5000)
+    for port in 8000 8080 3000 8888 5000; do
+        if curl -s -o /dev/null -w "%{http_code}" "http://localhost:$port" 2>/dev/null | grep -qE "^[23]"; then
             echo $port; return 0
         fi
     done
@@ -45,6 +54,31 @@ if [ ${#SCRIPTS[@]} -eq 0 ]; then
     echo "${TEST_ID}|totals_by_category|FAIL"
     exit 0
 fi
+
+# Patch common port assignments in generated code to avoid conflicts (e.g. macOS AirPlay on 5000)
+for f in "$WORKSPACE"/*.py; do
+    [ -f "$f" ] || continue
+    sed -i '' \
+        -e "s/port=5000/port=$SAFE_PORT/g" \
+        -e "s/port=8000/port=$SAFE_PORT/g" \
+        -e "s/port=3000/port=$SAFE_PORT/g" \
+        -e "s/port=8080/port=$SAFE_PORT/g" \
+        -e "s/port=8888/port=$SAFE_PORT/g" \
+        -e "s/port=5001/port=$SAFE_PORT/g" \
+        -e "s/port=5500/port=$SAFE_PORT/g" \
+        -e "s/port = 5001/port = $SAFE_PORT/g" \
+        -e "s/port = 5500/port = $SAFE_PORT/g" \
+        -e "s/port = 5000/port = $SAFE_PORT/g" \
+        -e "s/port = 8000/port = $SAFE_PORT/g" \
+        -e "s/port = 3000/port = $SAFE_PORT/g" \
+        -e "s/port = 8080/port = $SAFE_PORT/g" \
+        -e "s/port = 8888/port = $SAFE_PORT/g" \
+        "$f" 2>/dev/null || true
+done
+
+# Also set env vars for frameworks that read them
+export PORT=$SAFE_PORT
+export FLASK_RUN_PORT=$SAFE_PORT
 
 # Try to start the server
 PORT=""
@@ -124,10 +158,12 @@ fi
 check3_pass=false
 
 # Try various summary/totals endpoints
-for ep in /expenses/summary /expenses/totals /api/expenses/summary /api/expenses/totals \
+for ep in /expenses/summary /expenses/totals /expenses/totals/by-category \
+          /api/expenses/summary /api/expenses/totals /api/expenses/totals/by-category \
           /summary /totals /categories /expenses/categories /api/summary /api/totals \
           "/expenses?group_by=category" "/api/expenses?group_by=category" \
-          "/expenses/report" "/api/expenses/report"; do
+          "/expenses/report" "/api/expenses/report" \
+          "/expenses/stats" "/api/expenses/stats"; do
     resp=$(curl -s "$BASE$ep" 2>/dev/null)
     if [ -n "$resp" ] && echo "$resp" | grep -qi "food" && echo "$resp" | grep -qi "transport"; then
         # Check if the amounts are correct (food=80, transport=100)

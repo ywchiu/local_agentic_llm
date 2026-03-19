@@ -4,6 +4,9 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 WORKSPACE="$SCRIPT_DIR/workspace"
 TEST_ID="10_realtime_chat"
 
+# Use a safe port that won't conflict with macOS AirPlay Receiver (port 5000)
+SAFE_PORT=18114
+
 PASS=0
 FAIL=0
 SERVER_PID=""
@@ -21,8 +24,11 @@ cleanup() {
 trap cleanup EXIT
 
 detect_port() {
-    for port in 5000 8000 8080 3000 8888; do
-        if curl -s -o /dev/null -w "%{http_code}" "http://localhost:$port" 2>/dev/null | grep -qE "^[2345]"; then
+    if curl -s -o /dev/null -w "%{http_code}" "http://localhost:$SAFE_PORT" 2>/dev/null | grep -qE "^[2345]"; then
+        echo $SAFE_PORT; return 0
+    fi
+    for port in 8000 8080 3000 8888 5000; do
+        if curl -s -o /dev/null -w "%{http_code}" "http://localhost:$port" 2>/dev/null | grep -qE "^[23]"; then
             echo $port; return 0
         fi
     done
@@ -52,6 +58,29 @@ MAIN_PY=$(grep -rlE "run\(|serve\(|main|app\.run|uvicorn|\.start\(" "$WORKSPACE"
 if [ -z "$MAIN_PY" ]; then
     MAIN_PY=$(echo "$PY_FILES" | head -1)
 fi
+
+# Patch common port assignments in generated code to avoid conflicts (e.g. macOS AirPlay on 5000)
+for f in "$WORKSPACE"/*.py; do
+    [ -f "$f" ] || continue
+    sed -i '' \
+        -e "s/port=5000/port=$SAFE_PORT/g" \
+        -e "s/port=8000/port=$SAFE_PORT/g" \
+        -e "s/port=3000/port=$SAFE_PORT/g" \
+        -e "s/port=8080/port=$SAFE_PORT/g" \
+        -e "s/port=8888/port=$SAFE_PORT/g" \
+        -e "s/port=5001/port=$SAFE_PORT/g" \
+        -e "s/port=5500/port=$SAFE_PORT/g" \
+        -e "s/port = 5001/port = $SAFE_PORT/g" \
+        -e "s/port = 5500/port = $SAFE_PORT/g" \
+        -e "s/port = 5000/port = $SAFE_PORT/g" \
+        -e "s/port = 8000/port = $SAFE_PORT/g" \
+        -e "s/port = 3000/port = $SAFE_PORT/g" \
+        -e "s/port = 8080/port = $SAFE_PORT/g" \
+        -e "s/port = 8888/port = $SAFE_PORT/g" \
+        "$f" 2>/dev/null || true
+done
+export PORT=$SAFE_PORT
+export FLASK_RUN_PORT=$SAFE_PORT
 
 # Start server in background
 cd "$WORKSPACE"

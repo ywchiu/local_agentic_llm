@@ -13,6 +13,9 @@ cleanup() {
 }
 trap cleanup EXIT
 
+# Use a safe port that won't conflict with macOS AirPlay Receiver (port 5000)
+SAFE_PORT=18110
+
 SERVER_PID=""
 HTML_CONTENT=""
 IS_WEB_SERVER=false
@@ -41,6 +44,29 @@ fi
 
 # Check 1: App loads
 if $IS_WEB_SERVER; then
+    # Patch common port assignments in generated code to avoid conflicts (e.g. macOS AirPlay on 5000)
+    for f in "$WORKSPACE"/*.py; do
+        [ -f "$f" ] || continue
+        sed -i '' \
+            -e "s/port=5000/port=$SAFE_PORT/g" \
+            -e "s/port=8000/port=$SAFE_PORT/g" \
+            -e "s/port=3000/port=$SAFE_PORT/g" \
+            -e "s/port=8080/port=$SAFE_PORT/g" \
+            -e "s/port=8888/port=$SAFE_PORT/g" \
+        -e "s/port=5001/port=$SAFE_PORT/g" \
+        -e "s/port=5500/port=$SAFE_PORT/g" \
+        -e "s/port = 5001/port = $SAFE_PORT/g" \
+        -e "s/port = 5500/port = $SAFE_PORT/g" \
+            -e "s/port = 5000/port = $SAFE_PORT/g" \
+            -e "s/port = 8000/port = $SAFE_PORT/g" \
+            -e "s/port = 3000/port = $SAFE_PORT/g" \
+            -e "s/port = 8080/port = $SAFE_PORT/g" \
+            -e "s/port = 8888/port = $SAFE_PORT/g" \
+            "$f" 2>/dev/null || true
+    done
+    export PORT=$SAFE_PORT
+    export FLASK_RUN_PORT=$SAFE_PORT
+
     # Try to start the Python web app
     for entry in app.py main.py server.py; do
         CANDIDATE="$WORKSPACE/$entry"
@@ -66,9 +92,9 @@ if $IS_WEB_SERVER; then
 
     sleep 3
 
-    # Try common ports
+    # Try common ports (safe port first)
     SERVER_RESPONDED=false
-    for port in 5000 8000 8080 3000 8888 5500; do
+    for port in $SAFE_PORT 8000 8080 3000 8888 5500 5000; do
         if HTML_CONTENT=$(curl -s --max-time 3 "http://localhost:$port" 2>/dev/null) && [ -n "$HTML_CONTENT" ]; then
             SERVER_RESPONDED=true
             break
