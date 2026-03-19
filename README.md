@@ -59,34 +59,44 @@ xychart-beta horizontal
 | 09 Kanban | Hard | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟥 |
 | 10 Chat (WS) | Hard | 🟩 | 🟨 | 🟨 | 🟨 | 🟨 | 🟩 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟥 |
 
-### Cost-Performance Matrix
+### Cost-Performance Quadrant
 
-> Estimated cost per full run (10 tests) based on OpenRouter listed pricing. Sorted by cost per point (lower = better value).
+> Top-right = best (high score + low cost). Cost estimated from OpenRouter pricing x actual tokens.
 
-| Rank | Model | Score | Est. Cost | Cost/Pt | Tokens | Value |
-|------|-------|-------|-----------|---------|--------|-------|
-| 1 | openai/gpt-oss-120b | 22/30 | $0.010 | $0.0005 | 153K | Best |
-| 2 | openai/gpt-oss-20b | 14/30 | $0.010 | $0.0007 | 142K | Best |
-| 3 | qwen/qwen3-coder-next | 20/30 | $0.072 | $0.0036 | 467K | Best |
-| 4 | google/gemini-3-flash | 25/30 | $0.093 | $0.0037 | 107K | Great |
-| 5 | qwen/qwen3.5-27b | 25/30 | $0.099 | $0.0040 | 262K | Great |
-| 6 | qwen/qwen3-coder-30b | 26/30 | $0.109 | $0.0042 | 1420K | Great |
-| 7 | qwen/qwen3.5-35b | 22/30 | $0.097 | $0.0044 | 355K | Great |
-| 8 | minimax/minimax-m2.1 | 24/30 | $0.121 | $0.0050 | 368K | Great |
-| 9 | qwen/qwen3-coder | 24/30 | $0.126 | $0.0053 | 469K | Good |
-| 10 | minimax/minimax-m2.5 | 19/30 | $0.107 | $0.0056 | 300K | Good |
-| 11 | **qwen/qwen3-coder-flash** | **30/30** | $0.183 | $0.0061 | 780K | Good |
-| 12 | moonshotai/kimi-k2.5 | 27/30 | $0.174 | $0.0064 | 258K | Good |
-| 13 | qwen/qwen3.5-122b | 23/30 | $0.229 | $0.0100 | 579K | OK |
-| 14 | z-ai/glm-4.7 | 23/30 | $0.276 | $0.0120 | 570K | OK |
-| 15 | z-ai/glm-5 | 26/30 | $0.314 | $0.0121 | 354K | OK |
-| 16 | qwen/qwen3.5-397b | 20/30 | $0.290 | $0.0145 | 546K | Pricey |
-| 17 | moonshotai/kimi-k2 | 14/30 | $0.524 | $0.0374 | 808K | Pricey |
-| 18 | anthropic/claude-haiku-4.5 | 27/30 | $2.583 | $0.0957 | 1955K | Pricey |
+```mermaid
+quadrantChart
+    title Score vs Cost (top-right is best)
+    x-axis "Expensive" --> "Cheap"
+    y-axis "Low Score" --> "High Score"
+    quadrant-1 "Champions"
+    quadrant-2 "Strong but pricey"
+    quadrant-3 "Expensive & weak"
+    quadrant-4 "Budget picks"
+    Q3-Coder-Flash 30/30: [0.47, 0.95]
+    Kimi-K2.5 27/30: [0.48, 0.90]
+    Haiku-4.5 27/30: [0.05, 0.90]
+    GLM-5 26/30: [0.38, 0.87]
+    Q3-Coder-30B 26/30: [0.56, 0.87]
+    Gemini-3F 25/30: [0.59, 0.83]
+    Q3.5-27B 25/30: [0.58, 0.83]
+    M-M2.1 24/30: [0.54, 0.80]
+    Q3-Coder 24/30: [0.53, 0.80]
+    GLM-4.7 23/30: [0.40, 0.77]
+    Q3.5-122B 23/30: [0.43, 0.77]
+    GPT-120B 22/30: [0.95, 0.73]
+    Q3.5-35B 22/30: [0.58, 0.73]
+    Q3-Coder-Next 20/30: [0.63, 0.67]
+    Q3.5-397B 20/30: [0.39, 0.67]
+    M-M2.5 19/30: [0.56, 0.63]
+    GPT-20B 14/30: [0.95, 0.47]
+    Kimi-K2 14/30: [0.29, 0.47]
+```
 
-**Sweet spot:** Gemini 3 Flash (25/30, $0.09) and qwen3.5-27b (25/30, $0.10) offer the best balance of high score and low cost. The perfect-scoring qwen3-coder-flash costs just $0.18 per run.
+**Champions (top-right):** Gemini 3 Flash ($0.09), qwen3.5-27b ($0.10), and qwen3-coder-30b ($0.11) deliver 25-26/30 at under $0.12. GPT-OSS-120b ($0.01) is the cheapest model that still scores 22+.
 
-**Claude Haiku paradox:** Scores 27/30 but costs $2.58 — 28x more than Gemini Flash for 2 extra points. Its 1.9M token consumption (mostly from verbose multi-turn conversations) makes it the least cost-efficient model tested.
+**Strong but pricey (top-left):** Claude Haiku scores 27/30 but costs $2.58 — 28x more than Gemini Flash for 2 extra points. GLM-5 scores well but at $0.31.
+
+**The perfect-scorer:** qwen3-coder-flash (30/30) sits right at the boundary — not the cheapest at $0.18, but the only model to ace every test.
 
 ### Category Pass Rates
 
