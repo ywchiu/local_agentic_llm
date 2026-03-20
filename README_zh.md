@@ -20,26 +20,26 @@ xychart-beta horizontal
 
 | 排名 | 模型 | G1（編碼）| G2（OpenClaw）| 綜合 | 差異 |
 |------|------|:---------:|:------------:|:----:|:----:|
-| 1 | **qwen/qwen3-coder-flash** | 30 | 23 | **53** | -7 |
+| 1 | **qwen/qwen3-coder-flash** | 30 | 25 | **55** | -5 |
 | 2 | moonshotai/kimi-k2.5 | 27 | 23 | **50** | -4 |
-| 3 | qwen/qwen3-coder-30b | 26 | 22 | **48** | -4 |
-| 4 | anthropic/claude-haiku-4.5 | 27 | 19 | **46** | -8 |
-| 5 | qwen/qwen3-coder | 24 | 21 | **45** | -3 |
-| 6 | qwen/qwen3-coder-next | 20 | 23 | **43** | +3 |
-| 7 | z-ai/glm-4.7 | 23 | 19 | **42** | -4 |
-| 7 | openai/gpt-oss-120b | 22 | 20 | **42** | -2 |
-| 7 | qwen/qwen3.5-27b | 25 | 17 | **42** | -8 |
-| 10 | minimax/minimax-m2.1 | 24 | 16 | **40** | -8 |
-| 10 | qwen/qwen3.5-35b | 22 | 18 | **40** | -4 |
+| 3 | qwen/qwen3-coder-30b | 26 | 23 | **49** | -3 |
+| 4 | qwen/qwen3-coder | 24 | 24 | **48** | 0 |
+| 4 | anthropic/claude-haiku-4.5 | 27 | 21 | **48** | -6 |
+| 6 | qwen/qwen3-coder-next | 20 | 25 | **45** | +5 |
+| 6 | openai/gpt-oss-120b | 22 | 23 | **45** | +1 |
+| 6 | qwen/qwen3.5-27b | 25 | 20 | **45** | -5 |
+| 9 | minimax/minimax-m2.1 | 24 | 19 | **43** | -5 |
+| 9 | qwen/qwen3.5-35b | 22 | 21 | **43** | -1 |
+| 11 | z-ai/glm-4.7 | 23 | 19 | **42** | -4 |
+| 12 | minimax/minimax-m2.5 | 19 | 19 | **38** | 0 |
 | 12 | google/gemini-3-flash | 25 | 13 | **38** | -12 |
-| 13 | minimax/minimax-m2.5 | 19 | 18 | **37** | -1 |
-| 13 | qwen/qwen3.5-397b | 20 | 17 | **37** | -3 |
+| 14 | qwen/qwen3.5-397b | 20 | 17 | **37** | -3 |
 | 15 | z-ai/glm-5 | 26 | 8 | **34** | -18 |
 | 16 | qwen/qwen3.5-122b | 23 | 10 | **33** | -13 |
-| 17 | moonshotai/kimi-k2 | 14 | 12 | **26** | -2 |
+| 17 | moonshotai/kimi-k2 | 14 | 13 | **27** | -1 |
 | 18 | openai/gpt-oss-20b | 14 | 7 | **21** | -7 |
 
-> **差異** = G2 - G1 分數差。負值代表模型在 OpenClaw 技能上比純編碼弱。**qwen3-coder-next 是唯一在 OpenClaw 上得分更高的模型（+3）。**
+> **差異** = G2 - G1 分數差。負值代表模型在 OpenClaw 技能上比純編碼弱。**qwen3-coder-next（+5）和 gpt-oss-120b（+1）是唯一在 OpenClaw 上得分更高的模型。**
 
 ## 第一組：Python 基礎
 
