@@ -26,22 +26,22 @@ xychart-beta horizontal
 | Rank | Model | Open | G1 (Coding) | G2 (OpenClaw) | Combined | Delta |
 |------|-------|:----:|:-----------:|:-------------:|:--------:|:-----:|
 | 1 | **qwen/qwen3-coder-flash** | | 30 | 25 | **55** | -5 |
-| 2 | moonshotai/kimi-k2.5 | | 27 | 23 | **50** | -4 |
+| 2 | moonshotai/kimi-k2.5 | OSS | 27 | 23 | **50** | -4 |
 | 3 | qwen/qwen3-coder-30b | OSS | 26 | 23 | **49** | -3 |
 | 4 | qwen/qwen3-coder | OSS | 24 | 24 | **48** | 0 |
 | 4 | anthropic/claude-haiku-4.5 | | 27 | 21 | **48** | -6 |
 | 6 | qwen/qwen3-coder-next | OSS | 20 | 25 | **45** | +5 |
 | 6 | openai/gpt-oss-120b | OSS | 22 | 23 | **45** | +1 |
 | 6 | qwen/qwen3.5-27b | OSS | 25 | 20 | **45** | -5 |
-| 9 | minimax/minimax-m2.1 | | 24 | 19 | **43** | -5 |
+| 9 | minimax/minimax-m2.1 | OSS | 24 | 19 | **43** | -5 |
 | 9 | qwen/qwen3.5-35b | OSS | 22 | 21 | **43** | -1 |
 | 11 | z-ai/glm-4.7 | OSS | 23 | 19 | **42** | -4 |
 | 12 | google/gemini-3-flash | | 25 | 13 | **38** | -12 |
-| 12 | minimax/minimax-m2.5 | | 19 | 19 | **38** | 0 |
+| 12 | minimax/minimax-m2.5 | OSS | 19 | 19 | **38** | 0 |
 | 14 | qwen/qwen3.5-397b | OSS | 20 | 17 | **37** | -3 |
-| 15 | z-ai/glm-5 | | 26 | 8 | **34** | -18 |
+| 15 | z-ai/glm-5 | OSS | 26 | 8 | **34** | -18 |
 | 16 | qwen/qwen3.5-122b | OSS | 23 | 10 | **33** | -13 |
-| 17 | moonshotai/kimi-k2 | | 14 | 13 | **27** | -1 |
+| 17 | moonshotai/kimi-k2 | OSS | 14 | 13 | **27** | -1 |
 | 18 | openai/gpt-oss-20b | OSS | 14 | 7 | **21** | -7 |
 
 > **Open** = OSS means open-weight models with downloadable weights on HuggingFace. **Delta** = G2 - G1 score difference. **qwen3-coder-next (+5)** and **gpt-oss-120b (+1)** are the only models that scored higher on OpenClaw than coding.
@@ -51,7 +51,7 @@ xychart-beta horizontal
 1. **qwen3-coder-flash leads overall (55/60)** — perfect 30/30 on coding, 25/30 on OpenClaw skills
 2. **Coding ability ≠ agent skill building** — GLM-5 drops from 26→8, Gemini Flash from 25→13 on OpenClaw
 3. **qwen3-coder-next is the adaptation champion** — only model to score significantly higher on OpenClaw (+5)
-4. **Open-source models dominate the top 10** — 7 of the top 10 combined scores are OSS models
+4. **Open-source dominates** — 15 of 18 models are OSS; only qwen3-coder-flash, Claude Haiku, and Gemini Flash are proprietary
 
 </details>
 
@@ -68,13 +68,13 @@ xychart-beta horizontal
 | Rank | Model | Open | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | Total | Time | Tokens | Tok/Pt |
 |------|-------|:----:|----|----|----|----|----|----|----|----|----|----|-------|------|--------|--------|
 | 1 | **qwen/qwen3-coder-flash** | | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **30/30** | 20m51s | 780K | 26.0K |
-| 2 | moonshotai/kimi-k2.5 | | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **27/30** | 15m26s | 258K | 9.6K |
+| 2 | moonshotai/kimi-k2.5 | OSS | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **27/30** | 15m26s | 258K | 9.6K |
 | 3 | anthropic/claude-haiku-4.5 | | 1 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 2 | **27/30** | 22m34s | 1955K | 72.4K |
-| 4 | z-ai/glm-5 | | 2 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **26/30** | 27m03s | 354K | 13.6K |
+| 4 | z-ai/glm-5 | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **26/30** | 27m03s | 354K | 13.6K |
 | 5 | qwen/qwen3-coder-30b | OSS | 2 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 1 | **26/30** | 24m51s | 1420K | 54.6K |
 | 6 | google/gemini-3-flash | | 1 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 3 | **25/30** | 4m42s | 107K | 4.3K |
 | 7 | qwen/qwen3.5-27b | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **25/30** | 11m01s | 262K | 10.5K |
-| 8 | minimax/minimax-m2.1 | | 2 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 1 | **24/30** | 23m44s | 368K | 15.3K |
+| 8 | minimax/minimax-m2.1 | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 1 | **24/30** | 23m44s | 368K | 15.3K |
 | 9 | qwen/qwen3-coder (480B) | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 1 | 3 | 3 | 1 | **24/30** | 10m19s | 469K | 19.5K |
 | 10 | z-ai/glm-4.7 | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 1 | **23/30** | 14m46s | 570K | 24.8K |
 | 11 | qwen/qwen3.5-122b | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 1 | **23/30** | 15m25s | 579K | 25.2K |
@@ -82,9 +82,9 @@ xychart-beta horizontal
 | 12 | qwen/qwen3.5-35b | OSS | 3 | 3 | 3 | 1 | 3 | 0 | 2 | 3 | 3 | 1 | **22/30** | 15m58s | 355K | 16.1K |
 | 14 | qwen/qwen3-coder-next | OSS | 1 | 3 | 3 | 3 | 3 | 0 | 0 | 3 | 3 | 1 | **20/30** | 16m23s | 467K | 23.4K |
 | 14 | qwen/qwen3.5-397b | OSS | 1 | 3 | 3 | 3 | 3 | 0 | 0 | 3 | 3 | 1 | **20/30** | 19m20s | 546K | 27.3K |
-| 16 | minimax/minimax-m2.5 | | 1 | 0 | 3 | 3 | 1 | 3 | 1 | 3 | 3 | 1 | **19/30** | 45m05s | 300K | 15.8K |
+| 16 | minimax/minimax-m2.5 | OSS | 1 | 0 | 3 | 3 | 1 | 3 | 1 | 3 | 3 | 1 | **19/30** | 45m05s | 300K | 15.8K |
 | 17 | openai/gpt-oss-20b | OSS | 0 | 3 | 3 | 1 | 0 | 0 | 0 | 3 | 3 | 1 | **14/30** | 19m47s | 142K | 10.1K |
-| 17 | moonshotai/kimi-k2 | | 1 | 3 | 0 | 1 | 3 | 3 | 3 | 0 | 0 | 0 | **14/30** | 42m04s | 808K | 57.7K |
+| 17 | moonshotai/kimi-k2 | OSS | 1 | 3 | 0 | 1 | 3 | 3 | 3 | 0 | 0 | 0 | **14/30** | 42m04s | 808K | 57.7K |
 
 > Tok/Pt = tokens per point scored (lower = more efficient).
 
@@ -182,20 +182,20 @@ pie title Pass Rate by Category
 | 1 | **qwen/qwen3-coder-flash** | | 3 | 2 | 3 | 2 | 2 | 3 | 3 | 3 | 1 | 3 | **25/30** |
 | 1 | qwen/qwen3-coder-next | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 2 | 2 | 2 | **25/30** |
 | 3 | qwen/qwen3-coder | OSS | 2 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 2 | 1 | **24/30** |
-| 4 | moonshotai/kimi-k2.5 | | 0 | 2 | 3 | 3 | 3 | 2 | 3 | 1 | 3 | 3 | **23/30** |
+| 4 | moonshotai/kimi-k2.5 | OSS | 0 | 2 | 3 | 3 | 3 | 2 | 3 | 1 | 3 | 3 | **23/30** |
 | 4 | qwen/qwen3-coder-30b | OSS | 2 | 2 | 3 | 2 | 2 | 3 | 3 | 1 | 2 | 1 | **23/30** |
 | 4 | openai/gpt-oss-120b | OSS | 2 | 2 | 3 | 2 | 2 | 3 | 3 | 3 | 1 | 2 | **23/30** |
 | 7 | anthropic/claude-haiku-4.5 | | 2 | 2 | 2 | 2 | 1 | 2 | 3 | 2 | 1 | 2 | **21/30** |
 | 7 | qwen/qwen3.5-35b | OSS | 3 | 2 | 3 | 2 | 2 | 3 | 2 | 3 | 1 | 0 | **21/30** |
 | 9 | qwen/qwen3.5-27b | OSS | 1 | 2 | 2 | 2 | 2 | 3 | 2 | 3 | 2 | 1 | **20/30** |
 | 10 | z-ai/glm-4.7 | OSS | 3 | 2 | 0 | 0 | 3 | 3 | 3 | 0 | 2 | 3 | **19/30** |
-| 10 | minimax/minimax-m2.5 | | 3 | 2 | 3 | 0 | 0 | 3 | 3 | 2 | 0 | 3 | **19/30** |
-| 10 | minimax/minimax-m2.1 | | 3 | 2 | 0 | 2 | 2 | 3 | 0 | 3 | 3 | 1 | **19/30** |
+| 10 | minimax/minimax-m2.5 | OSS | 3 | 2 | 3 | 0 | 0 | 3 | 3 | 2 | 0 | 3 | **19/30** |
+| 10 | minimax/minimax-m2.1 | OSS | 3 | 2 | 0 | 2 | 2 | 3 | 0 | 3 | 3 | 1 | **19/30** |
 | 13 | qwen/qwen3.5-397b | OSS | 1 | 2 | 2 | 2 | 2 | 2 | 2 | 0 | 2 | 2 | **17/30** |
 | 14 | google/gemini-3-flash | | 1 | 2 | 2 | 1 | 2 | 1 | 2 | 0 | 1 | 1 | **13/30** |
-| 14 | moonshotai/kimi-k2 | | 3 | 2 | 0 | 3 | 2 | 1 | 1 | 1 | 0 | 0 | **13/30** |
+| 14 | moonshotai/kimi-k2 | OSS | 3 | 2 | 0 | 3 | 2 | 1 | 1 | 1 | 0 | 0 | **13/30** |
 | 16 | qwen/qwen3.5-122b | OSS | 1 | 1 | 1 | 1 | 2 | 1 | 1 | 0 | 1 | 1 | **10/30** |
-| 17 | z-ai/glm-5 | | 0 | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 2 | 3 | **8/30** |
+| 17 | z-ai/glm-5 | OSS | 0 | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 2 | 3 | **8/30** |
 | 18 | openai/gpt-oss-20b | OSS | 0 | 2 | 0 | 0 | 0 | 1 | 1 | 0 | 1 | 2 | **7/30** |
 
 ### Key Observations
