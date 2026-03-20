@@ -54,34 +54,7 @@ xychart-beta horizontal
 
 > Top-right = best value (high score + low cost). Cost estimated from OpenRouter pricing x actual tokens used.
 
-```mermaid
-quadrantChart
-    title Score vs Cost — Group 1 Coding (top-right is best)
-    x-axis "Expensive" --> "Cheap"
-    y-axis "Low Score" --> "High Score"
-    quadrant-1 "Champions"
-    quadrant-2 "Strong but pricey"
-    quadrant-3 "Expensive & weak"
-    quadrant-4 "Budget picks"
-    "Q3-Coder-Flash 30/30": [0.47, 0.95]
-    "Kimi-K2.5 27/30": [0.48, 0.90]
-    "Haiku-4.5 27/30": [0.05, 0.90]
-    "GLM-5 26/30": [0.38, 0.87]
-    "Q3-Coder-30B 26/30": [0.56, 0.87]
-    "Gemini-3F 25/30": [0.59, 0.83]
-    "Q3.5-27B 25/30": [0.58, 0.83]
-    "M-M2.1 24/30": [0.54, 0.80]
-    "Q3-Coder 24/30": [0.53, 0.80]
-    "GLM-4.7 23/30": [0.40, 0.77]
-    "Q3.5-122B 23/30": [0.43, 0.77]
-    "GPT-120B 22/30": [0.95, 0.73]
-    "Q3.5-35B 22/30": [0.58, 0.73]
-    "Q3-Coder-Next 20/30": [0.63, 0.67]
-    "Q3.5-397B 20/30": [0.39, 0.67]
-    "M-M2.5 19/30": [0.56, 0.63]
-    "GPT-20B 14/30": [0.95, 0.47]
-    "Kimi-K2 14/30": [0.29, 0.47]
-```
+![Score vs Cost — Group 1 Coding](docs/quadrant_en.png)
 
 **Best value picks:**
 - **Gemini 3 Flash** (25/30, ~$0.09/run) and **qwen3.5-27b** (25/30, ~$0.10/run) — best score-to-cost ratio
