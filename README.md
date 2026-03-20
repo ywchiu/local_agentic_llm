@@ -23,28 +23,28 @@ xychart-beta horizontal
 
 ### Leaderboard
 
-| Rank | Model | Open | Arch | Params | Active | G1 | G2 | Total | Delta |
-|------|-------|:----:|:----:|-------:|-------:|:--:|:--:|:-----:|:-----:|
-| 1 | **qwen/qwen3-coder-flash** | | MoE | ? | ? | 30 | 25 | **55** | -5 |
-| 2 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | **50** | -4 |
-| 3 | qwen/qwen3-coder-30b | OSS | MoE | 30B | 3B | 26 | 23 | **49** | -3 |
-| 4 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | **48** | 0 |
-| 4 | anthropic/claude-haiku-4.5 | | ? | ? | ? | 27 | 21 | **48** | -6 |
-| 6 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 25 | **45** | +5 |
-| 6 | openai/gpt-oss-120b | OSS | MoE | 120B | 5B | 22 | 23 | **45** | +1 |
-| 6 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 20 | **45** | -5 |
-| 9 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | **43** | -5 |
-| 9 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 21 | **43** | -1 |
-| 11 | z-ai/glm-4.7 | OSS | MoE | 355B | ~30B | 23 | 19 | **42** | -4 |
-| 12 | google/gemini-3-flash | | ? | ? | ? | 25 | 13 | **38** | -12 |
-| 12 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | **38** | 0 |
-| 14 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 17 | **37** | -3 |
-| 15 | z-ai/glm-5 | OSS | MoE | 745B | 44B | 26 | 8 | **34** | -18 |
-| 16 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 10 | **33** | -13 |
-| 17 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | **27** | -1 |
-| 18 | openai/gpt-oss-20b | OSS | Dense | 20B | 20B | 14 | 7 | **21** | -7 |
+| Rank | Model | Open | Arch | Params | Active | G1 | G2 | Total | Est. Cost | $/Pt |
+|------|-------|:----:|:----:|-------:|-------:|:--:|:--:|:-----:|----------:|-----:|
+| 1 | **qwen/qwen3-coder-flash** | | MoE | ? | ? | 30 | 25 | **55** | $0.26 | $0.005 |
+| 2 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | **50** | $0.44 | $0.009 |
+| 3 | qwen/qwen3-coder-30b | OSS | MoE | 30B | 3B | 26 | 23 | **49** | $0.14 | $0.003 |
+| 4 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | **48** | $0.20 | $0.004 |
+| 4 | anthropic/claude-haiku-4.5 | | ? | ? | ? | 27 | 21 | **48** | $8.52 | $0.178 |
+| 6 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 25 | **45** | $0.16 | $0.004 |
+| 6 | openai/gpt-oss-120b | OSS | MoE | 120B | 5B | 22 | 23 | **45** | $0.02 | $0.000 |
+| 6 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 20 | **45** | $0.26 | $0.006 |
+| 9 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | **43** | $0.30 | $0.007 |
+| 9 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 21 | **43** | $0.15 | $0.003 |
+| 11 | z-ai/glm-4.7 | OSS | MoE | 355B | ~30B | 23 | 19 | **42** | $0.64 | $0.015 |
+| 12 | google/gemini-3-flash | | ? | ? | ? | 25 | 13 | **38** | $0.17 | $0.004 |
+| 12 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | **38** | $0.23 | $0.006 |
+| 14 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 17 | **37** | $0.48 | $0.013 |
+| 15 | z-ai/glm-5 | OSS | MoE | 745B | 44B | 26 | 8 | **34** | $0.63 | $0.019 |
+| 16 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 10 | **33** | $0.39 | $0.012 |
+| 17 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | **27** | $1.18 | $0.044 |
+| 18 | openai/gpt-oss-20b | OSS | Dense | 20B | 20B | 14 | 7 | **21** | $0.02 | $0.001 |
 
-> **Open** = OSS (open weights on HuggingFace). **Arch** = Dense or MoE (Mixture of Experts). **Params** = total parameters. **Active** = parameters activated per token. **?** = undisclosed.
+> **Open** = OSS (open weights on HuggingFace). **Arch** = Dense or MoE. **Est. Cost** = estimated total cost for G1+G2 (20 tests) based on OpenRouter pricing. **$/Pt** = cost per point scored.
 >
 > **qwen3-coder-next (+5)** and **gpt-oss-120b (+1)** are the only models that scored higher on OpenClaw than coding.
 

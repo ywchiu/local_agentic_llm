@@ -23,28 +23,28 @@ xychart-beta horizontal
 
 ### 排行榜
 
-| 排名 | 模型 | 開源 | 架構 | 參數 | 活躍 | G1 | G2 | 綜合 | 差異 |
-|------|------|:----:|:----:|-----:|-----:|:--:|:--:|:----:|:----:|
-| 1 | **qwen/qwen3-coder-flash** | | MoE | ? | ? | 30 | 25 | **55** | -5 |
-| 2 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | **50** | -4 |
-| 3 | qwen/qwen3-coder-30b | OSS | MoE | 30B | 3B | 26 | 23 | **49** | -3 |
-| 4 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | **48** | 0 |
-| 4 | anthropic/claude-haiku-4.5 | | ? | ? | ? | 27 | 21 | **48** | -6 |
-| 6 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 25 | **45** | +5 |
-| 6 | openai/gpt-oss-120b | OSS | MoE | 120B | 5B | 22 | 23 | **45** | +1 |
-| 6 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 20 | **45** | -5 |
-| 9 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | **43** | -5 |
-| 9 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 21 | **43** | -1 |
-| 11 | z-ai/glm-4.7 | OSS | MoE | 355B | ~30B | 23 | 19 | **42** | -4 |
-| 12 | google/gemini-3-flash | | ? | ? | ? | 25 | 13 | **38** | -12 |
-| 12 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | **38** | 0 |
-| 14 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 17 | **37** | -3 |
-| 15 | z-ai/glm-5 | OSS | MoE | 745B | 44B | 26 | 8 | **34** | -18 |
-| 16 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 10 | **33** | -13 |
-| 17 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | **27** | -1 |
-| 18 | openai/gpt-oss-20b | OSS | Dense | 20B | 20B | 14 | 7 | **21** | -7 |
+| 排名 | 模型 | 開源 | 架構 | 參數 | 活躍 | G1 | G2 | 綜合 | 估算費用 | $/分 |
+|------|------|:----:|:----:|-----:|-----:|:--:|:--:|:----:|--------:|-----:|
+| 1 | **qwen/qwen3-coder-flash** | | MoE | ? | ? | 30 | 25 | **55** | $0.26 | $0.005 |
+| 2 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | **50** | $0.44 | $0.009 |
+| 3 | qwen/qwen3-coder-30b | OSS | MoE | 30B | 3B | 26 | 23 | **49** | $0.14 | $0.003 |
+| 4 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | **48** | $0.20 | $0.004 |
+| 4 | anthropic/claude-haiku-4.5 | | ? | ? | ? | 27 | 21 | **48** | $8.52 | $0.178 |
+| 6 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 25 | **45** | $0.16 | $0.004 |
+| 6 | openai/gpt-oss-120b | OSS | MoE | 120B | 5B | 22 | 23 | **45** | $0.02 | $0.000 |
+| 6 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 20 | **45** | $0.26 | $0.006 |
+| 9 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | **43** | $0.30 | $0.007 |
+| 9 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 21 | **43** | $0.15 | $0.003 |
+| 11 | z-ai/glm-4.7 | OSS | MoE | 355B | ~30B | 23 | 19 | **42** | $0.64 | $0.015 |
+| 12 | google/gemini-3-flash | | ? | ? | ? | 25 | 13 | **38** | $0.17 | $0.004 |
+| 12 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | **38** | $0.23 | $0.006 |
+| 14 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 17 | **37** | $0.48 | $0.013 |
+| 15 | z-ai/glm-5 | OSS | MoE | 745B | 44B | 26 | 8 | **34** | $0.63 | $0.019 |
+| 16 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 10 | **33** | $0.39 | $0.012 |
+| 17 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | **27** | $1.18 | $0.044 |
+| 18 | openai/gpt-oss-20b | OSS | Dense | 20B | 20B | 14 | 7 | **21** | $0.02 | $0.001 |
 
-> **開源** = OSS（HuggingFace 開放權重）。**架構** = Dense（密集）或 MoE（混合專家）。**參數** = 總參數。**活躍** = 每 Token 活躍參數。**?** = 未公開。
+> **開源** = OSS（HuggingFace 開放權重）。**架構** = Dense 或 MoE。**估算費用** = G1+G2 共 20 個測試的估算總費用（基於 OpenRouter 定價）。**$/分** = 每得一分所需費用。
 >
 > **qwen3-coder-next（+5）**和 **gpt-oss-120b（+1）**是唯一在 OpenClaw 上得分更高的模型。
 
