@@ -17,7 +17,7 @@
 
 ```mermaid
 xychart-beta horizontal
-    title "綜合得分：編碼 + OpenClaw 技能（滿分 60）"
+    title "綜合得分：寫程式 + OpenClaw 技能（滿分 60）"
     x-axis ["Q3-CF", "Kimi2.5", "Q3-30B", "Haiku", "Q3-C", "Q3-CN", "GPT-120B", "Q3.5-27B", "M-M2.1", "Q3.5-35B", "GLM4.7", "Gem3F", "M-M2.5", "Q3.5-397B", "GLM-5", "Q3.5-122B", "Kimi2", "GPT-20B"]
     y-axis "分數" 0 --> 60
     bar [55, 50, 49, 48, 48, 45, 45, 45, 43, 43, 42, 38, 38, 37, 34, 33, 27, 21]
@@ -56,7 +56,7 @@ xychart-beta horizontal
 
 ```mermaid
 quadrantChart
-    title 分數 vs 費用 — 第一組編碼（右上角最佳）
+    title 分數 vs 費用 — 第一組寫程式（右上角最佳）
     x-axis "昂貴" --> "便宜"
     y-axis "低分" --> "高分"
     quadrant-1 "冠軍區"
@@ -91,8 +91,8 @@ quadrantChart
 
 ### 主要發現
 
-1. **qwen3-coder-flash 綜合領先（55/60）** — 編碼滿分 30/30，OpenClaw 技能 25/30
-2. **編碼能力 ≠ Agent 技能構建能力** — GLM-5 從 26 跌至 8，Gemini Flash 從 25 跌至 13
+1. **qwen3-coder-flash 綜合領先（55/60）** — 寫程式滿分 30/30，OpenClaw 技能 25/30
+2. **寫程式能力 ≠ Agent 技能構建能力** — GLM-5 從 26 跌至 8，Gemini Flash 從 25 跌至 13
 3. **qwen3-coder-next 是適應力冠軍** — 唯一在 OpenClaw 上顯著提升的模型（+5）
 4. **開源主導** — 18 個模型中有 15 個是開源的；僅 qwen3-coder-flash、Claude Haiku 和 Gemini Flash 為閉源
 
@@ -210,7 +210,7 @@ pie title 各類別通過率
 
 ### 主要觀察
 
-- **OpenClaw 比純編碼難得多** — 平均分從 22.8（G1）下降到 18.4（G2）
+- **OpenClaw 比純寫程式難得多** — 平均分從 22.8（G1）下降到 18.4（G2）
 - **GLM-5 崩潰：26→8** — 完全無法產生 SKILL.md 格式
 - **Gemini 3 Flash 下跌：25→13** — 難以適應 Agent 框架慣例
 - **qwen3-coder-next 上升：20→25** — 最擅長適應新框架格式
@@ -259,7 +259,7 @@ pie title 各類別通過率
                     └─────────────────────┘
 ```
 
-**為什麼不用 opencode/cursor 等工具？** 廠商工具會引入偏差 — 恰好與特定工具介面相容的模型會獲得更高分，而非反映真實編碼能力。我們的 harness 透過 OpenRouter 的標準化 API 給予每個模型相同的工具。
+**為什麼不用 opencode/cursor 等工具？** 廠商工具會引入偏差 — 恰好與特定工具介面相容的模型會獲得更高分，而非反映真實寫程式能力。我們的 harness 透過 OpenRouter 的標準化 API 給予每個模型相同的工具。
 
 ### 使用方式
 
