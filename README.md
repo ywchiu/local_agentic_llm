@@ -23,28 +23,30 @@ xychart-beta horizontal
 
 ### Leaderboard
 
-| Rank | Model | Open | G1 (Coding) | G2 (OpenClaw) | Combined | Delta |
-|------|-------|:----:|:-----------:|:-------------:|:--------:|:-----:|
-| 1 | **qwen/qwen3-coder-flash** | | 30 | 25 | **55** | -5 |
-| 2 | moonshotai/kimi-k2.5 | OSS | 27 | 23 | **50** | -4 |
-| 3 | qwen/qwen3-coder-30b | OSS | 26 | 23 | **49** | -3 |
-| 4 | qwen/qwen3-coder | OSS | 24 | 24 | **48** | 0 |
-| 4 | anthropic/claude-haiku-4.5 | | 27 | 21 | **48** | -6 |
-| 6 | qwen/qwen3-coder-next | OSS | 20 | 25 | **45** | +5 |
-| 6 | openai/gpt-oss-120b | OSS | 22 | 23 | **45** | +1 |
-| 6 | qwen/qwen3.5-27b | OSS | 25 | 20 | **45** | -5 |
-| 9 | minimax/minimax-m2.1 | OSS | 24 | 19 | **43** | -5 |
-| 9 | qwen/qwen3.5-35b | OSS | 22 | 21 | **43** | -1 |
-| 11 | z-ai/glm-4.7 | OSS | 23 | 19 | **42** | -4 |
-| 12 | google/gemini-3-flash | | 25 | 13 | **38** | -12 |
-| 12 | minimax/minimax-m2.5 | OSS | 19 | 19 | **38** | 0 |
-| 14 | qwen/qwen3.5-397b | OSS | 20 | 17 | **37** | -3 |
-| 15 | z-ai/glm-5 | OSS | 26 | 8 | **34** | -18 |
-| 16 | qwen/qwen3.5-122b | OSS | 23 | 10 | **33** | -13 |
-| 17 | moonshotai/kimi-k2 | OSS | 14 | 13 | **27** | -1 |
-| 18 | openai/gpt-oss-20b | OSS | 14 | 7 | **21** | -7 |
+| Rank | Model | Open | Arch | Params | Active | G1 | G2 | Total | Delta |
+|------|-------|:----:|:----:|-------:|-------:|:--:|:--:|:-----:|:-----:|
+| 1 | **qwen/qwen3-coder-flash** | | MoE | ? | ? | 30 | 25 | **55** | -5 |
+| 2 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | **50** | -4 |
+| 3 | qwen/qwen3-coder-30b | OSS | MoE | 30B | 3B | 26 | 23 | **49** | -3 |
+| 4 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | **48** | 0 |
+| 4 | anthropic/claude-haiku-4.5 | | ? | ? | ? | 27 | 21 | **48** | -6 |
+| 6 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 25 | **45** | +5 |
+| 6 | openai/gpt-oss-120b | OSS | MoE | 120B | 5B | 22 | 23 | **45** | +1 |
+| 6 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 20 | **45** | -5 |
+| 9 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | **43** | -5 |
+| 9 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 21 | **43** | -1 |
+| 11 | z-ai/glm-4.7 | OSS | MoE | 355B | ~30B | 23 | 19 | **42** | -4 |
+| 12 | google/gemini-3-flash | | ? | ? | ? | 25 | 13 | **38** | -12 |
+| 12 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | **38** | 0 |
+| 14 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 17 | **37** | -3 |
+| 15 | z-ai/glm-5 | OSS | MoE | 745B | 44B | 26 | 8 | **34** | -18 |
+| 16 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 10 | **33** | -13 |
+| 17 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | **27** | -1 |
+| 18 | openai/gpt-oss-20b | OSS | Dense | 20B | 20B | 14 | 7 | **21** | -7 |
 
-> **Open** = OSS means open-weight models with downloadable weights on HuggingFace. **Delta** = G2 - G1 score difference. **qwen3-coder-next (+5)** and **gpt-oss-120b (+1)** are the only models that scored higher on OpenClaw than coding.
+> **Open** = OSS (open weights on HuggingFace). **Arch** = Dense or MoE (Mixture of Experts). **Params** = total parameters. **Active** = parameters activated per token. **?** = undisclosed.
+>
+> **qwen3-coder-next (+5)** and **gpt-oss-120b (+1)** are the only models that scored higher on OpenClaw than coding.
 
 ### Key Findings
 
