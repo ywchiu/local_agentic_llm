@@ -4,7 +4,14 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 WORKSPACE="$SCRIPT_DIR/workspace"
 TEST_ID="05_github_pr_summary"
 
-SKILL_FILE="$WORKSPACE/SKILL.md"
+# Find SKILL.md — check workspace root first, then search subdirectories
+if [ -f "$WORKSPACE/SKILL.md" ]; then
+    SKILL_DIR="$WORKSPACE"
+else
+    SKILL_DIR=$(find "$WORKSPACE" -name "SKILL.md" -type f -maxdepth 3 -print -quit 2>/dev/null | xargs dirname 2>/dev/null || echo "$WORKSPACE")
+fi
+
+SKILL_FILE="$SKILL_DIR/SKILL.md"
 
 # Check 1: declares_dependencies — frontmatter declares both gh binary AND GITHUB_TOKEN env var
 check1=FAIL
@@ -20,7 +27,7 @@ echo "${TEST_ID}|declares_dependencies|${check1}"
 
 # Check 2: gh_commands — contains gh pr list or equivalent
 check2=FAIL
-ALL_CONTENT=$(cat "$WORKSPACE"/*.md "$WORKSPACE"/*.sh "$WORKSPACE"/*.py 2>/dev/null || true)
+ALL_CONTENT=$(cat "$SKILL_DIR"/*.md "$SKILL_DIR"/*.sh "$SKILL_DIR"/*.py "$WORKSPACE"/*.md "$WORKSPACE"/*.sh "$WORKSPACE"/*.py 2>/dev/null | sort -u || true)
 if echo "$ALL_CONTENT" | grep -qiE "gh pr list|gh pr view|gh api.*pulls"; then
     check2=PASS
 fi

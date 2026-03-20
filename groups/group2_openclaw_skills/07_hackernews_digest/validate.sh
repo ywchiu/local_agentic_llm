@@ -4,6 +4,13 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 WORKSPACE="$SCRIPT_DIR/workspace"
 TEST_ID="07_hackernews_digest"
 
+# Find SKILL.md — check workspace root first, then search subdirectories
+if [ -f "$WORKSPACE/SKILL.md" ]; then
+    SKILL_DIR="$WORKSPACE"
+else
+    SKILL_DIR=$(find "$WORKSPACE" -name "SKILL.md" -type f -maxdepth 3 -print -quit 2>/dev/null | xargs dirname 2>/dev/null || echo "$WORKSPACE")
+fi
+
 MOCK_PID=""
 cleanup() { [ -n "$MOCK_PID" ] && kill $MOCK_PID 2>/dev/null || true; }
 trap cleanup EXIT
@@ -11,10 +18,10 @@ trap cleanup EXIT
 # Check 1: skill_and_script — SKILL.md with frontmatter + .py script exists
 check1=FAIL
 PY_SCRIPT=""
-if [ -f "$WORKSPACE/SKILL.md" ]; then
-    content=$(cat "$WORKSPACE/SKILL.md")
+if [ -f "$SKILL_DIR/SKILL.md" ]; then
+    content=$(cat "$SKILL_DIR/SKILL.md")
     if echo "$content" | head -1 | grep -q "^---"; then
-        PY_SCRIPT=$(find "$WORKSPACE" -maxdepth 2 -name "*.py" -type f | head -1)
+        PY_SCRIPT=$(find "$SKILL_DIR" -maxdepth 2 -name "*.py" -type f | head -1)
         [ -n "$PY_SCRIPT" ] && check1=PASS
     fi
 fi
@@ -29,7 +36,7 @@ sleep 1
 check2=FAIL
 if [ -n "$PY_SCRIPT" ]; then
     # Patch any HN API URLs to point at mock
-    for f in "$WORKSPACE"/*.py; do
+    for f in "$SKILL_DIR"/*.py "$WORKSPACE"/*.py; do
         [ -f "$f" ] || continue
         sed -i '' \
             -e 's|https://hacker-news.firebaseio.com|http://127.0.0.1:18200|g' \

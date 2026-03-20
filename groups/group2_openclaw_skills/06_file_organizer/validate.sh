@@ -4,13 +4,20 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 WORKSPACE="$SCRIPT_DIR/workspace"
 TEST_ID="06_file_organizer"
 
+# Find SKILL.md — check workspace root first, then search subdirectories
+if [ -f "$WORKSPACE/SKILL.md" ]; then
+    SKILL_DIR="$WORKSPACE"
+else
+    SKILL_DIR=$(find "$WORKSPACE" -name "SKILL.md" -type f -maxdepth 3 -print -quit 2>/dev/null | xargs dirname 2>/dev/null || echo "$WORKSPACE")
+fi
+
 # Check 1: skill_and_script — SKILL.md + companion script + SKILL.md references script
 check1=FAIL
-if [ -f "$WORKSPACE/SKILL.md" ]; then
-    SCRIPT_FILE=$(find "$WORKSPACE" -maxdepth 1 \( -name "*.sh" -o -name "*.py" \) ! -name "SKILL.md" -type f | head -1)
+if [ -f "$SKILL_DIR/SKILL.md" ]; then
+    SCRIPT_FILE=$(find "$SKILL_DIR" -maxdepth 1 \( -name "*.sh" -o -name "*.py" \) ! -name "SKILL.md" -type f | head -1)
     if [ -n "$SCRIPT_FILE" ]; then
         script_name=$(basename "$SCRIPT_FILE")
-        if grep -q "$script_name" "$WORKSPACE/SKILL.md" 2>/dev/null; then
+        if grep -q "$script_name" "$SKILL_DIR/SKILL.md" 2>/dev/null; then
             check1=PASS
         fi
     fi

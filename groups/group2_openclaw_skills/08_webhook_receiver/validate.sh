@@ -5,6 +5,13 @@ WORKSPACE="$SCRIPT_DIR/workspace"
 TEST_ID="08_webhook_receiver"
 SAFE_PORT=18201
 
+# Find SKILL.md — check workspace root first, then search subdirectories
+if [ -f "$WORKSPACE/SKILL.md" ]; then
+    SKILL_DIR="$WORKSPACE"
+else
+    SKILL_DIR=$(find "$WORKSPACE" -name "SKILL.md" -type f -maxdepth 3 -print -quit 2>/dev/null | xargs dirname 2>/dev/null || echo "$WORKSPACE")
+fi
+
 SERVER_PID=""
 cleanup() {
     [ -n "$SERVER_PID" ] && kill $SERVER_PID 2>/dev/null || true
@@ -15,10 +22,10 @@ trap cleanup EXIT
 # Check 1: skill_and_server — SKILL.md with frontmatter + a .py server script
 check1=FAIL
 PY_SCRIPT=""
-if [ -f "$WORKSPACE/SKILL.md" ]; then
-    content=$(cat "$WORKSPACE/SKILL.md")
+if [ -f "$SKILL_DIR/SKILL.md" ]; then
+    content=$(cat "$SKILL_DIR/SKILL.md")
     if echo "$content" | head -1 | grep -q "^---"; then
-        PY_SCRIPT=$(find "$WORKSPACE" -maxdepth 2 -name "*.py" -type f | head -1)
+        PY_SCRIPT=$(find "$SKILL_DIR" -maxdepth 2 -name "*.py" -type f | head -1)
         [ -n "$PY_SCRIPT" ] && check1=PASS
     fi
 fi
@@ -29,7 +36,7 @@ check2=FAIL
 check3=FAIL
 if [ -n "$PY_SCRIPT" ]; then
     # Aggressively patch ALL common port numbers to SAFE_PORT
-    for f in "$WORKSPACE"/*.py; do
+    for f in "$SKILL_DIR"/*.py "$WORKSPACE"/*.py; do
         [ -f "$f" ] || continue
         sed -i '' \
             -e "s/5000/$SAFE_PORT/g" \

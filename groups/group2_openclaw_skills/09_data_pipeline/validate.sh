@@ -4,13 +4,20 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 WORKSPACE="$SCRIPT_DIR/workspace"
 TEST_ID="09_data_pipeline"
 
+# Find SKILL.md — check workspace root first, then search subdirectories
+if [ -f "$WORKSPACE/SKILL.md" ]; then
+    SKILL_DIR="$WORKSPACE"
+else
+    SKILL_DIR=$(find "$WORKSPACE" -name "SKILL.md" -type f -maxdepth 3 -print -quit 2>/dev/null | xargs dirname 2>/dev/null || echo "$WORKSPACE")
+fi
+
 # Check 1: skill_and_script — SKILL.md with frontmatter + .py script
 check1=FAIL
 PY_SCRIPT=""
-if [ -f "$WORKSPACE/SKILL.md" ]; then
-    content=$(cat "$WORKSPACE/SKILL.md")
+if [ -f "$SKILL_DIR/SKILL.md" ]; then
+    content=$(cat "$SKILL_DIR/SKILL.md")
     if echo "$content" | head -1 | grep -q "^---"; then
-        PY_SCRIPT=$(find "$WORKSPACE" -maxdepth 2 -name "*.py" -type f | head -1)
+        PY_SCRIPT=$(find "$SKILL_DIR" -maxdepth 2 -name "*.py" -type f | head -1)
         [ -n "$PY_SCRIPT" ] && check1=PASS
     fi
 fi

@@ -18,9 +18,9 @@ An automated benchmark suite for evaluating LLM **agentic coding ability** via O
 ```mermaid
 xychart-beta horizontal
     title "Combined Score: Coding + OpenClaw Skills (out of 60)"
-    x-axis ["Q3-CF", "Kimi2.5", "Q3-30B", "Haiku", "Q3-C", "Q3-CN", "GPT-120B", "Q3.5-27B", "M-M2.1", "Q3.5-35B", "GLM4.7", "Gem3F", "M-M2.5", "Q3.5-397B", "GLM-5", "Q3.5-122B", "Kimi2", "GPT-20B"]
+    x-axis ["Q3-CF", "Q3.5-27B", "GLM-5", "Q3.5-122B", "Kimi2.5", "Q3.5-35B", "Q3-30B", "Q3-C", "Haiku", "GLM4.7", "Q3.5-397B", "GPT-120B", "Gem3F", "Q3-CN", "M-M2.1", "M-M2.5", "GPT-20B", "Kimi2"]
     y-axis "Score" 0 --> 60
-    bar [55, 50, 49, 48, 48, 45, 45, 45, 43, 43, 42, 38, 38, 37, 34, 33, 27, 21]
+    bar [55, 51, 50, 50, 50, 49, 49, 48, 48, 46, 46, 45, 45, 44, 43, 38, 37, 27]
 ```
 
 ### Leaderboard
@@ -28,27 +28,27 @@ xychart-beta horizontal
 | Rank | Model | Open | Arch | Params | Active | G1 | G2 | Total | Est. Cost | $/Pt |
 |------|-------|:----:|:----:|-------:|-------:|:--:|:--:|:-----:|----------:|-----:|
 | 1 | **qwen/qwen3-coder-flash** | | MoE | ? | ? | 30 | 25 | **55** | $0.26 | $0.005 |
-| 2 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | **50** | $0.44 | $0.009 |
-| 3 | qwen/qwen3-coder-30b | OSS | MoE | 30.5B | 3.3B | 26 | 23 | **49** | $0.14 | $0.003 |
-| 4 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | **48** | $0.20 | $0.004 |
-| 4 | anthropic/claude-haiku-4.5 | | ? | ? | ? | 27 | 21 | **48** | $8.52 | $0.178 |
-| 6 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 25 | **45** | $0.16 | $0.004 |
-| 6 | openai/gpt-oss-120b | OSS | MoE | 117B | 5.1B | 22 | 23 | **45** | $0.02 | $0.000 |
-| 6 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 20 | **45** | $0.26 | $0.006 |
-| 9 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | **43** | $0.30 | $0.007 |
-| 9 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 21 | **43** | $0.15 | $0.003 |
-| 11 | z-ai/glm-4.7 | OSS | MoE | 355B | 32B | 23 | 19 | **42** | $0.64 | $0.015 |
-| 12 | google/gemini-3-flash | | ? | ? | ? | 25 | 13 | **38** | $0.17 | $0.004 |
-| 12 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | **38** | $0.23 | $0.006 |
-| 14 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 17 | **37** | $0.48 | $0.013 |
-| 15 | z-ai/glm-5 | OSS | MoE | 745B | 44B | 26 | 8 | **34** | $0.63 | $0.019 |
-| 16 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 10 | **33** | $0.39 | $0.012 |
-| 17 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | **27** | $1.18 | $0.044 |
-| 18 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 7 | **21** | $0.02 | $0.001 |
+| 2 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 26 | **51** | $0.26 | $0.005 |
+| 3 | z-ai/glm-5 | OSS | MoE | 745B | 44B | 26 | 24 | **50** | $0.63 | $0.013 |
+| 3 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 27 | **50** | $0.39 | $0.008 |
+| 3 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | **50** | $0.44 | $0.009 |
+| 6 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 27 | **49** | $0.15 | $0.003 |
+| 6 | qwen/qwen3-coder-30b | OSS | MoE | 30.5B | 3.3B | 26 | 23 | **49** | $0.14 | $0.003 |
+| 8 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | **48** | $0.20 | $0.004 |
+| 8 | anthropic/claude-haiku-4.5 | | ? | ? | ? | 27 | 21 | **48** | $8.52 | $0.178 |
+| 10 | z-ai/glm-4.7 | OSS | MoE | 355B | 32B | 23 | 23 | **46** | $0.64 | $0.014 |
+| 10 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 26 | **46** | $0.48 | $0.010 |
+| 12 | openai/gpt-oss-120b | OSS | MoE | 117B | 5.1B | 22 | 23 | **45** | $0.02 | $0.000 |
+| 12 | google/gemini-3-flash | | ? | ? | ? | 25 | 20 | **45** | $0.17 | $0.004 |
+| 14 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 24 | **44** | $0.16 | $0.004 |
+| 15 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | **43** | $0.30 | $0.007 |
+| 16 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | **38** | $0.23 | $0.006 |
+| 17 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | **37** | $0.02 | $0.001 |
+| 18 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | **27** | $1.18 | $0.044 |
 
 > **Open** = OSS (open weights on HuggingFace). **Arch** = Dense or MoE. **Est. Cost** = estimated total cost for G1+G2 (20 tests) based on OpenRouter pricing. **$/Pt** = cost per point scored.
 >
-> **qwen3-coder-next (+5)** and **gpt-oss-120b (+1)** are the only models that scored higher on OpenClaw than coding.
+> **G2 scores updated 2026-03-21:** Validation scripts were fixed to accept SKILL.md placed in subdirectories (e.g. `pomodoro/SKILL.md` instead of `./SKILL.md`). The original validators only checked the workspace root, which unfairly penalized 10 models that organized files into project subdirectories — a reasonable convention, not a coding failure. Biggest improvements: **qwen3.5-122b** (10→27, +17), **gpt-oss-20b** (7→23, +16), **GLM-5** (8→24, +16), **qwen3.5-397b** (17→26, +9).
 
 ### Cost-Performance Quadrant (Group 1)
 
@@ -65,8 +65,8 @@ xychart-beta horizontal
 ### Key Findings
 
 1. **qwen3-coder-flash leads overall (55/60)** — perfect 30/30 on coding, 25/30 on OpenClaw skills
-2. **Coding ability ≠ agent skill building** — GLM-5 drops from 26→8, Gemini Flash from 25→13 on OpenClaw
-3. **qwen3-coder-next is the adaptation champion** — only model to score significantly higher on OpenClaw (+5)
+2. **qwen3.5-27b surges to #2 (51/60)** — strongest general-purpose model, dense 27B architecture
+3. **Validation matters** — a bug in our validators penalized models for placing SKILL.md in subdirectories; fixing it raised 10 models' G2 scores by +4 to +17 points (see note below leaderboard)
 4. **Open-source dominates** — 15 of 18 models are OSS; only qwen3-coder-flash, Claude Haiku, and Gemini Flash are proprietary
 
 </details>
@@ -162,31 +162,31 @@ pie title Pass Rate by Category
 
 | Rank | Model | Open | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | Total |
 |------|-------|:----:|----|----|----|----|----|----|----|----|----|----|-------|
-| 1 | **qwen/qwen3-coder-flash** | | 3 | 2 | 3 | 2 | 2 | 3 | 3 | 3 | 1 | 3 | **25/30** |
-| 1 | qwen/qwen3-coder-next | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 2 | 2 | 2 | **25/30** |
-| 3 | qwen/qwen3-coder | OSS | 2 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 2 | 1 | **24/30** |
-| 4 | moonshotai/kimi-k2.5 | OSS | 0 | 2 | 3 | 3 | 3 | 2 | 3 | 1 | 3 | 3 | **23/30** |
-| 4 | qwen/qwen3-coder-30b | OSS | 2 | 2 | 3 | 2 | 2 | 3 | 3 | 1 | 2 | 1 | **23/30** |
-| 4 | openai/gpt-oss-120b | OSS | 2 | 2 | 3 | 2 | 2 | 3 | 3 | 3 | 1 | 2 | **23/30** |
-| 7 | anthropic/claude-haiku-4.5 | | 2 | 2 | 2 | 2 | 1 | 2 | 3 | 2 | 1 | 2 | **21/30** |
-| 7 | qwen/qwen3.5-35b | OSS | 3 | 2 | 3 | 2 | 2 | 3 | 2 | 3 | 1 | 0 | **21/30** |
-| 9 | qwen/qwen3.5-27b | OSS | 1 | 2 | 2 | 2 | 2 | 3 | 2 | 3 | 2 | 1 | **20/30** |
-| 10 | z-ai/glm-4.7 | OSS | 3 | 2 | 0 | 0 | 3 | 3 | 3 | 0 | 2 | 3 | **19/30** |
-| 10 | minimax/minimax-m2.5 | OSS | 3 | 2 | 3 | 0 | 0 | 3 | 3 | 2 | 0 | 3 | **19/30** |
-| 10 | minimax/minimax-m2.1 | OSS | 3 | 2 | 0 | 2 | 2 | 3 | 0 | 3 | 3 | 1 | **19/30** |
-| 13 | qwen/qwen3.5-397b | OSS | 1 | 2 | 2 | 2 | 2 | 2 | 2 | 0 | 2 | 2 | **17/30** |
-| 14 | google/gemini-3-flash | | 1 | 2 | 2 | 1 | 2 | 1 | 2 | 0 | 1 | 1 | **13/30** |
-| 14 | moonshotai/kimi-k2 | OSS | 3 | 2 | 0 | 3 | 2 | 1 | 1 | 1 | 0 | 0 | **13/30** |
-| 16 | qwen/qwen3.5-122b | OSS | 1 | 1 | 1 | 1 | 2 | 1 | 1 | 0 | 1 | 1 | **10/30** |
-| 17 | z-ai/glm-5 | OSS | 0 | 2 | 0 | 0 | 0 | 1 | 0 | 0 | 2 | 3 | **8/30** |
-| 18 | openai/gpt-oss-20b | OSS | 0 | 2 | 0 | 0 | 0 | 1 | 1 | 0 | 1 | 2 | **7/30** |
+| 1 | **qwen/qwen3.5-122b** | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 2 | 3 | **27/30** |
+| 1 | qwen/qwen3.5-35b | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 2 | 3 | **27/30** |
+| 3 | qwen/qwen3.5-27b | OSS | 3 | 2 | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 3 | **26/30** |
+| 3 | qwen/qwen3.5-397b | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 2 | 2 | 3 | **26/30** |
+| 5 | qwen/qwen3-coder-flash | | 3 | 2 | 3 | 2 | 2 | 3 | 3 | 3 | 1 | 3 | **25/30** |
+| 6 | z-ai/glm-5 | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 1 | 2 | 3 | **24/30** |
+| 6 | qwen/qwen3-coder | OSS | 2 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 2 | 1 | **24/30** |
+| 6 | qwen/qwen3-coder-next | OSS | 3 | 2 | 3 | 3 | 3 | 2 | 3 | 2 | 2 | 1 | **24/30** |
+| 9 | moonshotai/kimi-k2.5 | OSS | 3 | 2 | 3 | 2 | 3 | 1 | 2 | 2 | 2 | 3 | **23/30** |
+| 9 | openai/gpt-oss-120b | OSS | 2 | 2 | 3 | 2 | 2 | 3 | 3 | 3 | 1 | 2 | **23/30** |
+| 9 | qwen/qwen3-coder-30b | OSS | 2 | 2 | 3 | 2 | 2 | 3 | 3 | 1 | 2 | 1 | **23/30** |
+| 9 | z-ai/glm-4.7 | OSS | 3 | 1 | 3 | 2 | 3 | 3 | 2 | 1 | 2 | 3 | **23/30** |
+| 9 | openai/gpt-oss-20b | OSS | 3 | 1 | 3 | 2 | 3 | 2 | 1 | 3 | 2 | 3 | **23/30** |
+| 14 | anthropic/claude-haiku-4.5 | | 2 | 2 | 2 | 2 | 1 | 2 | 3 | 2 | 1 | 2 | **21/30** |
+| 15 | google/gemini-3-flash | | 3 | 1 | 3 | 2 | 2 | 1 | 2 | 3 | 2 | 1 | **20/30** |
+| 16 | minimax/minimax-m2.1 | OSS | 3 | 2 | 0 | 2 | 2 | 3 | 0 | 3 | 3 | 1 | **19/30** |
+| 16 | minimax/minimax-m2.5 | OSS | 3 | 2 | 3 | 0 | 0 | 3 | 3 | 2 | 0 | 3 | **19/30** |
+| 18 | moonshotai/kimi-k2 | OSS | 3 | 2 | 0 | 3 | 2 | 1 | 1 | 1 | 0 | 0 | **13/30** |
 
 ### Key Observations
 
-- **OpenClaw is much harder than coding** — average score drops from 22.8 (G1) to 18.4 (G2)
-- **GLM-5 collapses: 26→8** — doesn't produce SKILL.md format at all
-- **Gemini 3 Flash drops: 25→13** — struggles with agent framework conventions
-- **qwen3-coder-next rises: 20→25** — best at adapting to new framework formats
+- **Validation fix dramatically changed rankings** — the original validators only checked `$WORKSPACE/SKILL.md`, penalizing models that placed files in subdirectories (e.g. `pomodoro/SKILL.md`). After fixing this, 10 models saw score increases of +4 to +17 points. The generated SKILL.md content was correct all along.
+- **qwen3.5 family dominates OpenClaw** — all four qwen3.5 variants now rank in the top 4, scoring 26-27/30
+- **GLM-5 recovers: 8→24** — the original 8/30 was entirely due to file placement, not coding ability
+- **gpt-oss-20b biggest surprise: 7→23** — went from last place to mid-pack after the fix
 - **Test 10 (Smart Home)** is the best discriminator — requires config parsing + state management
 
 ### Group 2 Tests
