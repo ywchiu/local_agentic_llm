@@ -2,6 +2,8 @@
 
 [English Version](README.md)
 
+[![部落格文章](https://img.shields.io/badge/Blog-閱讀完整分析-blue?style=for-the-badge)](https://www.largitdata.com/zh-tw/blog_detail/20260320)
+
 透過 OpenRouter Tool-Use API 自動化評估大型語言模型的 **Agentic Coding 能力** — 給模型一個模糊提示和 4 個工具（write_file、read_file、run_command、list_files），看它能否構建出可用的成品。
 
 > **為什麼選這些模型？** 本基準測試旨在找出 **性價比最高** 的 Agentic Coding 模型。我們刻意聚焦於開發者實際負擔得起大規模使用的輕量級與中階模型。旗艦模型如 Claude Opus/Sonnet 4、GPT-4.5、Gemini 2.5 Pro 等未納入 — 它們可能表現優異，但每次執行費用高出 10-100 倍，這違背了測試的初衷。**如果您希望測試特定模型，請 [開 Issue](https://github.com/ywchiu/local_agentic_llm/issues)！**
@@ -127,6 +129,37 @@ quadrantChart
 | 17 | openai/gpt-oss-20b | OSS | 0 | 3 | 3 | 1 | 0 | 0 | 0 | 3 | 3 | 1 | **14/30** | 19m47s | 142K | 10.1K |
 | 17 | moonshotai/kimi-k2 | OSS | 1 | 3 | 0 | 1 | 3 | 3 | 3 | 0 | 0 | 0 | **14/30** | 42m04s | 808K | 57.7K |
 
+> Tok/分 = 每得一分所消耗的 Token 數（越低越高效）。
+
+### 各測試熱力圖
+
+🟩 = 3/3 通過  🟨 = 部分通過  🟥 = 0/3 失敗
+
+| 測試 | 難度 | Q3-CF | Kimi2.5 | Haiku | GLM-5 | Q3-30B | Gem3F | Q3.5-27B | M2.1 | Q3-C | GLM4.7 | Q3.5-122B | GPT-120 | Q3.5-35B | Q3-CN | Q3.5-397B | M2.5 | GPT-20 | Kimi2 |
+|------|------|:-----:|:-------:|:-----:|:-----:|:------:|:-----:|:--------:|:----:|:----:|:------:|:---------:|:-------:|:--------:|:-----:|:---------:|:----:|:------:|:-----:|
+| 01 CSV→JSON | 簡單 | 🟩 | 🟩 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟩 | 🟨 | 🟨 | 🟨 | 🟥 | 🟨 |
+| 02 系統資訊 | 簡單 | 🟩 | 🟩 | 🟩 | 🟩 | 🟨 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟥 | 🟩 | 🟩 |
+| 03 計算機 | 簡單 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟥 |
+| 04 修復 Bug | 中等 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟨 | 🟩 | 🟩 | 🟩 | 🟨 | 🟨 |
+| 05 TDD | 中等 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟨 | 🟥 | 🟩 |
+| 06 費用 API | 中等 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟥 | 🟥 | 🟥 | 🟥 | 🟩 | 🟥 | 🟩 |
+| 07 短網址 | 中等 | 🟩 | 🟨 | 🟩 | 🟨 | 🟩 | 🟥 | 🟨 | 🟥 | 🟨 | 🟥 | 🟥 | 🟥 | 🟨 | 🟥 | 🟥 | 🟨 | 🟥 | 🟩 |
+| 08 儀表板 | 困難 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟥 |
+| 09 看板 | 困難 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟩 | 🟥 |
+| 10 聊天 (WS) | 困難 | 🟩 | 🟨 | 🟨 | 🟨 | 🟨 | 🟩 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟨 | 🟥 |
+
+### 各類別通過率
+
+```mermaid
+pie title 各類別通過率
+    "網頁前端 - 03,09 (89%)" : 89
+    "資料處理 - 08 (84%)" : 84
+    "工具使用 - 04,05 (83%)" : 83
+    "腳本與 CLI - 01,02 (62%)" : 62
+    "REST API 伺服器 - 06,07 (52%)" : 52
+    "即時/WebSocket - 10 (40%)" : 40
+```
+
 ### 第一組測試項目
 
 | # | 測試 | 類型 | 難度 | 測試重點 |
@@ -206,26 +239,56 @@ quadrantChart
 
 ### Agent Harness
 
-基準測試使用自製 **agent harness**（`agent_harness.py`），而非特定廠商的 Agentic 工具。確保每個模型獲得相同的標準化介面。
+基準測試使用自製 **agent harness**（`agent_harness.py`），而非特定廠商的 Agentic 工具。確保每個模型獲得相同的標準化介面：
 
-**為什麼不用 opencode/cursor 等工具？** 廠商工具會引入偏差 — 恰好與特定工具介面相容的模型會獲得更高分，而非反映真實編碼能力。
+```
+                    ┌─────────────────────┐
+                    │   agent_harness.py  │
+                    │                     │
+   prompt.md ──────►│  OpenRouter API     │
+                    │  (tool-use loop)    │
+                    │                     │
+                    │  4 個工具：          │
+                    │  - write_file       │
+                    │  - read_file        │──────► workspace/
+                    │  - run_command      │
+                    │  - list_files       │
+                    │                     │
+                    │  JSON 指標 ─────────│──────► stdout
+                    │  工具日誌 ──────────│──────► stderr
+                    └─────────────────────┘
+```
+
+**為什麼不用 opencode/cursor 等工具？** 廠商工具會引入偏差 — 恰好與特定工具介面相容的模型會獲得更高分，而非反映真實編碼能力。我們的 harness 透過 OpenRouter 的標準化 API 給予每個模型相同的工具。
 
 ### 使用方式
 
 ```bash
+# 前置需求：Python 3、requests 套件、OpenRouter API 金鑰
+
+# 設定
 git clone <此儲存庫>
 cd agentic_testing
 echo 'OPENROUTER_API_KEY="sk-or-..."' > .env
 pip install requests
 
-./run_benchmark.sh                                          # 所有模型
+# 執行基準測試
+./run_benchmark.sh                                          # models.txt 中的所有模型
 ./run_benchmark.sh "openrouter/z-ai/glm-5"                 # 單一模型
 OPENCODE_GROUP=group2_openclaw_skills ./run_benchmark.sh    # 特定分組
+OPENCODE_TESTS=06_expense_tracker_api ./run_benchmark.sh    # 特定測試
+OPENCODE_TIMEOUT=600 ./run_benchmark.sh                     # 自訂超時時間
 ```
 
 ## 評分方法
 
 每個測試 3 項檢查 x 1 分 = 3 分。每組總分：30 分。
+
+| 檢查項目 | 驗證內容 |
+|---------|---------|
+| 無錯誤執行 | 執行時不會崩潰 |
+| 核心功能 | 主要功能正常運作 |
+| 邊界情況 | 能處理非一般性輸入 |
 
 ## 實驗記錄
 

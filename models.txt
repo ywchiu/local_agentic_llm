@@ -12,6 +12,5 @@ openrouter/qwen/qwen3.5-35b-a3b
 openrouter/qwen/qwen3.5-122b-a10b
 openrouter/anthropic/claude-haiku-4.5
 openrouter/google/gemini-3-flash-preview
-openrouter/google/gemma-3-27b-it
 openrouter/openai/gpt-oss-20b
 openrouter/openai/gpt-oss-120b
