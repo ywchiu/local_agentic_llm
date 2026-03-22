@@ -18,9 +18,9 @@ An automated benchmark suite for evaluating LLM **agentic coding ability** via O
 ```mermaid
 xychart-beta horizontal
     title "Combined Score: Coding + OpenClaw Skills (out of 60)"
-    x-axis ["Q3-CF", "Q3.5-27B", "GLM-5", "Q3.5-122B", "Kimi2.5", "Q3.5-35B", "Q3-30B", "Q3-C", "Haiku", "GLM4.7", "Q3.5-397B", "GPT-120B", "Gem3F", "Q3-CN", "M-M2.1", "M-M2.5", "GPT-20B", "Kimi2"]
+    x-axis ["Q3-CF", "Q3.5-27B", "GLM-5", "Q3.5-122B", "Kimi2.5", "Q3.5-35B", "Q3-30B", "Q3-C", "Haiku", "GLM4.7", "Q3.5-397B", "GPT-120B", "Gem3F", "Q3-CN", "M-M2.1", "M-M2.5", "GPT-20B", "Kimi2", "Nemo120B"]
     y-axis "Score" 0 --> 60
-    bar [55, 51, 50, 50, 50, 49, 49, 48, 48, 46, 46, 45, 45, 44, 43, 38, 37, 27]
+    bar [55, 51, 50, 50, 50, 49, 49, 48, 48, 46, 46, 45, 45, 44, 43, 38, 37, 27, 17]
 ```
 
 ### Leaderboard
@@ -45,6 +45,7 @@ xychart-beta horizontal
 | 16 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | **38** | $0.23 | $0.006 |
 | 17 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | **37** | $0.02 | $0.001 |
 | 18 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | **27** | $1.18 | $0.044 |
+| 19 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | **17** | $0.02 | $0.001 |
 
 > **Open** = OSS (open weights on HuggingFace). **Arch** = Dense or MoE. **Est. Cost** = estimated total cost for G1+G2 (20 tests) based on OpenRouter pricing. **$/Pt** = cost per point scored.
 >
@@ -101,6 +102,7 @@ xychart-beta horizontal
 | 16 | minimax/minimax-m2.5 | OSS | 1 | 0 | 3 | 3 | 1 | 3 | 1 | 3 | 3 | 1 | **19/30** | 45m05s | 300K | 15.8K |
 | 17 | openai/gpt-oss-20b | OSS | 0 | 3 | 3 | 1 | 0 | 0 | 0 | 3 | 3 | 1 | **14/30** | 19m47s | 142K | 10.1K |
 | 17 | moonshotai/kimi-k2 | OSS | 1 | 3 | 0 | 1 | 3 | 3 | 3 | 0 | 0 | 0 | **14/30** | 42m04s | 808K | 57.7K |
+| 19 | nvidia/nemotron-3-super | OSS | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 1 | 3 | 0 | **5/30** | 2m53s | 120K | 24.0K |
 
 > Tok/Pt = tokens per point scored (lower = more efficient).
 
@@ -180,6 +182,7 @@ pie title Pass Rate by Category
 | 16 | minimax/minimax-m2.1 | OSS | 3 | 2 | 0 | 2 | 2 | 3 | 0 | 3 | 3 | 1 | **19/30** |
 | 16 | minimax/minimax-m2.5 | OSS | 3 | 2 | 3 | 0 | 0 | 3 | 3 | 2 | 0 | 3 | **19/30** |
 | 18 | moonshotai/kimi-k2 | OSS | 3 | 2 | 0 | 3 | 2 | 1 | 1 | 1 | 0 | 0 | **13/30** |
+| 19 | nvidia/nemotron-3-super | OSS | 0 | 1 | 3 | 2 | 2 | 1 | 0 | 1 | 1 | 1 | **12/30** |
 
 ### Key Observations
 
