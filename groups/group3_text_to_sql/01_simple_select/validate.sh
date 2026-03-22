@@ -14,7 +14,18 @@ rm -f "$DB_PATH"
 sqlite3 "$DB_PATH" < "$FIXTURES/seed.sql"
 
 # Find the Python script in workspace
-PY_SCRIPT=$(find "$WORKSPACE" -name "*.py" -type f | head -n 1)
+# Prefer text_to_sql.py, then *sql*/*query* scripts, then any .py (excluding test/setup helpers)
+if [ -f "$WORKSPACE/text_to_sql.py" ]; then
+    PY_SCRIPT="$WORKSPACE/text_to_sql.py"
+else
+    PY_SCRIPT=$(find "$WORKSPACE" -maxdepth 2 \( -name "*sql*.py" -o -name "*query*.py" -o -name "*translate*.py" \) -type f | head -n 1)
+    if [ -z "$PY_SCRIPT" ]; then
+        PY_SCRIPT=$(find "$WORKSPACE" -maxdepth 1 -name "*.py" -type f ! -name "test_*" ! -name "*_test.py" ! -name "create_*" ! -name "setup_*" ! -name "example*" | head -n 1)
+    fi
+    if [ -z "$PY_SCRIPT" ]; then
+        PY_SCRIPT=$(find "$WORKSPACE" -name "*.py" -type f | head -n 1)
+    fi
+fi
 
 if [ -z "$PY_SCRIPT" ]; then
     echo "${TEST_ID}|script_runs|FAIL"

@@ -11,45 +11,45 @@ An automated benchmark suite for evaluating LLM **agentic coding ability** via O
 ---
 
 <details open>
-<summary><h2>All Results (Combined G1 + G2)</h2></summary>
+<summary><h2>All Results (Combined G1 + G2 + G3)</h2></summary>
 
-### Combined Score (out of 60)
+### Combined Score (out of 90)
 
 ```mermaid
 xychart-beta horizontal
-    title "Combined Score: Coding + OpenClaw Skills (out of 60)"
-    x-axis ["Q3-CF", "Q3.5-27B", "GLM-5", "Q3.5-122B", "Kimi2.5", "Q3.5-35B", "Q3-30B", "Q3-C", "Haiku", "GLM4.7", "Q3.5-397B", "GPT-120B", "Gem3F", "Q3-CN", "M-M2.1", "M-M2.5", "GPT-20B", "Kimi2", "Nemo120B"]
-    y-axis "Score" 0 --> 60
-    bar [55, 51, 50, 50, 50, 49, 49, 48, 48, 46, 46, 45, 45, 44, 43, 38, 37, 27, 17]
+    title "Combined Score: Coding + OpenClaw + Text-to-SQL (out of 90)"
+    x-axis ["Q3-CF", "Q3-C", "Q3.5-122B", "GLM-5", "Q3.5-27B", "Q3-30B", "Q3.5-35B", "GLM4.7", "Gem3F", "GPT-120B", "Haiku", "Q3-CN", "Kimi2.5", "M-M2.1", "M-M2.5", "GPT-20B", "Nemo120B"]
+    y-axis "Score" 0 --> 90
+    bar [80, 77, 77, 77, 75, 73, 72, 71, 70, 69, 68, 66, 65, 61, 58, 52, 17]
 ```
 
 ### Leaderboard
 
-| Rank | Model | Open | Arch | Params | Active | G1 | G2 | Total | Est. Cost | $/Pt |
-|------|-------|:----:|:----:|-------:|-------:|:--:|:--:|:-----:|----------:|-----:|
-| 1 | **qwen/qwen3-coder-flash** | | MoE | ? | ? | 30 | 25 | **55** | $0.26 | $0.005 |
-| 2 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 26 | **51** | $0.26 | $0.005 |
-| 3 | z-ai/glm-5 | OSS | MoE | 745B | 44B | 26 | 24 | **50** | $0.63 | $0.013 |
-| 3 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 27 | **50** | $0.39 | $0.008 |
-| 3 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | **50** | $0.44 | $0.009 |
-| 6 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 27 | **49** | $0.15 | $0.003 |
-| 6 | qwen/qwen3-coder-30b | OSS | MoE | 30.5B | 3.3B | 26 | 23 | **49** | $0.14 | $0.003 |
-| 8 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | **48** | $0.20 | $0.004 |
-| 8 | anthropic/claude-haiku-4.5 | | ? | ? | ? | 27 | 21 | **48** | $8.52 | $0.178 |
-| 10 | z-ai/glm-4.7 | OSS | MoE | 355B | 32B | 23 | 23 | **46** | $0.64 | $0.014 |
-| 10 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 26 | **46** | $0.48 | $0.010 |
-| 12 | openai/gpt-oss-120b | OSS | MoE | 117B | 5.1B | 22 | 23 | **45** | $0.02 | $0.000 |
-| 12 | google/gemini-3-flash | | ? | ? | ? | 25 | 20 | **45** | $0.17 | $0.004 |
-| 14 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 24 | **44** | $0.16 | $0.004 |
-| 15 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | **43** | $0.30 | $0.007 |
-| 16 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | **38** | $0.23 | $0.006 |
-| 17 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | **37** | $0.02 | $0.001 |
-| 18 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | **27** | $1.18 | $0.044 |
-| 19 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | **17** | $0.02 | $0.001 |
+| Rank | Model | Open | Arch | Params | Active | G1 | G2 | G3 | Total |
+|------|-------|:----:|:----:|-------:|-------:|:--:|:--:|:--:|:-----:|
+| 1 | **qwen/qwen3-coder-flash** | | MoE | ? | ? | 30 | 25 | 25 | **80** |
+| 2 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | 29 | **77** |
+| 2 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 27 | 27 | **77** |
+| 2 | z-ai/glm-5 | OSS | MoE | 745B | 44B | 26 | 24 | 27 | **77** |
+| 5 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 26 | 24 | **75** |
+| 6 | qwen/qwen3-coder-30b | OSS | MoE | 30.5B | 3.3B | 26 | 23 | 24 | **73** |
+| 7 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 27 | 23 | **72** |
+| 8 | z-ai/glm-4.7 | OSS | MoE | 355B | 32B | 23 | 23 | 25 | **71** |
+| 9 | google/gemini-3-flash | | ? | ? | ? | 25 | 20 | 25 | **70** |
+| 10 | openai/gpt-oss-120b | OSS | MoE | 117B | 5.1B | 22 | 23 | 24 | **69** |
+| 11 | anthropic/claude-haiku-4.5 | | ? | ? | ? | 27 | 21 | 20 | **68** |
+| 12 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 24 | 22 | **66** |
+| 13 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | 15 | **65** |
+| 14 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | 18 | **61** |
+| 15 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | 20 | **58** |
+| 16 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | 15 | **52** |
+| 17 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
 
-> **Open** = OSS (open weights on HuggingFace). **Arch** = Dense or MoE. **Est. Cost** = estimated total cost for G1+G2 (20 tests) based on OpenRouter pricing. **$/Pt** = cost per point scored.
+> **Open** = OSS (open weights on HuggingFace). **Arch** = Dense or MoE. G1 = Python Fundamentals, G2 = OpenClaw Skills, G3 = Text-to-SQL. Models without G3 scores (qwen3.5-397b, kimi-k2) are excluded from this table.
 >
-> **G2 scores updated 2026-03-21:** Validation scripts were fixed to accept SKILL.md placed in subdirectories (e.g. `pomodoro/SKILL.md` instead of `./SKILL.md`). The original validators only checked the workspace root, which unfairly penalized 10 models that organized files into project subdirectories — a reasonable convention, not a coding failure. Biggest improvements: **qwen3.5-122b** (10→27, +17), **gpt-oss-20b** (7→23, +16), **GLM-5** (8→24, +16), **qwen3.5-397b** (17→26, +9).
+> **G2 scores updated 2026-03-21:** Validation scripts were fixed to accept SKILL.md placed in subdirectories. Biggest improvements: **qwen3.5-122b** (+17), **gpt-oss-20b** (+16), **GLM-5** (+16).
+>
+> **G3 scores updated 2026-03-22:** Validation scripts were fixed to prefer `text_to_sql.py` over helper scripts (test/setup files). Models that generated correct scripts alongside test helpers were previously penalized.
 
 ### Cost-Performance Quadrant (Group 1)
 
@@ -65,10 +65,11 @@ xychart-beta horizontal
 
 ### Key Findings
 
-1. **qwen3-coder-flash leads overall (55/60)** — perfect 30/30 on coding, 25/30 on OpenClaw skills
-2. **qwen3.5-27b surges to #2 (51/60)** — strongest general-purpose model, dense 27B architecture
-3. **Validation matters** — a bug in our validators penalized models for placing SKILL.md in subdirectories; fixing it raised 10 models' G2 scores by +4 to +17 points (see note below leaderboard)
-4. **Open-source dominates** — 15 of 18 models are OSS; only qwen3-coder-flash, Claude Haiku, and Gemini Flash are proprietary
+1. **qwen3-coder-flash leads overall (80/90)** — consistently strong across all 3 groups
+2. **3-way tie for #2 at 77/90** — qwen3-coder (G3 champion at 29/30), qwen3.5-122b, and GLM-5
+3. **Text-to-SQL reshuffles rankings** — kimi-k2.5 drops from top 3 to #13 due to intermittent tool-use failures on G3; GLM-5 rises thanks to strong G3 performance (27/30)
+4. **Validation quality matters** — two bugs in our validators (G2 subdirectory detection, G3 script selection) were artificially depressing scores; fixing them revealed the models' true capabilities
+5. **Open-source dominates** — 14 of 17 models are OSS; only qwen3-coder-flash, Claude Haiku, and Gemini Flash are proprietary
 
 </details>
 
@@ -211,6 +212,62 @@ pie title Pass Rate by Category
 
 ---
 
+<details>
+<summary><h2>Experiment 3: Group 3 — Text-to-SQL</h2></summary>
+
+> 10 tests evaluating whether models can build a heuristic text-to-SQL translator.
+> Each test provides a SQLite schema and natural language questions; the model must build a Python script that translates questions to SQL and returns correct results — without using any LLM API calls. March 2026.
+
+### Leaderboard
+
+| Rank | Model | Open | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | Total |
+|------|-------|:----:|----|----|----|----|----|----|----|----|----|----|-------|
+| 1 | **qwen/qwen3-coder** | OSS | 3 | 3 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **29/30** |
+| 2 | z-ai/glm-5 | OSS | 2 | 3 | 1 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **27/30** |
+| 2 | qwen/qwen3.5-122b | OSS | 3 | 3 | 1 | 3 | 3 | 3 | 2 | 3 | 3 | 3 | **27/30** |
+| 4 | z-ai/glm-4.7 | OSS | 3 | 3 | 2 | 3 | 3 | 2 | 3 | 3 | 0 | 3 | **25/30** |
+| 4 | qwen/qwen3-coder-flash | | 2 | 2 | 3 | 3 | 2 | 2 | 2 | 3 | 3 | 3 | **25/30** |
+| 4 | google/gemini-3-flash | | 3 | 3 | 0 | 3 | 3 | 3 | 2 | 3 | 2 | 3 | **25/30** |
+| 7 | qwen/qwen3-coder-30b | OSS | 3 | 3 | 2 | 3 | 3 | 3 | 2 | 2 | 0 | 3 | **24/30** |
+| 7 | qwen/qwen3.5-27b | OSS | 2 | 3 | 1 | 3 | 3 | 3 | 3 | 1 | 3 | 2 | **24/30** |
+| 7 | openai/gpt-oss-120b | OSS | 3 | 3 | 3 | 2 | 3 | 2 | 2 | 2 | 1 | 3 | **24/30** |
+| 10 | qwen/qwen3.5-35b | OSS | 2 | 3 | 2 | 3 | 3 | 1 | 1 | 2 | 3 | 3 | **23/30** |
+| 11 | qwen/qwen3-coder-next | OSS | 3 | 3 | 0 | 3 | 3 | 0 | 3 | 3 | 3 | 1 | **22/30** |
+| 12 | anthropic/claude-haiku-4.5 | | 3 | 3 | 2 | 3 | 3 | 3 | 3 | 0 | 0 | 0 | **20/30** |
+| 12 | minimax/minimax-m2.5 | OSS | 2 | 2 | 3 | 0 | 2 | 0 | 2 | 3 | 3 | 3 | **20/30** |
+| 14 | minimax/minimax-m2.1 | OSS | 3 | 3 | 1 | 2 | 3 | 2 | 0 | 0 | 1 | 3 | **18/30** |
+| 15 | moonshotai/kimi-k2.5 | OSS | 3 | 0 | 0 | 1 | 3 | 2 | 2 | 0 | 3 | 1 | **15/30** |
+| 15 | openai/gpt-oss-20b | OSS | 2 | 2 | 0 | 1 | 2 | 1 | 3 | 1 | 2 | 1 | **15/30** |
+| 17 | nvidia/nemotron-3-super | OSS | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0/30** |
+
+### Key Observations
+
+- **qwen3-coder dominates (29/30)** — near-perfect heuristic SQL translator, only missed one join_with_agg check
+- **GLM-5 strong at 27/30** — proves its coding ability after G2 validation fix restored its reputation
+- **Kimi-K2.5 drops sharply (15/30)** — intermittent tool-use failures: sometimes skips tool calls entirely, sometimes produces malformed path/content arguments (e.g. `write_file(path='.', content='text_to_sql.py')`)
+- **Claude Haiku collapses on tests 08-10 (0/30)** — strong on simple queries but fails on ordering, null handling, and complex analytics
+- **Nemotron-3-super scores 0/30** — poor tool-use API conformance, rarely invokes tools or produces garbled arguments
+- **Test 03 (JOINs) is the hardest** — 8 models scored 0-1/3; heuristic JOIN detection is genuinely difficult
+
+### Group 3 Tests
+
+| # | Test | SQL Concept | Difficulty | What It Tests |
+|---|------|------------|------------|---------------|
+| 01 | Simple SELECT | SELECT, WHERE | Easy | Basic query generation from natural language |
+| 02 | Aggregation | COUNT, SUM, AVG | Easy | Aggregate function detection |
+| 03 | JOIN Queries | JOIN, multi-table | Medium | Multi-table relationship understanding |
+| 04 | GROUP BY | GROUP BY, HAVING | Medium | Grouping and filtering aggregates |
+| 05 | Date Queries | Date filtering | Medium | Date range and comparison parsing |
+| 06 | Subqueries | Nested SELECT | Medium | Subquery pattern recognition |
+| 07 | String Operations | LIKE, string matching | Medium | Pattern matching from natural language |
+| 08 | Ordering & Limits | ORDER BY, LIMIT | Medium | Sort direction and limit extraction |
+| 09 | NULL Handling | IS NULL, COALESCE | Hard | Null-aware query construction |
+| 10 | Complex Analytics | Multi-join + aggregation | Hard | Combined analytical query building |
+
+</details>
+
+---
+
 ## Architecture
 
 ### Agent Harness
@@ -271,7 +328,8 @@ Each test: 3 checks x 1 point = 3 points. Total per group: 30 points.
 | Experiment | Date | Tool | Models | Groups | Key Finding |
 |-----------|------|------|--------|--------|-------------|
 | 1 | 2026-03-18 | opencode | 12 | G1 | Many models produced 0-byte output due to tool incompatibility |
-| **2** | **2026-03-19** | **agent_harness** | **18** | **G1+G2** | **Fair comparison — qwen3-coder-flash leads at 55/60** |
+| 2 | 2026-03-19 | agent_harness | 18 | G1+G2 | Fair comparison — qwen3-coder-flash leads at 55/60 |
+| **3** | **2026-03-22** | **agent_harness** | **17** | **G1+G2+G3** | **Text-to-SQL added — qwen3-coder-flash leads at 80/90** |
 
 ## License
 
