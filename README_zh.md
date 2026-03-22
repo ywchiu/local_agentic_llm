@@ -18,9 +18,9 @@
 ```mermaid
 xychart-beta horizontal
     title "綜合得分：寫程式 + OpenClaw + Text-to-SQL（滿分 90）"
-    x-axis ["Q3-CF", "Q3-C", "Q3.5-122B", "GLM-5", "Q3.5-27B", "Q3-30B", "Q3.5-35B", "GLM4.7", "Gem3F", "GPT-120B", "Haiku", "Q3-CN", "Kimi2.5", "M-M2.1", "M-M2.5", "GPT-20B", "Nemo120B"]
+    x-axis ["Q3-CF", "Q3-C", "Q3.5-122B", "GLM-5", "Q3.5-27B", "Q3-30B", "Q3.5-35B", "Q3.5-397B", "GLM4.7", "Gem3F", "GPT-120B", "Haiku", "Q3-CN", "Kimi2.5", "DS-v3.2", "M-M2.1", "M-M2.5", "GPT-20B", "Kimi2", "Nemo120B"]
     y-axis "分數" 0 --> 90
-    bar [80, 77, 77, 77, 75, 73, 72, 71, 70, 69, 68, 66, 65, 61, 58, 52, 17]
+    bar [80, 77, 77, 77, 75, 73, 72, 72, 71, 70, 69, 68, 66, 65, 62, 61, 58, 52, 41, 17]
 ```
 
 ### 排行榜
@@ -34,18 +34,21 @@ xychart-beta horizontal
 | 5 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 26 | 24 | **75** |
 | 6 | qwen/qwen3-coder-30b | OSS | MoE | 30.5B | 3.3B | 26 | 23 | 24 | **73** |
 | 7 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 27 | 23 | **72** |
-| 8 | z-ai/glm-4.7 | OSS | MoE | 355B | 32B | 23 | 23 | 25 | **71** |
-| 9 | google/gemini-3-flash | | ? | ? | ? | 25 | 20 | 25 | **70** |
-| 10 | openai/gpt-oss-120b | OSS | MoE | 117B | 5.1B | 22 | 23 | 24 | **69** |
-| 11 | anthropic/claude-haiku-4.5 | | ? | ? | ? | 27 | 21 | 20 | **68** |
-| 12 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 24 | 22 | **66** |
-| 13 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | 15 | **65** |
-| 14 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | 18 | **61** |
-| 15 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | 20 | **58** |
-| 16 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | 15 | **52** |
-| 17 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
+| 7 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 26 | 26 | **72** |
+| 9 | z-ai/glm-4.7 | OSS | MoE | 355B | 32B | 23 | 23 | 25 | **71** |
+| 10 | google/gemini-3-flash | | ? | ? | ? | 25 | 20 | 25 | **70** |
+| 11 | openai/gpt-oss-120b | OSS | MoE | 117B | 5.1B | 22 | 23 | 24 | **69** |
+| 12 | anthropic/claude-haiku-4.5 | | ? | ? | ? | 27 | 21 | 20 | **68** |
+| 13 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 24 | 22 | **66** |
+| 14 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | 15 | **65** |
+| 15 | deepseek/deepseek-v3.2 | OSS | MoE | 685B | 37B | 25 | 21 | 16 | **62** |
+| 16 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | 18 | **61** |
+| 17 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | 20 | **58** |
+| 18 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | 15 | **52** |
+| 19 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | 14 | **41** |
+| 20 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
 
-> **開源** = OSS（HuggingFace 開放權重）。**架構** = Dense 或 MoE。G1 = Python 基礎、G2 = OpenClaw 技能、G3 = Text-to-SQL。未有 G3 分數的模型（qwen3.5-397b、kimi-k2）未列入此表。
+> **開源** = OSS（HuggingFace 開放權重）。**架構** = Dense 或 MoE。G1 = Python 基礎、G2 = OpenClaw 技能、G3 = Text-to-SQL。共 20 個模型，2026 年 3 月。
 >
 > **G2 分數於 2026-03-21 更新：**驗證腳本已修正，接受將 SKILL.md 放在子目錄中。最大改善：**qwen3.5-122b**（+17）、**gpt-oss-20b**（+16）、**GLM-5**（+16）。
 >
@@ -69,7 +72,7 @@ xychart-beta horizontal
 2. **三方並列第二（77/90）** — qwen3-coder（G3 冠軍 29/30）、qwen3.5-122b、GLM-5
 3. **Text-to-SQL 重新洗牌排名** — kimi-k2.5 因 G3 工具呼叫不穩定從前三跌至第 13 名；GLM-5 憑藉 G3 強勁表現（27/30）躍升
 4. **驗證品質至關重要** — 兩個驗證器 Bug（G2 子目錄偵測、G3 腳本選擇）人為壓低分數；修正後揭示了模型的真實能力
-5. **開源主導** — 17 個模型中有 14 個是開源的；僅 qwen3-coder-flash、Claude Haiku 和 Gemini Flash 為閉源
+5. **開源主導** — 20 個模型中有 17 個是開源的；僅 qwen3-coder-flash、Claude Haiku 和 Gemini Flash 為閉源
 
 </details>
 
@@ -225,9 +228,10 @@ pie title 各類別通過率
 | 1 | **qwen/qwen3-coder** | OSS | 3 | 3 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **29/30** |
 | 2 | z-ai/glm-5 | OSS | 2 | 3 | 1 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **27/30** |
 | 2 | qwen/qwen3.5-122b | OSS | 3 | 3 | 1 | 3 | 3 | 3 | 2 | 3 | 3 | 3 | **27/30** |
-| 4 | z-ai/glm-4.7 | OSS | 3 | 3 | 2 | 3 | 3 | 2 | 3 | 3 | 0 | 3 | **25/30** |
-| 4 | qwen/qwen3-coder-flash | | 2 | 2 | 3 | 3 | 2 | 2 | 2 | 3 | 3 | 3 | **25/30** |
-| 4 | google/gemini-3-flash | | 3 | 3 | 0 | 3 | 3 | 3 | 2 | 3 | 2 | 3 | **25/30** |
+| 4 | qwen/qwen3.5-397b | OSS | 3 | 3 | 0 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | **26/30** |
+| 5 | z-ai/glm-4.7 | OSS | 3 | 3 | 2 | 3 | 3 | 2 | 3 | 3 | 0 | 3 | **25/30** |
+| 5 | qwen/qwen3-coder-flash | | 2 | 2 | 3 | 3 | 2 | 2 | 2 | 3 | 3 | 3 | **25/30** |
+| 5 | google/gemini-3-flash | | 3 | 3 | 0 | 3 | 3 | 3 | 2 | 3 | 2 | 3 | **25/30** |
 | 7 | qwen/qwen3-coder-30b | OSS | 3 | 3 | 2 | 3 | 3 | 3 | 2 | 2 | 0 | 3 | **24/30** |
 | 7 | qwen/qwen3.5-27b | OSS | 2 | 3 | 1 | 3 | 3 | 3 | 3 | 1 | 3 | 2 | **24/30** |
 | 7 | openai/gpt-oss-120b | OSS | 3 | 3 | 3 | 2 | 3 | 2 | 2 | 2 | 1 | 3 | **24/30** |
@@ -236,9 +240,11 @@ pie title 各類別通過率
 | 12 | anthropic/claude-haiku-4.5 | | 3 | 3 | 2 | 3 | 3 | 3 | 3 | 0 | 0 | 0 | **20/30** |
 | 12 | minimax/minimax-m2.5 | OSS | 2 | 2 | 3 | 0 | 2 | 0 | 2 | 3 | 3 | 3 | **20/30** |
 | 14 | minimax/minimax-m2.1 | OSS | 3 | 3 | 1 | 2 | 3 | 2 | 0 | 0 | 1 | 3 | **18/30** |
-| 15 | moonshotai/kimi-k2.5 | OSS | 3 | 0 | 0 | 1 | 3 | 2 | 2 | 0 | 3 | 1 | **15/30** |
-| 15 | openai/gpt-oss-20b | OSS | 2 | 2 | 0 | 1 | 2 | 1 | 3 | 1 | 2 | 1 | **15/30** |
-| 17 | nvidia/nemotron-3-super | OSS | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0/30** |
+| 15 | deepseek/deepseek-v3.2 | OSS | 3 | 3 | 0 | 1 | 3 | 0 | 2 | 1 | 3 | 0 | **16/30** |
+| 16 | moonshotai/kimi-k2.5 | OSS | 3 | 0 | 0 | 1 | 3 | 2 | 2 | 0 | 3 | 1 | **15/30** |
+| 16 | openai/gpt-oss-20b | OSS | 2 | 2 | 0 | 1 | 2 | 1 | 3 | 1 | 2 | 1 | **15/30** |
+| 18 | moonshotai/kimi-k2 | OSS | 2 | 3 | 0 | 3 | 0 | 2 | 1 | 2 | 0 | 1 | **14/30** |
+| 19 | nvidia/nemotron-3-super | OSS | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | **0/30** |
 
 ### 主要觀察
 
@@ -329,7 +335,7 @@ OPENCODE_TIMEOUT=600 ./run_benchmark.sh                     # 自訂超時時間
 |------|------|------|--------|------|---------|
 | 1 | 2026-03-18 | opencode | 12 | G1 | 許多模型因工具不相容而產生 0 位元組輸出 |
 | 2 | 2026-03-19 | agent_harness | 18 | G1+G2 | 公平比較 — qwen3-coder-flash 以 55/60 領先 |
-| **3** | **2026-03-22** | **agent_harness** | **17** | **G1+G2+G3** | **新增 Text-to-SQL — qwen3-coder-flash 以 80/90 領先** |
+| **3** | **2026-03-22** | **agent_harness** | **20** | **G1+G2+G3** | **新增 Text-to-SQL — qwen3-coder-flash 以 80/90 領先** |
 
 ## 授權
 
