@@ -18,9 +18,9 @@
 ```mermaid
 xychart-beta horizontal
     title "綜合得分：寫程式 + OpenClaw + Text-to-SQL（滿分 90）"
-    x-axis ["Q3-CF", "Q3-C", "Q3.5-122B", "GLM-5", "Q3.5-27B", "Q3-30B", "Q3.5-35B", "Q3.5-397B", "GLM4.7", "Gem3F", "GPT-120B", "Haiku", "Q3-CN", "Kimi2.5", "DS-v3.2", "M-M2.1", "M-M2.5", "GPT-20B", "Kimi2", "Nemo120B"]
+    x-axis ["Q3-CF", "Q3-C", "Q3.5-122B", "GLM-5", "Q3.5-27B", "Q3-30B", "Q3.5-35B", "Q3.5-397B", "Sonnet", "GLM4.7", "Gem3F", "Haiku", "GPT-120B", "Q3-CN", "Kimi2.5", "DS-v3.2", "M-M2.1", "M-M2.5", "GPT-20B", "Kimi2", "Nemo120B"]
     y-axis "分數" 0 --> 90
-    bar [80, 77, 77, 77, 75, 73, 72, 72, 71, 70, 69, 68, 66, 65, 62, 61, 58, 52, 41, 17]
+    bar [80, 77, 77, 77, 75, 73, 72, 72, 71, 71, 70, 69, 69, 66, 65, 62, 61, 58, 52, 41, 17]
 ```
 
 ### 排行榜
@@ -37,18 +37,19 @@ xychart-beta horizontal
 | 7 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 26 | 26 | **72** |
 | 9 | z-ai/glm-4.7 | OSS | MoE | 355B | 32B | 23 | 23 | 25 | **71** |
 | 10 | google/gemini-3-flash | | ? | ? | ? | 25 | 20 | 25 | **70** |
+| 11 | anthropic/claude-sonnet-4.6 | | ? | ? | ? | 23 | 21 | 25 | **69** |
 | 11 | openai/gpt-oss-120b | OSS | MoE | 117B | 5.1B | 22 | 23 | 24 | **69** |
-| 12 | anthropic/claude-haiku-4.5 | | ? | ? | ? | 27 | 21 | 20 | **68** |
-| 13 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 24 | 22 | **66** |
-| 14 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | 15 | **65** |
-| 15 | deepseek/deepseek-v3.2 | OSS | MoE | 685B | 37B | 25 | 21 | 16 | **62** |
-| 16 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | 18 | **61** |
-| 17 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | 20 | **58** |
-| 18 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | 15 | **52** |
-| 19 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | 14 | **41** |
-| 20 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
+| 13 | anthropic/claude-haiku-4.5 | | ? | ? | ? | 27 | 21 | 20 | **68** |
+| 14 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 24 | 22 | **66** |
+| 15 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | 15 | **65** |
+| 16 | deepseek/deepseek-v3.2 | OSS | MoE | 685B | 37B | 25 | 21 | 16 | **62** |
+| 17 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | 18 | **61** |
+| 18 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | 20 | **58** |
+| 19 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | 15 | **52** |
+| 20 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | 14 | **41** |
+| 21 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
 
-> **開源** = OSS（HuggingFace 開放權重）。**架構** = Dense 或 MoE。G1 = Python 基礎、G2 = OpenClaw 技能、G3 = Text-to-SQL。共 20 個模型，2026 年 3 月。
+> **開源** = OSS（HuggingFace 開放權重）。**架構** = Dense 或 MoE。G1 = Python 基礎、G2 = OpenClaw 技能、G3 = Text-to-SQL。共 21 個模型，2026 年 3 月。
 >
 > **G2 分數於 2026-03-21 更新：**驗證腳本已修正，接受將 SKILL.md 放在子目錄中。最大改善：**qwen3.5-122b**（+17）、**gpt-oss-20b**（+16）、**GLM-5**（+16）。
 >
@@ -247,6 +248,7 @@ pie title 各類別通過率
 | 5 | z-ai/glm-4.7 | OSS | 3 | 3 | 2 | 3 | 3 | 2 | 3 | 3 | 0 | 3 | **25/30** |
 | 5 | qwen/qwen3-coder-flash | | 2 | 2 | 3 | 3 | 2 | 2 | 2 | 3 | 3 | 3 | **25/30** |
 | 5 | google/gemini-3-flash | | 3 | 3 | 0 | 3 | 3 | 3 | 2 | 3 | 2 | 3 | **25/30** |
+| 5 | anthropic/claude-sonnet-4.6 | | 3 | 3 | 3 | 2 | 3 | 2 | 2 | 3 | 3 | 0 | **25/30** |
 | 7 | qwen/qwen3-coder-30b | OSS | 3 | 3 | 2 | 3 | 3 | 3 | 2 | 2 | 0 | 3 | **24/30** |
 | 7 | qwen/qwen3.5-27b | OSS | 2 | 3 | 1 | 3 | 3 | 3 | 3 | 1 | 3 | 2 | **24/30** |
 | 7 | openai/gpt-oss-120b | OSS | 3 | 3 | 3 | 2 | 3 | 2 | 2 | 2 | 1 | 3 | **24/30** |
