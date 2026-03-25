@@ -10,6 +10,7 @@ import numpy as np
 # Data: (label, arch, params, score, cost_estimate)
 # cost_estimate is relative (0=expensive, 1=cheap) matching the mermaid chart
 DATA = [
+    ("Sonnet-4.6†", "?", "?B", 29, 0.03),
     ("Q3-Coder-Flash", "MoE", "?B", 30, 0.47),
     ("Kimi-K2.5", "MoE", "1T/32B", 27, 0.48),
     ("Haiku-4.5", "?", "?B", 27, 0.05),
@@ -17,6 +18,7 @@ DATA = [
     ("Q3-Coder-30B", "MoE", "30.5B/3.3B", 26, 0.56),
     ("Gemini-3F", "?", "?B", 25, 0.59),
     ("Q3.5-27B", "Dense", "27B", 25, 0.58),
+    ("DS-v3.2", "MoE", "685B/37B", 25, 0.45),
     ("M-M2.1", "MoE", "230B/10B", 24, 0.54),
     ("Q3-Coder", "MoE", "480B/35B", 24, 0.53),
     ("GLM-4.7", "MoE", "355B/32B", 23, 0.40),
@@ -80,6 +82,7 @@ def generate_chart(lang='en'):
     # Manual label offsets (x_pt, y_pt) to avoid overlaps
     # Positive x = right, positive y = up
     OFFSETS = {
+        "Sonnet-4.6†": (8, 4),
         "Q3-Coder-Flash": (8, 4),
         "Kimi-K2.5": (8, 4),
         "Haiku-4.5": (8, 4),
@@ -87,6 +90,7 @@ def generate_chart(lang='en'):
         "Q3-Coder-30B": (8, 4),
         "Gemini-3F": (8, 12),        # nudge up well clear
         "Q3.5-27B": (8, -14),       # nudge down
+        "DS-v3.2": (8, -14),         # nudge down to avoid Gemini/Q3.5-27B
         "M-M2.1": (-110, 10),       # place left of point
         "Q3-Coder": (8, -14),       # nudge down
         "GLM-4.7": (-100, 10),      # place left of point
