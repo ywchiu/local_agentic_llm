@@ -54,7 +54,7 @@ if [ ${#SCRIPTS[@]} -eq 0 ]; then
 fi
 
 # Patch common port assignments in generated code to avoid conflicts (e.g. macOS AirPlay on 5000)
-for f in "$WORKSPACE"/*.py; do
+for f in $(find "$WORKSPACE" -name "*.py" -type f); do
     [ -f "$f" ] || continue
     sed -i '' \
         -e "s/port=5000/port=$SAFE_PORT/g" \
@@ -71,6 +71,8 @@ for f in "$WORKSPACE"/*.py; do
         -e "s/port = 3000/port = $SAFE_PORT/g" \
         -e "s/port = 8080/port = $SAFE_PORT/g" \
         -e "s/port = 8888/port = $SAFE_PORT/g" \
+        -e "s/app\.run(debug=True)/app.run(debug=True, port=$SAFE_PORT)/g" \
+        -e "s/app\.run()/app.run(port=$SAFE_PORT)/g" \
         "$f" 2>/dev/null || true
 done
 

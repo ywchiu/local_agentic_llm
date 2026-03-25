@@ -40,10 +40,10 @@ if [ -n "$PY_SCRIPT" ]; then
     (cd "$WORKSPACE" && python3 "$PY_SCRIPT" "turn on living room light" 2>/dev/null) || true
 
     # Find state file (anything that's not devices.json, SKILL.md, or the script)
-    STATE_FILE=$(find "$WORKSPACE" -maxdepth 1 -name "*.json" ! -name "devices.json" -type f -newer "$PY_SCRIPT" 2>/dev/null | head -1)
+    STATE_FILE=$(find "$WORKSPACE" -maxdepth 3 -name "*.json" ! -name "devices.json" -type f -newer "$PY_SCRIPT" 2>/dev/null | head -1)
     # Also check if devices.json was updated as state
     if [ -z "$STATE_FILE" ]; then
-        STATE_FILE=$(find "$WORKSPACE" -maxdepth 1 -name "state*" -o -name "*state*" 2>/dev/null | head -1)
+        STATE_FILE=$(find "$WORKSPACE" -maxdepth 3 -name "state*" -o -name "*state*" 2>/dev/null | head -1)
     fi
     if [ -z "$STATE_FILE" ]; then
         # Maybe the model uses devices.json itself as state

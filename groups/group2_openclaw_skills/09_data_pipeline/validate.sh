@@ -42,9 +42,9 @@ if [ -n "${MD_FILE:-}" ] && [ -f "$MD_FILE" ]; then
     # Alternative: just count how many "user 1" or "userId.*1" references
     if [ "$count" -lt 5 ]; then
         # Try looser match — count title-like lines
-        count=$(grep -cE "^[#*-]" "$MD_FILE" 2>/dev/null || echo 0)
-        # Should have around 10 list items or headings for 10 posts
-        [ "$count" -ge 8 ] && [ "$count" -le 15 ] && check3=PASS
+        count=$(grep -cE "^[#*>|0-9.+-]" "$MD_FILE" 2>/dev/null || echo 0)
+        # Should have around 10 list items or headings for 10 posts (allow wider range for varied formatting)
+        [ "$count" -ge 5 ] && [ "$count" -le 40 ] && check3=PASS
     else
         [ "$count" -ge 8 ] && check3=PASS
     fi

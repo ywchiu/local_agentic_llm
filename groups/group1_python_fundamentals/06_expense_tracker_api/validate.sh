@@ -32,11 +32,17 @@ detect_port() {
     return 1
 }
 
-# Find Python files to try starting
+# Find Python files to try starting (check root and one level of subdirectories)
 SCRIPTS=()
 for name in app.py main.py server.py run.py api.py expense.py expense_tracker.py; do
     if [ -f "$WORKSPACE/$name" ]; then
         SCRIPTS+=("$WORKSPACE/$name")
+    else
+        # Search subdirectories
+        found=$(find "$WORKSPACE" -maxdepth 2 -name "$name" -type f | head -1)
+        if [ -n "$found" ]; then
+            SCRIPTS+=("$found")
+        fi
     fi
 done
 # If none of the common names found, try any .py file
@@ -46,6 +52,12 @@ if [ ${#SCRIPTS[@]} -eq 0 ]; then
             SCRIPTS+=("$f")
         fi
     done
+    # Also check subdirectories
+    if [ ${#SCRIPTS[@]} -eq 0 ]; then
+        while IFS= read -r f; do
+            SCRIPTS+=("$f")
+        done < <(find "$WORKSPACE" -maxdepth 2 -name "*.py" -type f ! -name "test_*" ! -name "*_test.py" ! -name "setup_*" ! -name "seed_*" 2>/dev/null)
+    fi
 fi
 
 if [ ${#SCRIPTS[@]} -eq 0 ]; then
@@ -56,7 +68,7 @@ if [ ${#SCRIPTS[@]} -eq 0 ]; then
 fi
 
 # Patch common port assignments in generated code to avoid conflicts (e.g. macOS AirPlay on 5000)
-for f in "$WORKSPACE"/*.py; do
+for f in $(find "$WORKSPACE" -name "*.py" -type f); do
     [ -f "$f" ] || continue
     sed -i '' \
         -e "s/port=5000/port=$SAFE_PORT/g" \
@@ -73,6 +85,8 @@ for f in "$WORKSPACE"/*.py; do
         -e "s/port = 3000/port = $SAFE_PORT/g" \
         -e "s/port = 8080/port = $SAFE_PORT/g" \
         -e "s/port = 8888/port = $SAFE_PORT/g" \
+        -e "s/app\.run(debug=True)/app.run(debug=True, port=$SAFE_PORT)/g" \
+        -e "s/app\.run()/app.run(port=$SAFE_PORT)/g" \
         "$f" 2>/dev/null || true
 done
 

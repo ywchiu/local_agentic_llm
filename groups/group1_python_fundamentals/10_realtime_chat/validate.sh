@@ -27,8 +27,20 @@ detect_port() {
     if curl -s -o /dev/null -w "%{http_code}" "http://localhost:$SAFE_PORT" 2>/dev/null | grep -qE "^[2345]"; then
         echo $SAFE_PORT; return 0
     fi
-    for port in 8000 8080 3000 8888 5000; do
+    for port in 8000 8080 3000 8888 5000 8765; do
         if curl -s -o /dev/null -w "%{http_code}" "http://localhost:$port" 2>/dev/null | grep -qE "^[23]"; then
+            echo $port; return 0
+        fi
+    done
+    # Try websocket connections for ports that don't respond to HTTP
+    for port in $SAFE_PORT 8765 8000 8080 3000 8888 5000; do
+        if python3 -c "
+import asyncio, websockets
+async def t():
+    async with websockets.connect('ws://localhost:$port', timeout=2) as ws:
+        pass
+asyncio.run(t())
+" 2>/dev/null; then
             echo $port; return 0
         fi
     done
@@ -68,6 +80,7 @@ for f in "$WORKSPACE"/*.py; do
         -e "s/port=3000/port=$SAFE_PORT/g" \
         -e "s/port=8080/port=$SAFE_PORT/g" \
         -e "s/port=8888/port=$SAFE_PORT/g" \
+        -e "s/port=8765/port=$SAFE_PORT/g" \
         -e "s/port=5001/port=$SAFE_PORT/g" \
         -e "s/port=5500/port=$SAFE_PORT/g" \
         -e "s/port = 5001/port = $SAFE_PORT/g" \
@@ -76,6 +89,7 @@ for f in "$WORKSPACE"/*.py; do
         -e "s/port = 8000/port = $SAFE_PORT/g" \
         -e "s/port = 3000/port = $SAFE_PORT/g" \
         -e "s/port = 8080/port = $SAFE_PORT/g" \
+        -e "s/port = 8765/port = $SAFE_PORT/g" \
         -e "s/port = 8888/port = $SAFE_PORT/g" \
         "$f" 2>/dev/null || true
 done

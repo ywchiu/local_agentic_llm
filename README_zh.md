@@ -74,6 +74,21 @@ xychart-beta horizontal
 4. **驗證品質至關重要** — 兩個驗證器 Bug（G2 子目錄偵測、G3 腳本選擇）人為壓低分數；修正後揭示了模型的真實能力
 5. **開源主導** — 20 個模型中有 17 個是開源的；僅 qwen3-coder-flash、Claude Haiku 和 Gemini Flash 為閉源
 
+### Claude 模型：OpenRouter vs 原生 API（Claude Code）
+
+我們使用 **Claude Code 子代理**（Anthropic 原生 tool-use API）重新測試了 Claude Sonnet 4.6 和 Haiku 4.5，而非透過 OpenRouter。結果顯示顯著的效能差距：
+
+| 模型 | OpenRouter | Claude Code | 差異 |
+|------|:---------:|:-----------:|:----:|
+| **Sonnet 4.6** | 71/90 | **81/90** | **+10** |
+| **Haiku 4.5** | 68/90 | **69/90** | +1 |
+
+**Sonnet 4.6 透過 Claude Code 達到 81/90 — 基準測試中的最高分**，超越 qwen3-coder-flash（80/90）。Haiku 透過原生 API 在 G1 達到**滿分 30/30**（OpenRouter 為 27/30）。
+
+**為什麼有差距？** 本基準測試透過 OpenRouter 的 OpenAI 相容 tool-use API 路由所有模型。對於非 OpenAI 模型，這增加了一個轉譯層，可能降低工具使用品質。Claude 模型使用不同的原生 tool-use 格式（XML 式工具區塊 vs OpenAI 的 function-calling JSON），因此轉譯產生了摩擦 — 參數格式錯誤、遺漏工具呼叫、檔案放置不當。透過原生 API 測試時，Claude 模型表現明顯更好。
+
+**對排行榜的影響：** OpenRouter 分數代表所有模型使用相同 API 格式的公平競爭環境。Claude Code 分數則展示這些模型在原生工具環境下的真實能力。其他模型（Gemini、GPT 等）透過各自的原生 API 可能也會得分更高。本基準測試衡量的是**透過 OpenRouter 的工具使用能力**，而非模型的原始能力 — 解讀結果時請留意這一點。
+
 </details>
 
 ---

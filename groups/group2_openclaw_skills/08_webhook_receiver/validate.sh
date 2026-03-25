@@ -25,7 +25,14 @@ PY_SCRIPT=""
 if [ -f "$SKILL_DIR/SKILL.md" ]; then
     content=$(cat "$SKILL_DIR/SKILL.md")
     if echo "$content" | head -1 | grep -q "^---"; then
-        PY_SCRIPT=$(find "$SKILL_DIR" -maxdepth 2 -name "*.py" -type f | head -1)
+        # Prefer main.py/app.py/server.py over arbitrary .py files
+        PY_SCRIPT=""
+        for name in main.py app.py server.py; do
+            [ -f "$SKILL_DIR/$name" ] && PY_SCRIPT="$SKILL_DIR/$name" && break
+        done
+        if [ -z "$PY_SCRIPT" ]; then
+            PY_SCRIPT=$(find "$SKILL_DIR" -maxdepth 2 -name "*.py" -type f | head -1)
+        fi
         [ -n "$PY_SCRIPT" ] && check1=PASS
     fi
 fi

@@ -74,6 +74,21 @@ xychart-beta horizontal
 4. **Validation quality matters** — two bugs in our validators (G2 subdirectory detection, G3 script selection) were artificially depressing scores; fixing them revealed the models' true capabilities
 5. **Open-source dominates** — 17 of 20 models are OSS; only qwen3-coder-flash, Claude Haiku, and Gemini Flash are proprietary
 
+### Claude Models: OpenRouter vs Native API (Claude Code)
+
+We retested Claude Sonnet 4.6 and Haiku 4.5 using **Claude Code subagents** (Anthropic's native tool-use API) instead of OpenRouter. The results show a significant performance gap:
+
+| Model | OpenRouter | Claude Code | Delta |
+|-------|:---------:|:-----------:|:-----:|
+| **Sonnet 4.6** | 71/90 | **81/90** | **+10** |
+| **Haiku 4.5** | 68/90 | **69/90** | +1 |
+
+**Sonnet 4.6 via Claude Code scores 81/90 — the highest score in the benchmark**, surpassing qwen3-coder-flash (80/90). Haiku achieves a **perfect 30/30 on G1** via native API (vs 27/30 via OpenRouter).
+
+**Why the gap?** This benchmark routes all models through OpenRouter's OpenAI-compatible tool-use API. For non-OpenAI models, this adds a translation layer that can degrade tool-use quality. Claude models use a different native tool-use format (XML-based tool blocks vs OpenAI's function-calling JSON), so the translation introduces friction — malformed arguments, missed tool calls, and suboptimal file placement. When tested via their native API, Claude models perform significantly better.
+
+**Implication for the leaderboard:** The OpenRouter scores represent a level playing field where every model uses the same API format. The Claude Code scores show what these models can achieve with their native tooling. Other models (Gemini, GPT, etc.) would likely also score higher through their native APIs. The benchmark measures **tool-use via OpenRouter**, not raw model capability — keep this in mind when interpreting results.
+
 </details>
 
 ---

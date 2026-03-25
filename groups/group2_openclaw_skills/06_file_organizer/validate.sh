@@ -14,7 +14,7 @@ fi
 # Check 1: skill_and_script — SKILL.md + companion script + SKILL.md references script
 check1=FAIL
 if [ -f "$SKILL_DIR/SKILL.md" ]; then
-    SCRIPT_FILE=$(find "$SKILL_DIR" -maxdepth 1 \( -name "*.sh" -o -name "*.py" \) ! -name "SKILL.md" -type f | head -1)
+    SCRIPT_FILE=$(find "$SKILL_DIR" -maxdepth 3 \( -name "*.sh" -o -name "*.py" \) ! -name "SKILL.md" -type f | head -1)
     if [ -n "$SCRIPT_FILE" ]; then
         script_name=$(basename "$SCRIPT_FILE")
         if grep -q "$script_name" "$SKILL_DIR/SKILL.md" 2>/dev/null; then
