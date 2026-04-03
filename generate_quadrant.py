@@ -11,6 +11,7 @@ import numpy as np
 # cost_estimate is relative (0=expensive, 1=cheap) matching the mermaid chart
 DATA = [
     ("Sonnet-4.6†", "?", "?B", 29, 0.03),
+    ("Gemma4-31B†", "Dense", "31B", 27, 0.99),
     ("Q3-Coder-Flash", "MoE", "?B", 30, 0.47),
     ("Kimi-K2.5", "MoE", "1T/32B", 27, 0.48),
     ("Haiku-4.5", "?", "?B", 27, 0.05),

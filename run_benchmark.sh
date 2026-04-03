@@ -15,6 +15,10 @@ MODELS_FILE="$SCRIPT_DIR/models.txt"
 TIMEOUT="${OPENCODE_TIMEOUT:-300}"  # 5 minutes default, override with env var
 GROUP="${OPENCODE_GROUP:-}"  # specific group to run, or empty for all
 TEST_FILTER="${OPENCODE_TESTS:-}"  # comma-separated test names to run, or empty for all
+REASONING="${OPENCODE_REASONING:-}"  # set to 1 to enable reasoning mode
+PROMPT_TOOLS="${OPENCODE_PROMPT_TOOLS:-}"  # set to 1 to use prompt-based tool calling
+HARNESS="${OPENCODE_HARNESS:-agent_harness.py}"  # harness script (agent_harness.py or agent_harness_gemini.py)
+THINKING="${OPENCODE_THINKING:-}"  # thinking level for Gemini harness (off/low/medium/high)
 
 RESULTS_DIR="$SCRIPT_DIR/results"
 mkdir -p "$RESULTS_DIR"
@@ -183,11 +187,23 @@ for model in "${MODELS[@]}"; do
         echo "  │  Running agent harness..."
         start_time=$(date +%s)
 
-        harness_json=$(python3 "$SCRIPT_DIR/agent_harness.py" \
+        EXTRA_FLAGS=""
+        if [ -n "$REASONING" ] && [ "$REASONING" = "1" ]; then
+            EXTRA_FLAGS="$EXTRA_FLAGS --reasoning"
+        fi
+        if [ -n "$PROMPT_TOOLS" ] && [ "$PROMPT_TOOLS" = "1" ]; then
+            EXTRA_FLAGS="$EXTRA_FLAGS --prompt-tools"
+        fi
+        if [ -n "$THINKING" ] && [ "$HARNESS" = "agent_harness_gemini.py" ]; then
+            EXTRA_FLAGS="$EXTRA_FLAGS --thinking $THINKING"
+        fi
+
+        harness_json=$(python3 "$SCRIPT_DIR/$HARNESS" \
             --model "$model" \
             --prompt "$prompt_file" \
             --workspace "$abs_workspace" \
             --timeout "$TIMEOUT" \
+            $EXTRA_FLAGS \
             2>"$harness_log") || true
 
         end_time=$(date +%s)

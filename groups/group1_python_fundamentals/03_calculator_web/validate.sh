@@ -44,24 +44,15 @@ fi
 
 # Check 1: App loads
 if $IS_WEB_SERVER; then
-    # Patch common port assignments in generated code to avoid conflicts (e.g. macOS AirPlay on 5000)
+    # Patch ANY port assignment in generated code to use the safe port
     for f in "$WORKSPACE"/*.py; do
         [ -f "$f" ] || continue
         sed -i '' \
-            -e "s/port=5000/port=$SAFE_PORT/g" \
-            -e "s/port=8000/port=$SAFE_PORT/g" \
-            -e "s/port=3000/port=$SAFE_PORT/g" \
-            -e "s/port=8080/port=$SAFE_PORT/g" \
-            -e "s/port=8888/port=$SAFE_PORT/g" \
-        -e "s/port=5001/port=$SAFE_PORT/g" \
-        -e "s/port=5500/port=$SAFE_PORT/g" \
-        -e "s/port = 5001/port = $SAFE_PORT/g" \
-        -e "s/port = 5500/port = $SAFE_PORT/g" \
-            -e "s/port = 5000/port = $SAFE_PORT/g" \
-            -e "s/port = 8000/port = $SAFE_PORT/g" \
-            -e "s/port = 3000/port = $SAFE_PORT/g" \
-            -e "s/port = 8080/port = $SAFE_PORT/g" \
-            -e "s/port = 8888/port = $SAFE_PORT/g" \
+            -E "s/port[[:space:]]*=[[:space:]]*[0-9]{2,5}/port=$SAFE_PORT/g" \
+            "$f" 2>/dev/null || true
+        sed -i '' \
+            -e "s/app\.run(debug=True)/app.run(debug=True, port=$SAFE_PORT)/g" \
+            -e "s/app\.run()/app.run(port=$SAFE_PORT)/g" \
             "$f" 2>/dev/null || true
     done
     export PORT=$SAFE_PORT
