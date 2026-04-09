@@ -18,9 +18,9 @@ An automated benchmark suite for evaluating LLM **agentic coding ability** via O
 ```mermaid
 xychart-beta horizontal
     title "Combined Score: Coding + OpenClaw + Text-to-SQL (out of 90)"
-    x-axis ["Sonnet†", "Q3-CF", "Gemma4†", "Q3-C", "Q3.5-122B", "GLM-5", "Q3.5-27B", "Q3-30B", "Q3.5-35B", "Q3.5-397B", "GLM4.7", "Gem3F", "GPT-120B", "Haiku†", "Q3-CN", "Kimi2.5", "DS-v3.2", "M-M2.1", "M-M2.5", "GPT-20B", "Kimi2", "Nemo120B"]
+    x-axis ["Sonnet†", "Q3-CF", "Gemma4-31B†", "Q3-C", "Q3.5-122B", "GLM-5", "Q3.5-27B", "Q3-30B", "Q3.5-35B", "Q3.5-397B", "GLM4.7", "Gem3F", "Gemma4-26B‡", "GPT-120B", "Haiku†", "Q3-CN", "Kimi2.5", "DS-v3.2", "M-M2.1", "M-M2.5", "GPT-20B", "Kimi2", "Nemo120B"]
     y-axis "Score" 0 --> 90
-    bar [81, 80, 80, 77, 77, 77, 75, 73, 72, 72, 71, 70, 69, 69, 66, 65, 62, 61, 58, 52, 41, 17]
+    bar [81, 80, 80, 77, 77, 77, 75, 73, 72, 72, 71, 70, 70, 69, 69, 66, 65, 62, 61, 58, 52, 41, 17]
 ```
 
 ### Leaderboard
@@ -39,18 +39,19 @@ xychart-beta horizontal
 | 9 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 26 | 26 | **72** |
 | 11 | z-ai/glm-4.7 | OSS | MoE | 355B | 32B | 23 | 23 | 25 | **71** |
 | 12 | google/gemini-3-flash | | ? | ? | ? | 25 | 20 | 25 | **70** |
-| 13 | openai/gpt-oss-120b | OSS | MoE | 117B | 5.1B | 22 | 23 | 24 | **69** |
-| 13 | anthropic/claude-haiku-4.5† | | ? | ? | ? | 30 | 20 | 19 | **69** |
-| 15 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 24 | 22 | **66** |
-| 16 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | 15 | **65** |
-| 17 | deepseek/deepseek-v3.2 | OSS | MoE | 685B | 37B | 25 | 21 | 16 | **62** |
-| 18 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | 18 | **61** |
-| 19 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | 20 | **58** |
-| 20 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | 15 | **52** |
-| 21 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | 14 | **41** |
-| 22 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
+| 12 | google/gemma-4-26b-a4b-it‡ (H200, vLLM) | OSS | MoE | 26B | 4B | 25 | 20 | 25 | **70** |
+| 14 | openai/gpt-oss-120b | OSS | MoE | 117B | 5.1B | 22 | 23 | 24 | **69** |
+| 14 | anthropic/claude-haiku-4.5† | | ? | ? | ? | 30 | 20 | 19 | **69** |
+| 16 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 24 | 22 | **66** |
+| 17 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | 15 | **65** |
+| 18 | deepseek/deepseek-v3.2 | OSS | MoE | 685B | 37B | 25 | 21 | 16 | **62** |
+| 19 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | 18 | **61** |
+| 20 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | 20 | **58** |
+| 21 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | 15 | **52** |
+| 22 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | 14 | **41** |
+| 23 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
 
-> **Open** = OSS (open weights on HuggingFace). **Arch** = Dense or MoE. G1 = Python Fundamentals, G2 = OpenClaw Skills, G3 = Text-to-SQL. 22 models tested, March 2026. **†** Claude models tested via Claude Code (native API); Gemma 4 tested via Gemini native API; all other models tested via OpenRouter.
+> **Open** = OSS (open weights on HuggingFace). **Arch** = Dense or MoE. G1 = Python Fundamentals, G2 = OpenClaw Skills, G3 = Text-to-SQL. 23 models tested, March–April 2026. **†** Claude models tested via Claude Code (native API); Gemma 4 31B tested via Gemini native API; all other models tested via OpenRouter. **‡** Gemma 4 26B-A4B retested locally on an **H200 GPU running vLLM** (FP8, native tool calling via the gemma4 parser).
 >
 > **G2 scores updated 2026-03-21:** Validation scripts were fixed to accept SKILL.md placed in subdirectories. Biggest improvements: **qwen3.5-122b** (+17), **gpt-oss-20b** (+16), **GLM-5** (+16).
 >
@@ -71,11 +72,12 @@ xychart-beta horizontal
 ### Key Findings
 
 1. **qwen3-coder-flash and Gemma 4 31B tie at 80/90** — qwen3-coder-flash via OpenRouter, Gemma 4 via Gemini native API; both consistently strong across all 3 groups
-2. **Gemma 4 31B is the smallest model to hit 80/90** — at 31B Dense parameters, it outperforms models 5-20x its size; thinking mode adds zero benefit (identical scores)
-3. **3-way tie for #4 at 77/90** — qwen3-coder (G3 champion at 29/30), qwen3.5-122b, and GLM-5
-4. **Text-to-SQL reshuffles rankings** — kimi-k2.5 drops from top 3 to #16 due to intermittent tool-use failures on G3; GLM-5 rises thanks to strong G3 performance (27/30)
-5. **Validation quality matters** — two bugs in our validators (G2 subdirectory detection, G3 script selection) were artificially depressing scores; fixing them revealed the models' true capabilities
-6. **Open-source dominates** — 18 of 22 models are OSS; only qwen3-coder-flash, Claude Haiku, and Gemini Flash are proprietary
+2. **Gemma 4 31B is the smallest Dense model to hit 80/90** — at 31B parameters, it outperforms models 5-20x its size; thinking mode adds zero benefit (identical scores)
+3. **Gemma 4 26B-A4B (sparse, 4B active) jumps to 70/90 on local H200** — retested via local vLLM with the native gemma4 tool-call parser; previously only 59/90 via Gemini API where rate limits and tool-call translation were dragging G3 down. The model is genuinely capable; the earlier gap was infrastructure, not architecture.
+4. **3-way tie for #4 at 77/90** — qwen3-coder (G3 champion at 29/30), qwen3.5-122b, and GLM-5
+5. **Text-to-SQL reshuffles rankings** — kimi-k2.5 drops from top 3 to #16 due to intermittent tool-use failures on G3; GLM-5 rises thanks to strong G3 performance (27/30)
+6. **Validation quality matters** — two bugs in our validators (G2 subdirectory detection, G3 script selection) were artificially depressing scores; fixing them revealed the models' true capabilities
+7. **Open-source dominates** — 19 of 23 models are OSS; only qwen3-coder-flash, Claude Haiku, and Gemini Flash are proprietary
 
 ### Claude Models: OpenRouter vs Native API (Claude Code)
 
@@ -103,6 +105,23 @@ We tested google/gemma-4-31b-it using **Google's Gemini native API** with functi
 
 **Key finding:** Thinking/reasoning mode adds zero benefit — identical scores on every single test. At 31B parameters (Dense), this is the smallest model to achieve 80/90, and it's completely free via Google's API.
 
+### Gemma 4 31B (Dense) vs 26B-A4B (MoE) — Now via Local H200
+
+We also tested `gemma-4-26b-a4b-it` — the sparse MoE variant with 26B total parameters but only **~4B active per token** (hence "A4B"). The first run was via the Gemini API and produced 59/90, with G3 collapsing to 12/30. We retested it on a **local H200 GPU running vLLM** (FP8 weights, `--enable-auto-tool-choice --tool-call-parser gemma4`) — no API key, no rate limits, native tool calling. The score jumped to **70/90**.
+
+| Model | Runner | Arch | Total | Active | G1 | G2 | G3 | Total |
+|-------|--------|------|:-----:|:------:|:--:|:--:|:--:|:-----:|
+| **gemma-4-31b-it** | Gemini API | Dense | 31B | 31B | 27 | 26 | 27 | **80/90** |
+| **gemma-4-26b-a4b-it** (old) | Gemini API | MoE | 26B | ~4B | 22 | 25 | 12 | **59/90** |
+| **gemma-4-26b-a4b-it** (new) | **H200 / vLLM (FP8)** | MoE | 26B | ~4B | **25** | **20** | **25** | **70/90** |
+
+**Key findings:**
+- **G3 was an infrastructure problem, not a model problem** — 12/30 → 25/30 once rate limits and the OpenAI-shape tool-call translation were removed. The model can do text-to-SQL just fine.
+- **G1 +3, G3 +13, G2 −5** — G2 regressed slightly on the H200 run (the vLLM gemma4 parser had a couple of small placement / dependency-declaration misses); the net is +11.
+- **Dense 31B still wins overall (80 vs 70)** — but the gap shrinks from 21 to 10 points, much more in line with what "26B sparse with 4B active" should look like vs a 31B Dense model.
+- **Active parameters still matter** — 4B active is still a step down from 31B Dense, especially on G2 skill scaffolding and on the harder G1 coding tasks (test 09 0/3, test 10 2/3).
+- **Local serving > API for small open models** — when the model is hosted with its proper native tool parser, no rate limits, and no translation layer, it scores meaningfully higher. The earlier 59 was punishing the runner, not the weights.
+
 </details>
 
 ---
@@ -127,18 +146,19 @@ We tested google/gemma-4-31b-it using **Google's Gemini native API** with functi
 | 8 | deepseek/deepseek-v3.2 | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **25/30** | — | — | — |
 | 8 | google/gemini-3-flash | | 1 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 3 | **25/30** | 4m42s | 107K | 4.3K |
 | 8 | qwen/qwen3.5-27b | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **25/30** | 11m01s | 262K | 10.5K |
+| 8 | google/gemma-4-26b-a4b-it‡ (H200) | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 0 | 2 | **25/30** | 7m31s | 499K | 20.0K |
 | 11 | minimax/minimax-m2.1 | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 1 | **24/30** | 23m44s | 368K | 15.3K |
 | 11 | qwen/qwen3-coder (480B) | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 1 | 3 | 3 | 1 | **24/30** | 10m19s | 469K | 19.5K |
 | 13 | z-ai/glm-4.7 | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 1 | **23/30** | 14m46s | 570K | 24.8K |
 | 13 | qwen/qwen3.5-122b | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 1 | **23/30** | 15m25s | 579K | 25.2K |
-| 15 | openai/gpt-oss-120b | OSS | 2 | 3 | 3 | 3 | 3 | 0 | 0 | 3 | 3 | 2 | **22/30** | 4m33s | 153K | 7.0K |
-| 15 | qwen/qwen3.5-35b | OSS | 3 | 3 | 3 | 1 | 3 | 0 | 2 | 3 | 3 | 1 | **22/30** | 15m58s | 355K | 16.1K |
-| 17 | qwen/qwen3-coder-next | OSS | 1 | 3 | 3 | 3 | 3 | 0 | 0 | 3 | 3 | 1 | **20/30** | 16m23s | 467K | 23.4K |
-| 17 | qwen/qwen3.5-397b | OSS | 1 | 3 | 3 | 3 | 3 | 0 | 0 | 3 | 3 | 1 | **20/30** | 19m20s | 546K | 27.3K |
-| 19 | minimax/minimax-m2.5 | OSS | 1 | 0 | 3 | 3 | 1 | 3 | 1 | 3 | 3 | 1 | **19/30** | 45m05s | 300K | 15.8K |
-| 20 | openai/gpt-oss-20b | OSS | 0 | 3 | 3 | 1 | 0 | 0 | 0 | 3 | 3 | 1 | **14/30** | 19m47s | 142K | 10.1K |
-| 20 | moonshotai/kimi-k2 | OSS | 1 | 3 | 0 | 1 | 3 | 3 | 3 | 0 | 0 | 0 | **14/30** | 42m04s | 808K | 57.7K |
-| 22 | nvidia/nemotron-3-super | OSS | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 1 | 3 | 0 | **5/30** | 2m53s | 120K | 24.0K |
+| 16 | openai/gpt-oss-120b | OSS | 2 | 3 | 3 | 3 | 3 | 0 | 0 | 3 | 3 | 2 | **22/30** | 4m33s | 153K | 7.0K |
+| 16 | qwen/qwen3.5-35b | OSS | 3 | 3 | 3 | 1 | 3 | 0 | 2 | 3 | 3 | 1 | **22/30** | 15m58s | 355K | 16.1K |
+| 18 | qwen/qwen3-coder-next | OSS | 1 | 3 | 3 | 3 | 3 | 0 | 0 | 3 | 3 | 1 | **20/30** | 16m23s | 467K | 23.4K |
+| 18 | qwen/qwen3.5-397b | OSS | 1 | 3 | 3 | 3 | 3 | 0 | 0 | 3 | 3 | 1 | **20/30** | 19m20s | 546K | 27.3K |
+| 20 | minimax/minimax-m2.5 | OSS | 1 | 0 | 3 | 3 | 1 | 3 | 1 | 3 | 3 | 1 | **19/30** | 45m05s | 300K | 15.8K |
+| 21 | openai/gpt-oss-20b | OSS | 0 | 3 | 3 | 1 | 0 | 0 | 0 | 3 | 3 | 1 | **14/30** | 19m47s | 142K | 10.1K |
+| 21 | moonshotai/kimi-k2 | OSS | 1 | 3 | 0 | 1 | 3 | 3 | 3 | 0 | 0 | 0 | **14/30** | 42m04s | 808K | 57.7K |
+| 23 | nvidia/nemotron-3-super | OSS | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 1 | 3 | 0 | **5/30** | 2m53s | 120K | 24.0K |
 
 > Tok/Pt = tokens per point scored (lower = more efficient).
 
@@ -207,20 +227,21 @@ pie title Pass Rate by Category
 | 3 | qwen/qwen3.5-27b | OSS | 3 | 2 | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 3 | **26/30** |
 | 3 | qwen/qwen3.5-397b | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 2 | 2 | 3 | **26/30** |
 | 7 | qwen/qwen3-coder-flash | | 3 | 2 | 3 | 2 | 2 | 3 | 3 | 3 | 1 | 3 | **25/30** |
-| 8 | z-ai/glm-5 | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 1 | 2 | 3 | **24/30** |
-| 8 | qwen/qwen3-coder | OSS | 2 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 2 | 1 | **24/30** |
-| 8 | qwen/qwen3-coder-next | OSS | 3 | 2 | 3 | 3 | 3 | 2 | 3 | 2 | 2 | 1 | **24/30** |
-| 11 | moonshotai/kimi-k2.5 | OSS | 3 | 2 | 3 | 2 | 3 | 1 | 2 | 2 | 2 | 3 | **23/30** |
-| 11 | openai/gpt-oss-120b | OSS | 2 | 2 | 3 | 2 | 2 | 3 | 3 | 3 | 1 | 2 | **23/30** |
-| 11 | qwen/qwen3-coder-30b | OSS | 2 | 2 | 3 | 2 | 2 | 3 | 3 | 1 | 2 | 1 | **23/30** |
-| 11 | z-ai/glm-4.7 | OSS | 3 | 1 | 3 | 2 | 3 | 3 | 2 | 1 | 2 | 3 | **23/30** |
-| 11 | openai/gpt-oss-20b | OSS | 3 | 1 | 3 | 2 | 3 | 2 | 1 | 3 | 2 | 3 | **23/30** |
-| 16 | anthropic/claude-haiku-4.5† | | 3 | 3 | 3 | 3 | 3 | 2 | 1 | 0 | 0 | 2 | **20/30** |
-| 16 | google/gemini-3-flash | | 3 | 1 | 3 | 2 | 2 | 1 | 2 | 3 | 2 | 1 | **20/30** |
-| 18 | minimax/minimax-m2.1 | OSS | 3 | 2 | 0 | 2 | 2 | 3 | 0 | 3 | 3 | 1 | **19/30** |
-| 18 | minimax/minimax-m2.5 | OSS | 3 | 2 | 3 | 0 | 0 | 3 | 3 | 2 | 0 | 3 | **19/30** |
-| 20 | moonshotai/kimi-k2 | OSS | 3 | 2 | 0 | 3 | 2 | 1 | 1 | 1 | 0 | 0 | **13/30** |
-| 21 | nvidia/nemotron-3-super | OSS | 0 | 1 | 3 | 2 | 2 | 1 | 0 | 1 | 1 | 1 | **12/30** |
+| 9 | z-ai/glm-5 | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 1 | 2 | 3 | **24/30** |
+| 9 | qwen/qwen3-coder | OSS | 2 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 2 | 1 | **24/30** |
+| 9 | qwen/qwen3-coder-next | OSS | 3 | 2 | 3 | 3 | 3 | 2 | 3 | 2 | 2 | 1 | **24/30** |
+| 12 | moonshotai/kimi-k2.5 | OSS | 3 | 2 | 3 | 2 | 3 | 1 | 2 | 2 | 2 | 3 | **23/30** |
+| 12 | openai/gpt-oss-120b | OSS | 2 | 2 | 3 | 2 | 2 | 3 | 3 | 3 | 1 | 2 | **23/30** |
+| 12 | qwen/qwen3-coder-30b | OSS | 2 | 2 | 3 | 2 | 2 | 3 | 3 | 1 | 2 | 1 | **23/30** |
+| 12 | z-ai/glm-4.7 | OSS | 3 | 1 | 3 | 2 | 3 | 3 | 2 | 1 | 2 | 3 | **23/30** |
+| 12 | openai/gpt-oss-20b | OSS | 3 | 1 | 3 | 2 | 3 | 2 | 1 | 3 | 2 | 3 | **23/30** |
+| 17 | anthropic/claude-haiku-4.5† | | 3 | 3 | 3 | 3 | 3 | 2 | 1 | 0 | 0 | 2 | **20/30** |
+| 17 | google/gemini-3-flash | | 3 | 1 | 3 | 2 | 2 | 1 | 2 | 3 | 2 | 1 | **20/30** |
+| 17 | google/gemma-4-26b-a4b-it‡ (H200) | OSS | 3 | 2 | 3 | 1 | 2 | 1 | 3 | 3 | 2 | 0 | **20/30** |
+| 19 | minimax/minimax-m2.1 | OSS | 3 | 2 | 0 | 2 | 2 | 3 | 0 | 3 | 3 | 1 | **19/30** |
+| 19 | minimax/minimax-m2.5 | OSS | 3 | 2 | 3 | 0 | 0 | 3 | 3 | 2 | 0 | 3 | **19/30** |
+| 21 | moonshotai/kimi-k2 | OSS | 3 | 2 | 0 | 3 | 2 | 1 | 1 | 1 | 0 | 0 | **13/30** |
+| 22 | nvidia/nemotron-3-super | OSS | 0 | 1 | 3 | 2 | 2 | 1 | 0 | 1 | 1 | 1 | **12/30** |
 
 ### Key Observations
 
@@ -268,6 +289,7 @@ pie title Pass Rate by Category
 | 7 | z-ai/glm-4.7 | OSS | 3 | 3 | 2 | 3 | 3 | 2 | 3 | 3 | 0 | 3 | **25/30** |
 | 7 | qwen/qwen3-coder-flash | | 2 | 2 | 3 | 3 | 2 | 2 | 2 | 3 | 3 | 3 | **25/30** |
 | 7 | google/gemini-3-flash | | 3 | 3 | 0 | 3 | 3 | 3 | 2 | 3 | 2 | 3 | **25/30** |
+| 7 | google/gemma-4-26b-a4b-it‡ (H200) | OSS | 3 | 3 | 0 | 3 | 3 | 3 | 2 | 3 | 2 | 3 | **25/30** |
 | 10 | qwen/qwen3-coder-30b | OSS | 3 | 3 | 2 | 3 | 3 | 3 | 2 | 2 | 0 | 3 | **24/30** |
 | 10 | qwen/qwen3.5-27b | OSS | 2 | 3 | 1 | 3 | 3 | 3 | 3 | 1 | 3 | 2 | **24/30** |
 | 10 | openai/gpt-oss-120b | OSS | 3 | 3 | 3 | 2 | 3 | 2 | 2 | 2 | 1 | 3 | **24/30** |
@@ -372,7 +394,9 @@ Each test: 3 checks x 1 point = 3 points. Total per group: 30 points.
 | 1 | 2026-03-18 | opencode | 12 | G1 | Many models produced 0-byte output due to tool incompatibility |
 | 2 | 2026-03-19 | agent_harness | 18 | G1+G2 | Fair comparison — qwen3-coder-flash leads at 55/60 |
 | 3 | 2026-03-22 | agent_harness | 20 | G1+G2+G3 | Text-to-SQL added — qwen3-coder-flash leads at 80/90 |
-| **4** | **2026-04-03** | **agent_harness_gemini** | **22** | **G1+G2+G3** | **Gemma 4 31B ties for #2 at 80/90 — smallest model to hit 80, thinking adds zero benefit** |
+| 4 | 2026-04-03 | agent_harness_gemini | 22 | G1+G2+G3 | Gemma 4 31B ties for #2 at 80/90 — smallest Dense model to hit 80, thinking adds zero benefit |
+| 5 | 2026-04-03 | agent_harness_gemini | 23 | G1+G2+G3 | Gemma 4 26B-A4B (sparse MoE, 4B active) scores 59/90 via Gemini API — G3 collapses (12/30) under rate limits |
+| **6** | **2026-04-09** | **agent_harness (vLLM, H200)** | **23** | **G1+G2+G3** | **Gemma 4 26B-A4B retested locally on H200 + vLLM (FP8, gemma4 tool parser): 70/90. G3 recovers from 12 → 25; gap to Dense 31B narrows from 21 to 10 pts.** |
 
 ## License
 

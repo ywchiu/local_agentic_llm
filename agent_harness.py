@@ -289,7 +289,7 @@ def parse_tool_calls_from_text(text):
     return calls
 
 
-API_URL = "https://openrouter.ai/api/v1/chat/completions"
+API_URL = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1").rstrip("/") + "/chat/completions"
 
 def call_api(model, messages, api_key, reasoning=False, use_native_tools=True):
     """Call OpenRouter API. Returns (response_json, cost, error)."""
@@ -331,9 +331,7 @@ def call_api(model, messages, api_key, reasoning=False, use_native_tools=True):
 
 
 def run_agent(model, prompt, workspace, timeout, max_turns, reasoning=False, prompt_tools=False):
-    api_key = os.environ.get("OPENROUTER_API_KEY", "")
-    if not api_key:
-        return {"error": "OPENROUTER_API_KEY not set", "timed_out": False}
+    api_key = os.environ.get("OPENROUTER_API_KEY", "") or "EMPTY"
 
     # Strip openrouter/ prefix for API
     api_model = model.removeprefix("openrouter/")
