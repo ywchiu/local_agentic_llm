@@ -112,8 +112,7 @@ We also tested `gemma-4-26b-a4b-it` — the sparse MoE variant with 26B total pa
 | Model | Runner | Arch | Total | Active | G1 | G2 | G3 | Total |
 |-------|--------|------|:-----:|:------:|:--:|:--:|:--:|:-----:|
 | **gemma-4-31b-it** | Gemini API | Dense | 31B | 31B | 27 | 26 | 27 | **80/90** |
-| **gemma-4-26b-a4b-it** (old) | Gemini API | MoE | 26B | ~4B | 22 | 25 | 12 | **59/90** |
-| **gemma-4-26b-a4b-it** (new) | **H200 / vLLM (FP8)** | MoE | 26B | ~4B | **25** | **20** | **25** | **70/90** |
+| **gemma-4-26b-a4b-it** | **H200 / vLLM (FP8)** | MoE | 26B | ~4B | **25** | **20** | **25** | **70/90** |
 
 **Key findings:**
 - **G3 was an infrastructure problem, not a model problem** — 12/30 → 25/30 once rate limits and the OpenAI-shape tool-call translation were removed. The model can do text-to-SQL just fine.
