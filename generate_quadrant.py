@@ -12,6 +12,7 @@ import numpy as np
 DATA = [
     ("Sonnet-4.6†", "?", "?B", 29, 0.03),
     ("Gemma4-31B‡ (H200)", "Dense", "31B", 27, 1.00),
+    ("Qwen3.6-35B‡ (H200)", "MoE", "35B/3B", 26, 1.00),
     ("Gemma4-26B‡ (H200)", "MoE", "26B/4B", 25, 1.00),
     ("Q3-Coder-Flash", "MoE", "?B", 30, 0.47),
     ("Kimi-K2.5", "MoE", "1T/32B", 27, 0.48),
@@ -105,6 +106,7 @@ def generate_chart(lang='en'):
         "GPT-20B": (8, 4),
         "Kimi-K2": (8, 4),
         "Gemma4-31B‡ (H200)": (8, -14),
+        "Qwen3.6-35B‡ (H200)": (-155, 4),
         "Gemma4-26B‡ (H200)": (-150, 4),
     }
 

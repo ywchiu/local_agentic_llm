@@ -18,9 +18,9 @@
 ```mermaid
 xychart-beta horizontal
     title "綜合得分：寫程式 + OpenClaw + Text-to-SQL（滿分 90）"
-    x-axis ["Sonnet†", "Gemma4-31B‡", "Q3-CF", "Q3-C", "Q3.5-122B", "GLM-5", "Q3.5-27B", "Q3-30B", "Q3.5-35B", "Q3.5-397B", "GLM4.7", "Gem3F", "Gemma4-26B‡", "GPT-120B", "Haiku†", "Q3-CN", "Kimi2.5", "DS-v3.2", "M-M2.1", "M-M2.5", "GPT-20B", "Kimi2", "Nemo120B"]
+    x-axis ["Sonnet†", "Gemma4-31B‡", "Qwen3.6-35B‡", "Q3-CF", "Q3-C", "Q3.5-122B", "GLM-5", "Q3.5-27B", "Q3-30B", "Q3.5-35B", "Q3.5-397B", "GLM4.7", "Gem3F", "Gemma4-26B‡", "GPT-120B", "Haiku†", "Q3-CN", "Kimi2.5", "DS-v3.2", "M-M2.1", "M-M2.5", "GPT-20B", "Kimi2", "Nemo120B"]
     y-axis "分數" 0 --> 90
-    bar [81, 81, 80, 77, 77, 77, 75, 73, 72, 72, 71, 70, 70, 69, 69, 66, 65, 62, 61, 58, 52, 41, 17]
+    bar [81, 81, 81, 80, 77, 77, 77, 75, 73, 72, 72, 71, 70, 70, 69, 69, 66, 65, 62, 61, 58, 52, 41, 17]
 ```
 
 ### 排行榜
@@ -29,6 +29,7 @@ xychart-beta horizontal
 |------|------|:----:|:----:|-----:|-----:|:--:|:--:|:--:|:----:|
 | 1 | **anthropic/claude-sonnet-4.6** (Claude Code) | | ? | ? | ? | 29 | 26 | 26 | **81** |
 | 1 | **google/gemma-4-31b-it‡** (H200, vLLM) | OSS | Dense | 31B | 31B | 27 | 27 | 27 | **81** |
+| 1 | **qwen/qwen3.6-35b-a3b‡** (H200, vLLM FP8) | OSS | MoE | 35B | 3B | 26 | 27 | 28 | **81** |
 | 3 | qwen/qwen3-coder-flash (OpenRouter) | | MoE | ? | ? | 30 | 25 | 25 | **80** |
 | 5 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | 29 | **77** |
 | 5 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 27 | 27 | **77** |
@@ -51,7 +52,7 @@ xychart-beta horizontal
 | 23 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | 14 | **41** |
 | 24 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
 
-> **開源** = OSS（HuggingFace 開放權重）。**架構** = Dense 或 MoE。G1 = Python 基礎、G2 = OpenClaw 技能、G3 = Text-to-SQL。共 23 個模型，2026 年 3-4 月。**†** Claude 模型透過 Claude Code（原生 API）測試；其他模型均透過 OpenRouter 測試。**‡** Gemma 4 模型已改在**本地 H200 GPU 上以 vLLM 重新測試**（FP8 權重，使用 gemma4 原生 tool-call parser）。
+> **開源** = OSS（HuggingFace 開放權重）。**架構** = Dense 或 MoE。G1 = Python 基礎、G2 = OpenClaw 技能、G3 = Text-to-SQL。共 24 個模型，2026 年 3-4 月。**†** Claude 模型透過 Claude Code（原生 API）測試；其他模型均透過 OpenRouter 測試。**‡** 模型在**本地 H200 GPU 上以 vLLM 提供服務**（FP8 權重，使用對應的原生 tool-call parser — Gemma 使用 `gemma4`、Qwen 使用 `qwen3_coder`）。
 >
 > **G2 分數於 2026-03-21 更新：**驗證腳本已修正，接受將 SKILL.md 放在子目錄中。最大改善：**qwen3.5-122b**（+17）、**gpt-oss-20b**（+16）、**GLM-5**（+16）。
 >
@@ -71,13 +72,14 @@ xychart-beta horizontal
 
 ### 主要發現
 
-1. **Gemma 4 31B 在本地 H200 上與 Sonnet 4.6 並列第一（81/90）** — 改用本地 vLLM（FP8、gemma4 tool parser）重測，G2 +1；31B Dense 是達到第一名的最小模型
-2. **Gemma 4 31B 是達到 81/90 的最小 Dense 模型** — 僅 31B Dense 參數，超越體積 5-20 倍的模型；思考模式零增益（分數完全相同）
-3. **Gemma 4 26B-A4B 在本地 H200 上躍升至 70/90** — 改用本地 vLLM + 原生 gemma4 tool-call parser 重新測試後，從原本透過 Gemini API 的 59/90 提升 11 分；G3 從 12/30 回升到 25/30。先前的低分主要來自 API 速率限制與 OpenAI 形式的工具呼叫轉譯，並非模型本身能力不足。
-4. **三方並列第四（77/90）** — qwen3-coder（G3 冠軍 29/30）、qwen3.5-122b、GLM-5
-5. **Text-to-SQL 重新洗牌排名** — kimi-k2.5 因 G3 工具呼叫不穩定從前三跌至第 16 名；GLM-5 憑藉 G3 強勁表現（27/30）躍升
-6. **驗證品質至關重要** — 兩個驗證器 Bug（G2 子目錄偵測、G3 腳本選擇）人為壓低分數；修正後揭示了模型的真實能力
-6. **開源主導** — 22 個模型中有 18 個是開源的；僅 qwen3-coder-flash、Claude Haiku 和 Gemini Flash 為閉源
+1. **三方並列第一（81/90）** — Sonnet 4.6（Claude Code）、Gemma 4 31B（H200 vLLM）、Qwen 3.6 35B-A3B（H200 vLLM，FP8）同時達到 81/90。其中兩個是在單張 H200 GPU 上執行的開源模型 — 前沿等級的 Agentic Coding 能力現已可在本地達成。
+2. **Qwen 3.6 35B-A3B 是第一個達到第一名的稀疏 MoE 模型** — 總參數 35B，但每個 token **僅啟動約 3B 活躍參數**；G3 Text-to-SQL 表現最強（28/30），僅次於 qwen3-coder（29/30）。在 H200 vLLM（FP8）上推理，每次執行成本實質為零。
+3. **Gemma 4 31B 是達到 81/90 的最小 Dense 模型** — 僅 31B Dense 參數，超越體積 5-20 倍的模型；思考模式零增益（分數完全相同）
+4. **Gemma 4 26B-A4B 在本地 H200 上躍升至 70/90** — 改用本地 vLLM + 原生 gemma4 tool-call parser 重新測試後，從原本透過 Gemini API 的 59/90 提升 11 分；G3 從 12/30 回升到 25/30。先前的低分主要來自 API 速率限制與 OpenAI 形式的工具呼叫轉譯，並非模型本身能力不足。
+5. **三方並列第四（77/90）** — qwen3-coder（G3 冠軍 29/30）、qwen3.5-122b、GLM-5
+6. **Text-to-SQL 重新洗牌排名** — kimi-k2.5 因 G3 工具呼叫不穩定從前三跌至第 16 名；GLM-5 憑藉 G3 強勁表現（27/30）躍升
+7. **驗證品質至關重要** — 兩個驗證器 Bug（G2 子目錄偵測、G3 腳本選擇）人為壓低分數；修正後揭示了模型的真實能力
+8. **開源主導** — 24 個模型中有 20 個是開源的；僅 qwen3-coder-flash、Claude Haiku 和 Gemini Flash 為閉源
 
 ### Claude 模型：OpenRouter vs 原生 API（Claude Code）
 
@@ -142,6 +144,7 @@ xychart-beta horizontal
 | 4 | google/gemma-4-31b-it‡ (H200) | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 1 | **27/30** | 6m56s | 67K | 2.5K |
 | 6 | z-ai/glm-5 | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **26/30** | 27m03s | 354K | 13.6K |
 | 6 | qwen/qwen3-coder-30b | OSS | 2 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 1 | **26/30** | 24m51s | 1420K | 54.6K |
+| 6 | qwen/qwen3.6-35b-a3b‡ (H200) | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 2 | **26/30** | 11m13s | 746K | 28.7K |
 | 8 | deepseek/deepseek-v3.2 | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **25/30** | — | — | — |
 | 8 | google/gemini-3-flash | | 1 | 3 | 3 | 3 | 3 | 3 | 0 | 3 | 3 | 3 | **25/30** | 4m42s | 107K | 4.3K |
 | 8 | qwen/qwen3.5-27b | OSS | 1 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **25/30** | 11m01s | 262K | 10.5K |
@@ -222,6 +225,7 @@ pie title 各類別通過率
 | 1 | **qwen/qwen3.5-122b** | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 2 | 3 | **27/30** |
 | 1 | qwen/qwen3.5-35b | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 2 | 3 | **27/30** |
 | 1 | google/gemma-4-31b-it‡ (H200) | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 2 | 3 | **27/30** |
+| 1 | qwen/qwen3.6-35b-a3b‡ (H200) | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 2 | 3 | **27/30** |
 | 3 | anthropic/claude-sonnet-4.6† | | 3 | 2 | 3 | 3 | 3 | 2 | 1 | 3 | 3 | 3 | **26/30** |
 | 3 | qwen/qwen3.5-27b | OSS | 3 | 2 | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 3 | **26/30** |
 | 3 | qwen/qwen3.5-397b | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 2 | 2 | 3 | **26/30** |
@@ -280,11 +284,12 @@ pie title 各類別通過率
 | 排名 | 模型 | 開源 | 01 | 02 | 03 | 04 | 05 | 06 | 07 | 08 | 09 | 10 | 總分 |
 |------|------|:----:|----|----|----|----|----|----|----|----|----|----|------|
 | 1 | **qwen/qwen3-coder** | OSS | 3 | 3 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **29/30** |
-| 2 | google/gemma-4-31b-it‡ (H200) | OSS | 3 | 3 | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 3 | **27/30** |
-| 2 | z-ai/glm-5 | OSS | 2 | 3 | 1 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **27/30** |
-| 2 | qwen/qwen3.5-122b | OSS | 3 | 3 | 1 | 3 | 3 | 3 | 2 | 3 | 3 | 3 | **27/30** |
-| 5 | qwen/qwen3.5-397b | OSS | 3 | 3 | 0 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | **26/30** |
-| 5 | anthropic/claude-sonnet-4.6† | | 2 | 2 | 2 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | **26/30** |
+| 2 | qwen/qwen3.6-35b-a3b‡ (H200) | OSS | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 1 | **28/30** |
+| 3 | google/gemma-4-31b-it‡ (H200) | OSS | 3 | 3 | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 3 | **27/30** |
+| 3 | z-ai/glm-5 | OSS | 2 | 3 | 1 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **27/30** |
+| 3 | qwen/qwen3.5-122b | OSS | 3 | 3 | 1 | 3 | 3 | 3 | 2 | 3 | 3 | 3 | **27/30** |
+| 6 | qwen/qwen3.5-397b | OSS | 3 | 3 | 0 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | **26/30** |
+| 6 | anthropic/claude-sonnet-4.6† | | 2 | 2 | 2 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | **26/30** |
 | 7 | z-ai/glm-4.7 | OSS | 3 | 3 | 2 | 3 | 3 | 2 | 3 | 3 | 0 | 3 | **25/30** |
 | 7 | qwen/qwen3-coder-flash | | 2 | 2 | 3 | 3 | 2 | 2 | 2 | 3 | 3 | 3 | **25/30** |
 | 7 | google/gemini-3-flash | | 3 | 3 | 0 | 3 | 3 | 3 | 2 | 3 | 2 | 3 | **25/30** |
@@ -397,6 +402,7 @@ OPENCODE_TIMEOUT=600 ./run_benchmark.sh                     # 自訂超時時間
 | 5 | 2026-04-03 | agent_harness_gemini | 23 | G1+G2+G3 | Gemma 4 26B-A4B 透過 Gemini API 得 59/90 — G3 受速率限制崩潰（12/30）|
 | 6 | 2026-04-09 | agent_harness（vLLM, H200） | 23 | G1+G2+G3 | Gemma 4 26B-A4B 改在本地 H200 + vLLM 重測：70/90。G3 從 12 → 25 |
 | **7** | **2026-04-09** | **agent_harness（vLLM, H200）** | **23** | **G1+G2+G3** | **Gemma 4 31B 亦在 H200 vLLM 重測：81/90（G2 +1），與 Sonnet 4.6 並列第一** |
+| **8** | **2026-04-18** | **agent_harness（vLLM, H200）** | **24** | **G1+G2+G3** | **Qwen 3.6 35B-A3B 在 H200 vLLM（FP8、qwen3_coder parser）測試：81/90 — 並列第一（首個達到第一名的稀疏 MoE 模型）** |
 
 ## 授權
 
