@@ -28,9 +28,9 @@ xychart-beta horizontal
 | Rank | Model | Open | Arch | Params | Active | G1 | G2 | G3 | Total |
 |------|-------|:----:|:----:|-------:|-------:|:--:|:--:|:--:|:-----:|
 | 1 | **qwen/qwen3.6-27b‡** (H200, vLLM FP8) | OSS | Dense | 27B | 27B | 29§ | 26 | 27 | **82** |
-| 2 | **anthropic/claude-sonnet-4.6** (Claude Code) | | ? | ? | ? | 29 | 26 | 26 | **81** |
-| 2 | **google/gemma-4-31b-it‡** (H200, vLLM) | OSS | Dense | 31B | 31B | 27 | 27 | 27 | **81** |
-| 2 | **qwen/qwen3.6-35b-a3b‡** (H200, vLLM FP8) | OSS | MoE | 35B | 3B | 26 | 27 | 28 | **81** |
+| 1 | **anthropic/claude-sonnet-4.6** (Claude Code) | | ? | ? | ? | 30§ | 26 | 26 | **82** |
+| 3 | **google/gemma-4-31b-it‡** (H200, vLLM) | OSS | Dense | 31B | 31B | 27 | 27 | 27 | **81** |
+| 3 | **qwen/qwen3.6-35b-a3b‡** (H200, vLLM FP8) | OSS | MoE | 35B | 3B | 26 | 27 | 28 | **81** |
 | 5 | qwen/qwen3-coder-flash (OpenRouter) | | MoE | ? | ? | 30 | 25 | 25 | **80** |
 | 6 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | 29 | **77** |
 | 6 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 27 | 27 | **77** |
@@ -53,7 +53,7 @@ xychart-beta horizontal
 | 24 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | 14 | **41** |
 | 25 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
 
-> **Open** = OSS (open weights on HuggingFace). **Arch** = Dense or MoE. G1 = Python Fundamentals, G2 = OpenClaw Skills, G3 = Text-to-SQL. 25 models tested, March–April 2026. **†** Claude models tested via Claude Code (native API); all other models tested via OpenRouter. **‡** Models served locally on an **H200 GPU via vLLM** (FP8, native tool calling via the appropriate tool-call parser — `gemma4` for Gemma, `qwen3_coder` for Qwen). **§** G1 test 07 (URL shortener) credited 3/3 after manual verification — model's code is functionally correct (verified via Flask `test_client`: POST `/api/shorten` returns short URL, GET `/<code>` 302-redirects) but `validate.sh` has a timing false-negative when the model uses `app.run(debug=True)` (Flask's debug reloader needs ~4s to bind; validator `sleep 3` misses it). Raw score without this adjustment is 79/90.
+> **Open** = OSS (open weights on HuggingFace). **Arch** = Dense or MoE. G1 = Python Fundamentals, G2 = OpenClaw Skills, G3 = Text-to-SQL. 25 models tested, March–April 2026. **†** Claude models tested via Claude Code (native API); all other models tested via OpenRouter. **‡** Models served locally on an **H200 GPU via vLLM** (FP8, native tool calling via the appropriate tool-call parser — `gemma4` for Gemma, `qwen3_coder` for Qwen). **§** G1 test 07 (URL shortener) credited +N after manual verification — code is functionally correct but `validate.sh` has a timing false-negative when the model uses `app.run(debug=True)` (Flask debug reloader needs ~4s to bind; validator `sleep 3` misses it). Qwen 3.6 27B: +3 (0/3 → 3/3, verified via Flask `test_client`: POST `/api/shorten` returns short URL, GET `/<code>` 302-redirects); raw total 79/90. Sonnet 4.6: +1 (2/3 → 3/3, verified via OpenRouter rerun — the same workspace passes 3/3 on re-validation, confirming timing flake); raw total 81/90. This adjustment is not yet applied retroactively to other models.
 >
 > **G2 scores updated 2026-03-21:** Validation scripts were fixed to accept SKILL.md placed in subdirectories. Biggest improvements: **qwen3.5-122b** (+17), **gpt-oss-20b** (+16), **GLM-5** (+16).
 >
@@ -73,8 +73,8 @@ xychart-beta horizontal
 
 ### Key Findings
 
-1. **Qwen 3.6 27B (Dense) takes #1 at 82/90** (H200 vLLM, FP8) — the first model to cross 81. Beats the previous three-way tie (Sonnet 4.6, Gemma 4 31B, Qwen 3.6 35B-A3B) by 1 point. Score includes a +3 manual credit on G1/07 (URL shortener) where the model's code is functionally correct but the validator's `sleep 3` window misses Flask `debug=True` startup; raw score would be 79/90. Four of the top five entries are open-weight models running on a single H200 GPU.
-2. **Three-way tie at #2 (81/90)** — Sonnet 4.6 (Claude Code), Gemma 4 31B (H200 vLLM), and Qwen 3.6 35B-A3B (H200 vLLM, FP8). Two of the three are open-weight models running locally on H200 — frontier-level agentic coding is now reachable locally.
+1. **Two-way tie at #1 (82/90) — Qwen 3.6 27B (Dense, H200 vLLM FP8) and Sonnet 4.6 (Claude Code)**. Both scores include a **§** G1/07 validator-timing credit (Qwen +3, Sonnet +1); raw scores are 79 and 81 respectively. Qwen 3.6 27B is the first open-weight Dense model to reach #1, running on a single H200 GPU at effectively zero marginal cost per run.
+2. **Two-way tie at #3 (81/90)** — Gemma 4 31B (H200 vLLM) and Qwen 3.6 35B-A3B (H200 vLLM, FP8). Both are open-weight models running locally on H200 — frontier-level agentic coding is reachable locally.
 3. **Qwen 3.6 35B-A3B (sparse MoE, #2) — 35B total / ~3B active per token** — strongest on G3 Text-to-SQL (28/30) where it trails only qwen3-coder (29/30). Inference on H200 vLLM (FP8) is effectively free per run.
 4. **Gemma 4 31B is the smallest Dense model to hit 81/90** — at 31B parameters, it outperforms models 5-20x its size; thinking mode adds zero benefit (identical scores)
 5. **Gemma 4 26B-A4B (sparse, 4B active) jumps to 70/90 on local H200** — retested via local vLLM with the native gemma4 tool-call parser; previously only 59/90 via Gemini API where rate limits and tool-call translation were dragging G3 down. The model is genuinely capable; the earlier gap was infrastructure, not architecture.
@@ -141,8 +141,8 @@ We also tested `gemma-4-26b-a4b-it` — the sparse MoE variant with 26B total pa
 |------|-------|:----:|----|----|----|----|----|----|----|----|----|----|-------|------|--------|--------|
 | 1 | **qwen/qwen3-coder-flash** | | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **30/30** | 20m51s | 780K | 26.0K |
 | 1 | anthropic/claude-haiku-4.5† | | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **30/30** | — | — | — |
-| 3 | anthropic/claude-sonnet-4.6† | | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 3 | **29/30** | — | — | — |
-| 3 | qwen/qwen3.6-27b‡ (H200) | OSS | 3 | 3 | 3 | 3 | 3 | 3 | 3§ | 3 | 3 | 2 | **29/30** | 12m50s | 593K | 20.4K |
+| 1 | anthropic/claude-sonnet-4.6† | | 3 | 3 | 3 | 3 | 3 | 3 | 3§ | 3 | 3 | 3 | **30/30** | — | — | — |
+| 4 | qwen/qwen3.6-27b‡ (H200) | OSS | 3 | 3 | 3 | 3 | 3 | 3 | 3§ | 3 | 3 | 2 | **29/30** | 12m50s | 593K | 20.4K |
 | 4 | moonshotai/kimi-k2.5 | OSS | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **27/30** | 15m26s | 258K | 9.6K |
 | 4 | google/gemma-4-31b-it‡ (H200) | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 1 | **27/30** | 6m56s | 67K | 2.5K |
 | 6 | z-ai/glm-5 | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **26/30** | 27m03s | 354K | 13.6K |
@@ -408,7 +408,7 @@ Each test: 3 checks x 1 point = 3 points. Total per group: 30 points.
 | 6 | 2026-04-09 | agent_harness (vLLM, H200) | 23 | G1+G2+G3 | Gemma 4 26B-A4B retested locally on H200 + vLLM (FP8, gemma4 tool parser): 70/90. G3 recovers from 12 → 25 |
 | **7** | **2026-04-09** | **agent_harness (vLLM, H200)** | **23** | **G1+G2+G3** | **Gemma 4 31B also retested on H200 vLLM: 81/90 (+1 G2), ties Sonnet 4.6 for #1** |
 | **8** | **2026-04-18** | **agent_harness (vLLM, H200)** | **24** | **G1+G2+G3** | **Qwen 3.6 35B-A3B tested on H200 vLLM (FP8, qwen3_coder parser): 81/90 — ties #1 (first sparse MoE to reach #1)** |
-| **9** | **2026-04-23** | **agent_harness (vLLM, H200)** | **25** | **G1+G2+G3** | **Qwen 3.6 27B (Dense) tested on H200 vLLM (FP8, qwen3_coder parser): 82/90 — new solo #1 (raw 79; +3 manual credit on G1/07 after validator `sleep 3` timing false-negative identified)** |
+| **9** | **2026-04-23** | **agent_harness (vLLM, H200)** | **25** | **G1+G2+G3** | **Qwen 3.6 27B (Dense) tested on H200 vLLM (FP8, qwen3_coder parser): 82/90 (raw 79, +3 G1/07 validator-timing credit). Sonnet 4.6 G1/07 re-audited via OpenRouter rerun — same workspace passes 3/3 on re-validation → Sonnet credited +1 for same bug (81 → 82). Qwen 3.6 27B and Sonnet 4.6 now tie #1 at 82/90.** |
 
 ## License
 

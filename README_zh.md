@@ -28,9 +28,9 @@ xychart-beta horizontal
 | 排名 | 模型 | 開源 | 架構 | 參數 | 活躍 | G1 | G2 | G3 | 綜合 |
 |------|------|:----:|:----:|-----:|-----:|:--:|:--:|:--:|:----:|
 | 1 | **qwen/qwen3.6-27b‡** (H200, vLLM FP8) | OSS | Dense | 27B | 27B | 29§ | 26 | 27 | **82** |
-| 2 | **anthropic/claude-sonnet-4.6** (Claude Code) | | ? | ? | ? | 29 | 26 | 26 | **81** |
-| 2 | **google/gemma-4-31b-it‡** (H200, vLLM) | OSS | Dense | 31B | 31B | 27 | 27 | 27 | **81** |
-| 2 | **qwen/qwen3.6-35b-a3b‡** (H200, vLLM FP8) | OSS | MoE | 35B | 3B | 26 | 27 | 28 | **81** |
+| 1 | **anthropic/claude-sonnet-4.6** (Claude Code) | | ? | ? | ? | 30§ | 26 | 26 | **82** |
+| 3 | **google/gemma-4-31b-it‡** (H200, vLLM) | OSS | Dense | 31B | 31B | 27 | 27 | 27 | **81** |
+| 3 | **qwen/qwen3.6-35b-a3b‡** (H200, vLLM FP8) | OSS | MoE | 35B | 3B | 26 | 27 | 28 | **81** |
 | 5 | qwen/qwen3-coder-flash (OpenRouter) | | MoE | ? | ? | 30 | 25 | 25 | **80** |
 | 6 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | 29 | **77** |
 | 6 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 27 | 27 | **77** |
@@ -53,7 +53,7 @@ xychart-beta horizontal
 | 24 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | 14 | **41** |
 | 25 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
 
-> **開源** = OSS（HuggingFace 開放權重）。**架構** = Dense 或 MoE。G1 = Python 基礎、G2 = OpenClaw 技能、G3 = Text-to-SQL。共 25 個模型，2026 年 3-4 月。**†** Claude 模型透過 Claude Code（原生 API）測試；其他模型均透過 OpenRouter 測試。**‡** 模型在**本地 H200 GPU 上以 vLLM 提供服務**（FP8 權重，使用對應的原生 tool-call parser — Gemma 使用 `gemma4`、Qwen 使用 `qwen3_coder`）。**§** G1 test 07（URL shortener）經人工驗證後計為 3/3 — 模型的程式碼功能正確（以 Flask `test_client` 驗證：POST `/api/shorten` 回傳 short URL、GET `/<code>` 302 重導），但 `validate.sh` 在模型使用 `app.run(debug=True)` 時有時序 false-negative（Flask debug reloader 需 ~4s 才 bind port；validator `sleep 3` 太短撈不到）。未套用此校正的原始分數為 79/90。
+> **開源** = OSS（HuggingFace 開放權重）。**架構** = Dense 或 MoE。G1 = Python 基礎、G2 = OpenClaw 技能、G3 = Text-to-SQL。共 25 個模型，2026 年 3-4 月。**†** Claude 模型透過 Claude Code（原生 API）測試；其他模型均透過 OpenRouter 測試。**‡** 模型在**本地 H200 GPU 上以 vLLM 提供服務**（FP8 權重，使用對應的原生 tool-call parser — Gemma 使用 `gemma4`、Qwen 使用 `qwen3_coder`）。**§** G1 test 07（URL shortener）經人工驗證後補分 — 程式碼功能正確，但 `validate.sh` 在模型使用 `app.run(debug=True)` 時有時序 false-negative（Flask debug reloader 需 ~4s 才 bind port；validator `sleep 3` 太短撈不到）。Qwen 3.6 27B：+3（0/3 → 3/3，以 Flask `test_client` 驗證：POST `/api/shorten` 回傳 short URL、GET `/<code>` 302 重導）；原始總分 79/90。Sonnet 4.6：+1（2/3 → 3/3，OpenRouter 重跑後再驗證，同一 workspace 拿 3/3，確認為 timing flake）；原始總分 81/90。此校正尚未回溯套用至其他模型。
 >
 > **G2 分數於 2026-03-21 更新：**驗證腳本已修正，接受將 SKILL.md 放在子目錄中。最大改善：**qwen3.5-122b**（+17）、**gpt-oss-20b**（+16）、**GLM-5**（+16）。
 >
@@ -73,8 +73,8 @@ xychart-beta horizontal
 
 ### 主要發現
 
-1. **Qwen 3.6 27B（Dense）以 82/90 拿下第一** — H200 vLLM、FP8。首個突破 81 分的模型，比先前三方並列（Sonnet 4.6、Gemma 4 31B、Qwen 3.6 35B-A3B）多 1 分。分數包含 G1/07（URL shortener）的 +3 人工校正 — 模型程式碼功能正確，但 validator 的 `sleep 3` 時窗撈不到 Flask `debug=True` 啟動；未校正的原始分為 79/90。前五名有四個是在單張 H200 GPU 上執行的開源模型。
-2. **三方並列第二（81/90）** — Sonnet 4.6（Claude Code）、Gemma 4 31B（H200 vLLM）、Qwen 3.6 35B-A3B（H200 vLLM，FP8）。其中兩個為在 H200 上本地執行的開源模型 — 前沿等級的 Agentic Coding 能力現已可在本地達成。
+1. **雙方並列第一（82/90）— Qwen 3.6 27B（Dense，H200 vLLM FP8）與 Sonnet 4.6（Claude Code）**。兩者分數皆含 **§** G1/07 validator 時序 false-negative 人工校正（Qwen +3、Sonnet +1），原始分分別為 79 與 81。Qwen 3.6 27B 是首個拿下第一的開源 Dense 模型，在單張 H200 GPU 上執行，每次推理成本實質為零。
+2. **雙方並列第三（81/90）** — Gemma 4 31B（H200 vLLM）、Qwen 3.6 35B-A3B（H200 vLLM，FP8）。皆為在 H200 上本地執行的開源模型 — 前沿等級的 Agentic Coding 能力已可在本地達成。
 3. **Qwen 3.6 35B-A3B（第二名、稀疏 MoE）— 35B 總參數 / ~3B 活躍參數**；G3 Text-to-SQL 表現最強（28/30），僅次於 qwen3-coder（29/30）。在 H200 vLLM（FP8）上推理，每次執行成本實質為零。
 4. **Gemma 4 31B 是達到 81/90 的最小 Dense 模型** — 僅 31B Dense 參數，超越體積 5-20 倍的模型；思考模式零增益（分數完全相同）
 5. **Gemma 4 26B-A4B 在本地 H200 上躍升至 70/90** — 改用本地 vLLM + 原生 gemma4 tool-call parser 重新測試後，從原本透過 Gemini API 的 59/90 提升 11 分；G3 從 12/30 回升到 25/30。先前的低分主要來自 API 速率限制與 OpenAI 形式的工具呼叫轉譯，並非模型本身能力不足。
@@ -141,8 +141,8 @@ xychart-beta horizontal
 |------|------|:----:|----|----|----|----|----|----|----|----|----|----|------|------|---------|--------|
 | 1 | **qwen/qwen3-coder-flash** | | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **30/30** | 20m51s | 780K | 26.0K |
 | 1 | anthropic/claude-haiku-4.5† | | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **30/30** | — | — | — |
-| 3 | anthropic/claude-sonnet-4.6† | | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 3 | **29/30** | — | — | — |
-| 3 | qwen/qwen3.6-27b‡ (H200) | OSS | 3 | 3 | 3 | 3 | 3 | 3 | 3§ | 3 | 3 | 2 | **29/30** | 12m50s | 593K | 20.4K |
+| 1 | anthropic/claude-sonnet-4.6† | | 3 | 3 | 3 | 3 | 3 | 3 | 3§ | 3 | 3 | 3 | **30/30** | — | — | — |
+| 4 | qwen/qwen3.6-27b‡ (H200) | OSS | 3 | 3 | 3 | 3 | 3 | 3 | 3§ | 3 | 3 | 2 | **29/30** | 12m50s | 593K | 20.4K |
 | 4 | moonshotai/kimi-k2.5 | OSS | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **27/30** | 15m26s | 258K | 9.6K |
 | 4 | google/gemma-4-31b-it‡ (H200) | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 1 | **27/30** | 6m56s | 67K | 2.5K |
 | 6 | z-ai/glm-5 | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **26/30** | 27m03s | 354K | 13.6K |
@@ -408,7 +408,7 @@ OPENCODE_TIMEOUT=600 ./run_benchmark.sh                     # 自訂超時時間
 | 6 | 2026-04-09 | agent_harness（vLLM, H200） | 23 | G1+G2+G3 | Gemma 4 26B-A4B 改在本地 H200 + vLLM 重測：70/90。G3 從 12 → 25 |
 | **7** | **2026-04-09** | **agent_harness（vLLM, H200）** | **23** | **G1+G2+G3** | **Gemma 4 31B 亦在 H200 vLLM 重測：81/90（G2 +1），與 Sonnet 4.6 並列第一** |
 | **8** | **2026-04-18** | **agent_harness（vLLM, H200）** | **24** | **G1+G2+G3** | **Qwen 3.6 35B-A3B 在 H200 vLLM（FP8、qwen3_coder parser）測試：81/90 — 並列第一（首個達到第一名的稀疏 MoE 模型）** |
-| **9** | **2026-04-23** | **agent_harness（vLLM, H200）** | **25** | **G1+G2+G3** | **Qwen 3.6 27B（Dense）在 H200 vLLM（FP8、qwen3_coder parser）測試：82/90 — 單獨第一（原始 79 分；G1/07 發現 validator `sleep 3` 時序 false-negative 後 +3 人工校正）** |
+| **9** | **2026-04-23** | **agent_harness（vLLM, H200）** | **25** | **G1+G2+G3** | **Qwen 3.6 27B（Dense）在 H200 vLLM（FP8、qwen3_coder parser）測試：82/90（原始 79，G1/07 validator 時序 false-negative +3 校正）。Sonnet 4.6 G1/07 透過 OpenRouter 重跑再稽核 — 同一 workspace 重驗拿 3/3 → Sonnet 以同樣 bug +1（81 → 82）。Qwen 3.6 27B 與 Sonnet 4.6 並列第一 82/90。** |
 
 ## 授權
 
