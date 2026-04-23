@@ -18,9 +18,9 @@
 ```mermaid
 xychart-beta horizontal
     title "綜合得分：寫程式 + OpenClaw + Text-to-SQL（滿分 90）"
-    x-axis ["Sonnet†", "Gemma4-31B‡", "Qwen3.6-35B‡", "Q3-CF", "Q3-C", "Q3.5-122B", "GLM-5", "Q3.5-27B", "Q3-30B", "Q3.5-35B", "Q3.5-397B", "GLM4.7", "Gem3F", "Gemma4-26B‡", "GPT-120B", "Haiku†", "Q3-CN", "Kimi2.5", "DS-v3.2", "M-M2.1", "M-M2.5", "GPT-20B", "Kimi2", "Nemo120B"]
+    x-axis ["Qwen3.6-27B‡§", "Sonnet†§", "Gemma4-31B‡", "Qwen3.6-35B‡", "Q3-CF", "Q3-C", "Q3.5-122B", "GLM-5", "Q3.5-27B", "Q3-30B", "Q3.5-35B", "Q3.5-397B", "GLM4.7", "Gem3F", "Gemma4-26B‡", "GPT-120B", "Haiku†", "Q3-CN", "Kimi2.5", "DS-v3.2", "M-M2.1", "M-M2.5", "GPT-20B", "Kimi2", "Nemo120B"]
     y-axis "分數" 0 --> 90
-    bar [81, 81, 81, 80, 77, 77, 77, 75, 73, 72, 72, 71, 70, 70, 69, 69, 66, 65, 62, 61, 58, 52, 41, 17]
+    bar [82, 82, 81, 81, 80, 77, 77, 77, 75, 73, 72, 72, 71, 70, 70, 69, 69, 66, 65, 62, 61, 58, 52, 41, 17]
 ```
 
 ### 排行榜

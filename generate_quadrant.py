@@ -10,7 +10,8 @@ import numpy as np
 # Data: (label, arch, params, score, cost_estimate)
 # cost_estimate is relative (0=expensive, 1=cheap) matching the mermaid chart
 DATA = [
-    ("Sonnet-4.6†", "?", "?B", 29, 0.03),
+    ("Qwen3.6-27B‡ (H200)", "Dense", "27B", 29, 1.00),
+    ("Sonnet-4.6†", "?", "?B", 30, 0.03),
     ("Gemma4-31B‡ (H200)", "Dense", "31B", 27, 1.00),
     ("Qwen3.6-35B‡ (H200)", "MoE", "35B/3B", 26, 1.00),
     ("Gemma4-26B‡ (H200)", "MoE", "26B/4B", 25, 1.00),
@@ -107,6 +108,7 @@ def generate_chart(lang='en'):
         "Kimi-K2": (8, 4),
         "Gemma4-31B‡ (H200)": (8, -14),
         "Qwen3.6-35B‡ (H200)": (-155, 4),
+        "Qwen3.6-27B‡ (H200)": (-155, 4),
         "Gemma4-26B‡ (H200)": (-150, 4),
     }
 
