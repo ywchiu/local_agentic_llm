@@ -27,32 +27,33 @@ xychart-beta horizontal
 
 | 排名 | 模型 | 開源 | 架構 | 參數 | 活躍 | G1 | G2 | G3 | 綜合 |
 |------|------|:----:|:----:|-----:|-----:|:--:|:--:|:--:|:----:|
-| 1 | **anthropic/claude-sonnet-4.6** (Claude Code) | | ? | ? | ? | 29 | 26 | 26 | **81** |
-| 1 | **google/gemma-4-31b-it‡** (H200, vLLM) | OSS | Dense | 31B | 31B | 27 | 27 | 27 | **81** |
-| 1 | **qwen/qwen3.6-35b-a3b‡** (H200, vLLM FP8) | OSS | MoE | 35B | 3B | 26 | 27 | 28 | **81** |
-| 3 | qwen/qwen3-coder-flash (OpenRouter) | | MoE | ? | ? | 30 | 25 | 25 | **80** |
-| 5 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | 29 | **77** |
-| 5 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 27 | 27 | **77** |
-| 5 | z-ai/glm-5 | OSS | MoE | 745B | 44B | 26 | 24 | 27 | **77** |
-| 8 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 26 | 24 | **75** |
-| 9 | qwen/qwen3-coder-30b | OSS | MoE | 30.5B | 3.3B | 26 | 23 | 24 | **73** |
-| 10 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 27 | 23 | **72** |
-| 10 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 26 | 26 | **72** |
-| 12 | z-ai/glm-4.7 | OSS | MoE | 355B | 32B | 23 | 23 | 25 | **71** |
-| 13 | google/gemini-3-flash | | ? | ? | ? | 25 | 20 | 25 | **70** |
-| 13 | google/gemma-4-26b-a4b-it‡ (H200, vLLM) | OSS | MoE | 26B | 4B | 25 | 20 | 25 | **70** |
-| 15 | openai/gpt-oss-120b | OSS | MoE | 117B | 5.1B | 22 | 23 | 24 | **69** |
-| 15 | anthropic/claude-haiku-4.5† | | ? | ? | ? | 30 | 20 | 19 | **69** |
-| 17 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 24 | 22 | **66** |
-| 18 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | 15 | **65** |
-| 19 | deepseek/deepseek-v3.2 | OSS | MoE | 685B | 37B | 25 | 21 | 16 | **62** |
-| 20 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | 18 | **61** |
-| 21 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | 20 | **58** |
-| 22 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | 15 | **52** |
-| 23 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | 14 | **41** |
-| 24 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
+| 1 | **qwen/qwen3.6-27b‡** (H200, vLLM FP8) | OSS | Dense | 27B | 27B | 29§ | 26 | 27 | **82** |
+| 2 | **anthropic/claude-sonnet-4.6** (Claude Code) | | ? | ? | ? | 29 | 26 | 26 | **81** |
+| 2 | **google/gemma-4-31b-it‡** (H200, vLLM) | OSS | Dense | 31B | 31B | 27 | 27 | 27 | **81** |
+| 2 | **qwen/qwen3.6-35b-a3b‡** (H200, vLLM FP8) | OSS | MoE | 35B | 3B | 26 | 27 | 28 | **81** |
+| 5 | qwen/qwen3-coder-flash (OpenRouter) | | MoE | ? | ? | 30 | 25 | 25 | **80** |
+| 6 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | 29 | **77** |
+| 6 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 27 | 27 | **77** |
+| 6 | z-ai/glm-5 | OSS | MoE | 745B | 44B | 26 | 24 | 27 | **77** |
+| 9 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 26 | 24 | **75** |
+| 10 | qwen/qwen3-coder-30b | OSS | MoE | 30.5B | 3.3B | 26 | 23 | 24 | **73** |
+| 11 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 27 | 23 | **72** |
+| 11 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 26 | 26 | **72** |
+| 13 | z-ai/glm-4.7 | OSS | MoE | 355B | 32B | 23 | 23 | 25 | **71** |
+| 14 | google/gemini-3-flash | | ? | ? | ? | 25 | 20 | 25 | **70** |
+| 14 | google/gemma-4-26b-a4b-it‡ (H200, vLLM) | OSS | MoE | 26B | 4B | 25 | 20 | 25 | **70** |
+| 16 | openai/gpt-oss-120b | OSS | MoE | 117B | 5.1B | 22 | 23 | 24 | **69** |
+| 16 | anthropic/claude-haiku-4.5† | | ? | ? | ? | 30 | 20 | 19 | **69** |
+| 18 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 24 | 22 | **66** |
+| 19 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | 15 | **65** |
+| 20 | deepseek/deepseek-v3.2 | OSS | MoE | 685B | 37B | 25 | 21 | 16 | **62** |
+| 21 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | 18 | **61** |
+| 22 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | 20 | **58** |
+| 23 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | 15 | **52** |
+| 24 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | 14 | **41** |
+| 25 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
 
-> **開源** = OSS（HuggingFace 開放權重）。**架構** = Dense 或 MoE。G1 = Python 基礎、G2 = OpenClaw 技能、G3 = Text-to-SQL。共 24 個模型，2026 年 3-4 月。**†** Claude 模型透過 Claude Code（原生 API）測試；其他模型均透過 OpenRouter 測試。**‡** 模型在**本地 H200 GPU 上以 vLLM 提供服務**（FP8 權重，使用對應的原生 tool-call parser — Gemma 使用 `gemma4`、Qwen 使用 `qwen3_coder`）。
+> **開源** = OSS（HuggingFace 開放權重）。**架構** = Dense 或 MoE。G1 = Python 基礎、G2 = OpenClaw 技能、G3 = Text-to-SQL。共 25 個模型，2026 年 3-4 月。**†** Claude 模型透過 Claude Code（原生 API）測試；其他模型均透過 OpenRouter 測試。**‡** 模型在**本地 H200 GPU 上以 vLLM 提供服務**（FP8 權重，使用對應的原生 tool-call parser — Gemma 使用 `gemma4`、Qwen 使用 `qwen3_coder`）。**§** G1 test 07（URL shortener）經人工驗證後計為 3/3 — 模型的程式碼功能正確（以 Flask `test_client` 驗證：POST `/api/shorten` 回傳 short URL、GET `/<code>` 302 重導），但 `validate.sh` 在模型使用 `app.run(debug=True)` 時有時序 false-negative（Flask debug reloader 需 ~4s 才 bind port；validator `sleep 3` 太短撈不到）。未套用此校正的原始分數為 79/90。
 >
 > **G2 分數於 2026-03-21 更新：**驗證腳本已修正，接受將 SKILL.md 放在子目錄中。最大改善：**qwen3.5-122b**（+17）、**gpt-oss-20b**（+16）、**GLM-5**（+16）。
 >
@@ -72,14 +73,15 @@ xychart-beta horizontal
 
 ### 主要發現
 
-1. **三方並列第一（81/90）** — Sonnet 4.6（Claude Code）、Gemma 4 31B（H200 vLLM）、Qwen 3.6 35B-A3B（H200 vLLM，FP8）同時達到 81/90。其中兩個是在單張 H200 GPU 上執行的開源模型 — 前沿等級的 Agentic Coding 能力現已可在本地達成。
-2. **Qwen 3.6 35B-A3B 是第一個達到第一名的稀疏 MoE 模型** — 總參數 35B，但每個 token **僅啟動約 3B 活躍參數**；G3 Text-to-SQL 表現最強（28/30），僅次於 qwen3-coder（29/30）。在 H200 vLLM（FP8）上推理，每次執行成本實質為零。
-3. **Gemma 4 31B 是達到 81/90 的最小 Dense 模型** — 僅 31B Dense 參數，超越體積 5-20 倍的模型；思考模式零增益（分數完全相同）
-4. **Gemma 4 26B-A4B 在本地 H200 上躍升至 70/90** — 改用本地 vLLM + 原生 gemma4 tool-call parser 重新測試後，從原本透過 Gemini API 的 59/90 提升 11 分；G3 從 12/30 回升到 25/30。先前的低分主要來自 API 速率限制與 OpenAI 形式的工具呼叫轉譯，並非模型本身能力不足。
-5. **三方並列第四（77/90）** — qwen3-coder（G3 冠軍 29/30）、qwen3.5-122b、GLM-5
-6. **Text-to-SQL 重新洗牌排名** — kimi-k2.5 因 G3 工具呼叫不穩定從前三跌至第 16 名；GLM-5 憑藉 G3 強勁表現（27/30）躍升
-7. **驗證品質至關重要** — 兩個驗證器 Bug（G2 子目錄偵測、G3 腳本選擇）人為壓低分數；修正後揭示了模型的真實能力
-8. **開源主導** — 24 個模型中有 20 個是開源的；僅 qwen3-coder-flash、Claude Haiku 和 Gemini Flash 為閉源
+1. **Qwen 3.6 27B（Dense）以 82/90 拿下第一** — H200 vLLM、FP8。首個突破 81 分的模型，比先前三方並列（Sonnet 4.6、Gemma 4 31B、Qwen 3.6 35B-A3B）多 1 分。分數包含 G1/07（URL shortener）的 +3 人工校正 — 模型程式碼功能正確，但 validator 的 `sleep 3` 時窗撈不到 Flask `debug=True` 啟動；未校正的原始分為 79/90。前五名有四個是在單張 H200 GPU 上執行的開源模型。
+2. **三方並列第二（81/90）** — Sonnet 4.6（Claude Code）、Gemma 4 31B（H200 vLLM）、Qwen 3.6 35B-A3B（H200 vLLM，FP8）。其中兩個為在 H200 上本地執行的開源模型 — 前沿等級的 Agentic Coding 能力現已可在本地達成。
+3. **Qwen 3.6 35B-A3B（第二名、稀疏 MoE）— 35B 總參數 / ~3B 活躍參數**；G3 Text-to-SQL 表現最強（28/30），僅次於 qwen3-coder（29/30）。在 H200 vLLM（FP8）上推理，每次執行成本實質為零。
+4. **Gemma 4 31B 是達到 81/90 的最小 Dense 模型** — 僅 31B Dense 參數，超越體積 5-20 倍的模型；思考模式零增益（分數完全相同）
+5. **Gemma 4 26B-A4B 在本地 H200 上躍升至 70/90** — 改用本地 vLLM + 原生 gemma4 tool-call parser 重新測試後，從原本透過 Gemini API 的 59/90 提升 11 分；G3 從 12/30 回升到 25/30。先前的低分主要來自 API 速率限制與 OpenAI 形式的工具呼叫轉譯，並非模型本身能力不足。
+6. **三方並列第六（77/90）** — qwen3-coder（G3 冠軍 29/30）、qwen3.5-122b、GLM-5
+7. **Text-to-SQL 重新洗牌排名** — kimi-k2.5 因 G3 工具呼叫不穩定從前三跌至第 19 名；GLM-5 憑藉 G3 強勁表現（27/30）躍升
+8. **驗證品質至關重要** — 已識別三個 validator Bug：(a) G2 子目錄偵測、(b) G3 腳本選擇 — 兩者皆已修正；(c) G1/07 `sleep 3` 撈不到 `debug=True` Flask bind，在 Qwen 3.6 27B 的測試中被發現並以 **§** 註解形式人工校正，但尚未對其他模型回溯套用。修正 (a)+(b) 揭示了模型的真實能力。
+9. **開源主導** — 25 個模型中有 21 個是開源的；僅 qwen3-coder-flash、Claude Sonnet、Claude Haiku 和 Gemini Flash 為閉源
 
 ### Claude 模型：OpenRouter vs 原生 API（Claude Code）
 
@@ -140,6 +142,7 @@ xychart-beta horizontal
 | 1 | **qwen/qwen3-coder-flash** | | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **30/30** | 20m51s | 780K | 26.0K |
 | 1 | anthropic/claude-haiku-4.5† | | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **30/30** | — | — | — |
 | 3 | anthropic/claude-sonnet-4.6† | | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 3 | **29/30** | — | — | — |
+| 3 | qwen/qwen3.6-27b‡ (H200) | OSS | 3 | 3 | 3 | 3 | 3 | 3 | 3§ | 3 | 3 | 2 | **29/30** | 12m50s | 593K | 20.4K |
 | 4 | moonshotai/kimi-k2.5 | OSS | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **27/30** | 15m26s | 258K | 9.6K |
 | 4 | google/gemma-4-31b-it‡ (H200) | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 1 | **27/30** | 6m56s | 67K | 2.5K |
 | 6 | z-ai/glm-5 | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **26/30** | 27m03s | 354K | 13.6K |
@@ -229,6 +232,7 @@ pie title 各類別通過率
 | 3 | anthropic/claude-sonnet-4.6† | | 3 | 2 | 3 | 3 | 3 | 2 | 1 | 3 | 3 | 3 | **26/30** |
 | 3 | qwen/qwen3.5-27b | OSS | 3 | 2 | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 3 | **26/30** |
 | 3 | qwen/qwen3.5-397b | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 2 | 2 | 3 | **26/30** |
+| 3 | qwen/qwen3.6-27b‡ (H200) | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 1 | 3 | **26/30** |
 | 7 | qwen/qwen3-coder-flash | | 3 | 2 | 3 | 2 | 2 | 3 | 3 | 3 | 1 | 3 | **25/30** |
 | 9 | z-ai/glm-5 | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 1 | 2 | 3 | **24/30** |
 | 9 | qwen/qwen3-coder | OSS | 2 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 2 | 1 | **24/30** |
@@ -288,6 +292,7 @@ pie title 各類別通過率
 | 3 | google/gemma-4-31b-it‡ (H200) | OSS | 3 | 3 | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 3 | **27/30** |
 | 3 | z-ai/glm-5 | OSS | 2 | 3 | 1 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **27/30** |
 | 3 | qwen/qwen3.5-122b | OSS | 3 | 3 | 1 | 3 | 3 | 3 | 2 | 3 | 3 | 3 | **27/30** |
+| 3 | qwen/qwen3.6-27b‡ (H200) | OSS | 2 | 3 | 1 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **27/30** |
 | 6 | qwen/qwen3.5-397b | OSS | 3 | 3 | 0 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | **26/30** |
 | 6 | anthropic/claude-sonnet-4.6† | | 2 | 2 | 2 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | **26/30** |
 | 7 | z-ai/glm-4.7 | OSS | 3 | 3 | 2 | 3 | 3 | 2 | 3 | 3 | 0 | 3 | **25/30** |
@@ -403,6 +408,7 @@ OPENCODE_TIMEOUT=600 ./run_benchmark.sh                     # 自訂超時時間
 | 6 | 2026-04-09 | agent_harness（vLLM, H200） | 23 | G1+G2+G3 | Gemma 4 26B-A4B 改在本地 H200 + vLLM 重測：70/90。G3 從 12 → 25 |
 | **7** | **2026-04-09** | **agent_harness（vLLM, H200）** | **23** | **G1+G2+G3** | **Gemma 4 31B 亦在 H200 vLLM 重測：81/90（G2 +1），與 Sonnet 4.6 並列第一** |
 | **8** | **2026-04-18** | **agent_harness（vLLM, H200）** | **24** | **G1+G2+G3** | **Qwen 3.6 35B-A3B 在 H200 vLLM（FP8、qwen3_coder parser）測試：81/90 — 並列第一（首個達到第一名的稀疏 MoE 模型）** |
+| **9** | **2026-04-23** | **agent_harness（vLLM, H200）** | **25** | **G1+G2+G3** | **Qwen 3.6 27B（Dense）在 H200 vLLM（FP8、qwen3_coder parser）測試：82/90 — 單獨第一（原始 79 分；G1/07 發現 validator `sleep 3` 時序 false-negative 後 +3 人工校正）** |
 
 ## 授權
 

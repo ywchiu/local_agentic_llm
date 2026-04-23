@@ -27,32 +27,33 @@ xychart-beta horizontal
 
 | Rank | Model | Open | Arch | Params | Active | G1 | G2 | G3 | Total |
 |------|-------|:----:|:----:|-------:|-------:|:--:|:--:|:--:|:-----:|
-| 1 | **anthropic/claude-sonnet-4.6** (Claude Code) | | ? | ? | ? | 29 | 26 | 26 | **81** |
-| 1 | **google/gemma-4-31b-it‡** (H200, vLLM) | OSS | Dense | 31B | 31B | 27 | 27 | 27 | **81** |
-| 1 | **qwen/qwen3.6-35b-a3b‡** (H200, vLLM FP8) | OSS | MoE | 35B | 3B | 26 | 27 | 28 | **81** |
-| 3 | qwen/qwen3-coder-flash (OpenRouter) | | MoE | ? | ? | 30 | 25 | 25 | **80** |
-| 5 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | 29 | **77** |
-| 5 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 27 | 27 | **77** |
-| 5 | z-ai/glm-5 | OSS | MoE | 745B | 44B | 26 | 24 | 27 | **77** |
-| 8 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 26 | 24 | **75** |
-| 9 | qwen/qwen3-coder-30b | OSS | MoE | 30.5B | 3.3B | 26 | 23 | 24 | **73** |
-| 10 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 27 | 23 | **72** |
-| 10 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 26 | 26 | **72** |
-| 12 | z-ai/glm-4.7 | OSS | MoE | 355B | 32B | 23 | 23 | 25 | **71** |
-| 13 | google/gemini-3-flash | | ? | ? | ? | 25 | 20 | 25 | **70** |
-| 13 | google/gemma-4-26b-a4b-it‡ (H200, vLLM) | OSS | MoE | 26B | 4B | 25 | 20 | 25 | **70** |
-| 15 | openai/gpt-oss-120b | OSS | MoE | 117B | 5.1B | 22 | 23 | 24 | **69** |
-| 15 | anthropic/claude-haiku-4.5† | | ? | ? | ? | 30 | 20 | 19 | **69** |
-| 17 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 24 | 22 | **66** |
-| 18 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | 15 | **65** |
-| 19 | deepseek/deepseek-v3.2 | OSS | MoE | 685B | 37B | 25 | 21 | 16 | **62** |
-| 20 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | 18 | **61** |
-| 21 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | 20 | **58** |
-| 22 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | 15 | **52** |
-| 23 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | 14 | **41** |
-| 24 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
+| 1 | **qwen/qwen3.6-27b‡** (H200, vLLM FP8) | OSS | Dense | 27B | 27B | 29§ | 26 | 27 | **82** |
+| 2 | **anthropic/claude-sonnet-4.6** (Claude Code) | | ? | ? | ? | 29 | 26 | 26 | **81** |
+| 2 | **google/gemma-4-31b-it‡** (H200, vLLM) | OSS | Dense | 31B | 31B | 27 | 27 | 27 | **81** |
+| 2 | **qwen/qwen3.6-35b-a3b‡** (H200, vLLM FP8) | OSS | MoE | 35B | 3B | 26 | 27 | 28 | **81** |
+| 5 | qwen/qwen3-coder-flash (OpenRouter) | | MoE | ? | ? | 30 | 25 | 25 | **80** |
+| 6 | qwen/qwen3-coder | OSS | MoE | 480B | 35B | 24 | 24 | 29 | **77** |
+| 6 | qwen/qwen3.5-122b | OSS | MoE | 122B | 10B | 23 | 27 | 27 | **77** |
+| 6 | z-ai/glm-5 | OSS | MoE | 745B | 44B | 26 | 24 | 27 | **77** |
+| 9 | qwen/qwen3.5-27b | OSS | Dense | 27B | 27B | 25 | 26 | 24 | **75** |
+| 10 | qwen/qwen3-coder-30b | OSS | MoE | 30.5B | 3.3B | 26 | 23 | 24 | **73** |
+| 11 | qwen/qwen3.5-35b | OSS | MoE | 35B | 3B | 22 | 27 | 23 | **72** |
+| 11 | qwen/qwen3.5-397b | OSS | MoE | 397B | 17B | 20 | 26 | 26 | **72** |
+| 13 | z-ai/glm-4.7 | OSS | MoE | 355B | 32B | 23 | 23 | 25 | **71** |
+| 14 | google/gemini-3-flash | | ? | ? | ? | 25 | 20 | 25 | **70** |
+| 14 | google/gemma-4-26b-a4b-it‡ (H200, vLLM) | OSS | MoE | 26B | 4B | 25 | 20 | 25 | **70** |
+| 16 | openai/gpt-oss-120b | OSS | MoE | 117B | 5.1B | 22 | 23 | 24 | **69** |
+| 16 | anthropic/claude-haiku-4.5† | | ? | ? | ? | 30 | 20 | 19 | **69** |
+| 18 | qwen/qwen3-coder-next | OSS | MoE | 80B | 3B | 20 | 24 | 22 | **66** |
+| 19 | moonshotai/kimi-k2.5 | OSS | MoE | 1T | 32B | 27 | 23 | 15 | **65** |
+| 20 | deepseek/deepseek-v3.2 | OSS | MoE | 685B | 37B | 25 | 21 | 16 | **62** |
+| 21 | minimax/minimax-m2.1 | OSS | MoE | 230B | 10B | 24 | 19 | 18 | **61** |
+| 22 | minimax/minimax-m2.5 | OSS | MoE | 230B | 10B | 19 | 19 | 20 | **58** |
+| 23 | openai/gpt-oss-20b | OSS | MoE | 21B | 3.6B | 14 | 23 | 15 | **52** |
+| 24 | moonshotai/kimi-k2 | OSS | MoE | 1T | 32B | 14 | 13 | 14 | **41** |
+| 25 | nvidia/nemotron-3-super | OSS | MoE | 120B | 12B | 5 | 12 | 0 | **17** |
 
-> **Open** = OSS (open weights on HuggingFace). **Arch** = Dense or MoE. G1 = Python Fundamentals, G2 = OpenClaw Skills, G3 = Text-to-SQL. 24 models tested, March–April 2026. **†** Claude models tested via Claude Code (native API); all other models tested via OpenRouter. **‡** Models served locally on an **H200 GPU via vLLM** (FP8, native tool calling via the appropriate tool-call parser — `gemma4` for Gemma, `qwen3_coder` for Qwen).
+> **Open** = OSS (open weights on HuggingFace). **Arch** = Dense or MoE. G1 = Python Fundamentals, G2 = OpenClaw Skills, G3 = Text-to-SQL. 25 models tested, March–April 2026. **†** Claude models tested via Claude Code (native API); all other models tested via OpenRouter. **‡** Models served locally on an **H200 GPU via vLLM** (FP8, native tool calling via the appropriate tool-call parser — `gemma4` for Gemma, `qwen3_coder` for Qwen). **§** G1 test 07 (URL shortener) credited 3/3 after manual verification — model's code is functionally correct (verified via Flask `test_client`: POST `/api/shorten` returns short URL, GET `/<code>` 302-redirects) but `validate.sh` has a timing false-negative when the model uses `app.run(debug=True)` (Flask's debug reloader needs ~4s to bind; validator `sleep 3` misses it). Raw score without this adjustment is 79/90.
 >
 > **G2 scores updated 2026-03-21:** Validation scripts were fixed to accept SKILL.md placed in subdirectories. Biggest improvements: **qwen3.5-122b** (+17), **gpt-oss-20b** (+16), **GLM-5** (+16).
 >
@@ -72,14 +73,15 @@ xychart-beta horizontal
 
 ### Key Findings
 
-1. **Three-way tie at #1 (81/90)** — Sonnet 4.6 (Claude Code), Gemma 4 31B (H200 vLLM), and Qwen 3.6 35B-A3B (H200 vLLM, FP8) all reach 81/90. Two of the three are open-weight models running on a single H200 GPU — frontier-level agentic coding is now reachable locally.
-2. **Qwen 3.6 35B-A3B is the first sparse MoE to hit #1** — 35B total parameters but only **~3B active per token**; strongest on G3 Text-to-SQL (28/30) where it trails only qwen3-coder (29/30). Inference on H200 vLLM (FP8) is effectively free per run.
-3. **Gemma 4 31B is the smallest Dense model to hit 81/90** — at 31B parameters, it outperforms models 5-20x its size; thinking mode adds zero benefit (identical scores)
-4. **Gemma 4 26B-A4B (sparse, 4B active) jumps to 70/90 on local H200** — retested via local vLLM with the native gemma4 tool-call parser; previously only 59/90 via Gemini API where rate limits and tool-call translation were dragging G3 down. The model is genuinely capable; the earlier gap was infrastructure, not architecture.
-5. **3-way tie for #4 at 77/90** — qwen3-coder (G3 champion at 29/30), qwen3.5-122b, and GLM-5
-6. **Text-to-SQL reshuffles rankings** — kimi-k2.5 drops from top 3 to #16 due to intermittent tool-use failures on G3; GLM-5 rises thanks to strong G3 performance (27/30)
-7. **Validation quality matters** — two bugs in our validators (G2 subdirectory detection, G3 script selection) were artificially depressing scores; fixing them revealed the models' true capabilities
-8. **Open-source dominates** — 20 of 24 models are OSS; only qwen3-coder-flash, Claude Haiku, and Gemini Flash are proprietary
+1. **Qwen 3.6 27B (Dense) takes #1 at 82/90** (H200 vLLM, FP8) — the first model to cross 81. Beats the previous three-way tie (Sonnet 4.6, Gemma 4 31B, Qwen 3.6 35B-A3B) by 1 point. Score includes a +3 manual credit on G1/07 (URL shortener) where the model's code is functionally correct but the validator's `sleep 3` window misses Flask `debug=True` startup; raw score would be 79/90. Four of the top five entries are open-weight models running on a single H200 GPU.
+2. **Three-way tie at #2 (81/90)** — Sonnet 4.6 (Claude Code), Gemma 4 31B (H200 vLLM), and Qwen 3.6 35B-A3B (H200 vLLM, FP8). Two of the three are open-weight models running locally on H200 — frontier-level agentic coding is now reachable locally.
+3. **Qwen 3.6 35B-A3B (sparse MoE, #2) — 35B total / ~3B active per token** — strongest on G3 Text-to-SQL (28/30) where it trails only qwen3-coder (29/30). Inference on H200 vLLM (FP8) is effectively free per run.
+4. **Gemma 4 31B is the smallest Dense model to hit 81/90** — at 31B parameters, it outperforms models 5-20x its size; thinking mode adds zero benefit (identical scores)
+5. **Gemma 4 26B-A4B (sparse, 4B active) jumps to 70/90 on local H200** — retested via local vLLM with the native gemma4 tool-call parser; previously only 59/90 via Gemini API where rate limits and tool-call translation were dragging G3 down. The model is genuinely capable; the earlier gap was infrastructure, not architecture.
+6. **3-way tie for #6 at 77/90** — qwen3-coder (G3 champion at 29/30), qwen3.5-122b, and GLM-5
+7. **Text-to-SQL reshuffles rankings** — kimi-k2.5 drops from top 3 to #19 due to intermittent tool-use failures on G3; GLM-5 rises thanks to strong G3 performance (27/30)
+8. **Validation quality matters** — three bugs have been identified in our validators: (a) G2 subdirectory detection, (b) G3 script selection — both fixed; (c) G1/07 `sleep 3` misses `debug=True` Flask bind, flagged via Qwen 3.6 27B's run and credited manually (see **§**) but not yet applied retroactively to other models. Fixing (a)+(b) revealed models' true capabilities across the board.
+9. **Open-source dominates** — 21 of 25 models are OSS; only qwen3-coder-flash, Claude Haiku, Claude Sonnet, and Gemini Flash are proprietary
 
 ### Claude Models: OpenRouter vs Native API (Claude Code)
 
@@ -140,6 +142,7 @@ We also tested `gemma-4-26b-a4b-it` — the sparse MoE variant with 26B total pa
 | 1 | **qwen/qwen3-coder-flash** | | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **30/30** | 20m51s | 780K | 26.0K |
 | 1 | anthropic/claude-haiku-4.5† | | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **30/30** | — | — | — |
 | 3 | anthropic/claude-sonnet-4.6† | | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 3 | **29/30** | — | — | — |
+| 3 | qwen/qwen3.6-27b‡ (H200) | OSS | 3 | 3 | 3 | 3 | 3 | 3 | 3§ | 3 | 3 | 2 | **29/30** | 12m50s | 593K | 20.4K |
 | 4 | moonshotai/kimi-k2.5 | OSS | 3 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **27/30** | 15m26s | 258K | 9.6K |
 | 4 | google/gemma-4-31b-it‡ (H200) | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | 1 | **27/30** | 6m56s | 67K | 2.5K |
 | 6 | z-ai/glm-5 | OSS | 2 | 3 | 3 | 3 | 3 | 3 | 2 | 3 | 3 | 1 | **26/30** | 27m03s | 354K | 13.6K |
@@ -229,6 +232,7 @@ pie title Pass Rate by Category
 | 3 | anthropic/claude-sonnet-4.6† | | 3 | 2 | 3 | 3 | 3 | 2 | 1 | 3 | 3 | 3 | **26/30** |
 | 3 | qwen/qwen3.5-27b | OSS | 3 | 2 | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 3 | **26/30** |
 | 3 | qwen/qwen3.5-397b | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 2 | 2 | 3 | **26/30** |
+| 3 | qwen/qwen3.6-27b‡ (H200) | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 1 | 3 | **26/30** |
 | 7 | qwen/qwen3-coder-flash | | 3 | 2 | 3 | 2 | 2 | 3 | 3 | 3 | 1 | 3 | **25/30** |
 | 9 | z-ai/glm-5 | OSS | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 1 | 2 | 3 | **24/30** |
 | 9 | qwen/qwen3-coder | OSS | 2 | 2 | 3 | 2 | 3 | 3 | 3 | 3 | 2 | 1 | **24/30** |
@@ -288,6 +292,7 @@ pie title Pass Rate by Category
 | 3 | google/gemma-4-31b-it‡ (H200) | OSS | 3 | 3 | 3 | 2 | 3 | 2 | 3 | 3 | 2 | 3 | **27/30** |
 | 3 | z-ai/glm-5 | OSS | 2 | 3 | 1 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **27/30** |
 | 3 | qwen/qwen3.5-122b | OSS | 3 | 3 | 1 | 3 | 3 | 3 | 2 | 3 | 3 | 3 | **27/30** |
+| 3 | qwen/qwen3.6-27b‡ (H200) | OSS | 2 | 3 | 1 | 3 | 3 | 3 | 3 | 3 | 3 | 3 | **27/30** |
 | 6 | qwen/qwen3.5-397b | OSS | 3 | 3 | 0 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | **26/30** |
 | 6 | anthropic/claude-sonnet-4.6† | | 2 | 2 | 2 | 2 | 3 | 3 | 3 | 3 | 3 | 3 | **26/30** |
 | 7 | z-ai/glm-4.7 | OSS | 3 | 3 | 2 | 3 | 3 | 2 | 3 | 3 | 0 | 3 | **25/30** |
@@ -403,6 +408,7 @@ Each test: 3 checks x 1 point = 3 points. Total per group: 30 points.
 | 6 | 2026-04-09 | agent_harness (vLLM, H200) | 23 | G1+G2+G3 | Gemma 4 26B-A4B retested locally on H200 + vLLM (FP8, gemma4 tool parser): 70/90. G3 recovers from 12 → 25 |
 | **7** | **2026-04-09** | **agent_harness (vLLM, H200)** | **23** | **G1+G2+G3** | **Gemma 4 31B also retested on H200 vLLM: 81/90 (+1 G2), ties Sonnet 4.6 for #1** |
 | **8** | **2026-04-18** | **agent_harness (vLLM, H200)** | **24** | **G1+G2+G3** | **Qwen 3.6 35B-A3B tested on H200 vLLM (FP8, qwen3_coder parser): 81/90 — ties #1 (first sparse MoE to reach #1)** |
+| **9** | **2026-04-23** | **agent_harness (vLLM, H200)** | **25** | **G1+G2+G3** | **Qwen 3.6 27B (Dense) tested on H200 vLLM (FP8, qwen3_coder parser): 82/90 — new solo #1 (raw 79; +3 manual credit on G1/07 after validator `sleep 3` timing false-negative identified)** |
 
 ## License
 
